@@ -1,0 +1,57 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "75eb61ed56e1a39c6d7c5ec5e0ae99c0",
+    "packages": [
+        {
+            "name": "nemundo/core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nemundo/core.git",
+                "reference": "5e81324f0a7e969d2dd254ddd5d9be9a8fce3625"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nemundo/core/zipball/5e81324f0a7e969d2dd254ddd5d9be9a8fce3625",
+                "reference": "5e81324f0a7e969d2dd254ddd5d9be9a8fce3625",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nemundo\\Core\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Urs Lang",
+                    "email": "urs.lang@nemundo.org"
+                }
+            ],
+            "description": "Core",
+            "support": {
+                "issues": "https://github.com/nemundo/core/issues",
+                "source": "https://github.com/nemundo/core/tree/master"
+            },
+            "time": "2025-11-25T15:14:01+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}
