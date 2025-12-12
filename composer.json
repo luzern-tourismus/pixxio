@@ -1,18 +1,19 @@
 {
-    "name": "luzern-tourismus/pixxio",
-    "authors": [
-        {
-            "name": "Urs Lang",
-            "email": "urs.lang@luzern.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "LuzernTourismus\\Pixxio\\": "src/"
-        }
-    },
-    "require": {
-        "nemundo/core": "*"
+  "name": "luzerntourismus/pixxio",
+  "authors": [
+    {
+      "name": "Urs Lang",
+      "email": "urs.lang@luzern.com"
     }
+  ],
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "LuzernTourismus\\Pixxio\\": "src/"
+    }
+  },
+  "require": {
+    "nemundo/core": "*"
+  }
 }
