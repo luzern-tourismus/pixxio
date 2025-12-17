@@ -4,8 +4,10 @@ namespace LuzernTourismus\Pixxio\Json;
 
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\File\File;
 use Nemundo\Core\Json\JsonText;
+use Nemundo\Core\Json\Reader\JsonReader;
 
 class FileUpload extends AbstractBase
 {
@@ -36,8 +38,8 @@ class FileUpload extends AbstractBase
 
         $custom = [];
         $custom['action'] = 'add';
-        $custom['id'] = $id; // 75540013;
-        $custom['value'] = $value; // 'asdfasdfsad';
+        $custom['id'] = $id;
+        $custom['value'] = $value;
 
         $this->customList[] = $custom;
 
@@ -58,9 +60,6 @@ class FileUpload extends AbstractBase
 
         if ($this->title !== null) {
             $data['fileName'] = $this->title;
-
-            //$data['fileName']= (new File($filename))->getFilename();
-
         } else {
             $data['fileName'] = (new File($this->fullFilename))->getFilename();
         }
@@ -69,31 +68,29 @@ class FileUpload extends AbstractBase
             $data['appendDescription'] = $this->description;
         }
 
-
-        //$data['metadataStandard']='blablabla,75540013';
-        //$data['metadataStandard']='blablabla';
-
-
-        /*$customList=[];
-
-        $custom = [];
-        $custom['action']='add';
-        $custom['id']=75540013;
-        $custom['value'] = 'asdfasdfsad';
-
-        $customList[] = $custom;*/
-
-        //$data['metadataCustom']= {};  // $customList;
-
-        //metadataStandard
-
-
-        //$data['metadataCustom']= '{ ["adsf",75540013]}';  // $customList;
         if (sizeof($this->customList) > 0) {
-            $data['metadataCustom'] = (new JsonText())->addData($this->customList)->getJson();   // (new JsonDocument())->addRow($custom)->ad ->get ["adsf",75540013];  // $customList;
+            $data['metadataCustom'] = (new JsonText())->addData($this->customList)->getJson();
         }
 
-        (new PixxioWebRequest())->uploadFile($this->fullFilename, $data);
+        $response = (new PixxioWebRequest())->uploadFile($this->fullFilename, $data);
+
+        $jsonReader = new JsonReader();
+        $jsonReader->fromText($response->html);
+        $jsonData = $jsonReader->getData();
+
+        $success = $jsonData['success'];
+        $jobId = $jsonData['jobID'];
+
+        if (!$success) {
+            (new Debug())->write($jsonData);
+        }
+
+        return $success;
+
+//        {"success":true,"jobID":17893200}
+
+
+
 
 
     }

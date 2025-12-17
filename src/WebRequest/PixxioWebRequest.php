@@ -4,11 +4,7 @@ namespace LuzernTourismus\Pixxio\WebRequest;
 
 use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use Nemundo\Core\Debug\Debug;
-use Nemundo\Core\Directory\UniqueDirectory;
-use Nemundo\Core\File\File;
 use Nemundo\Core\Path\Path;
-use Nemundo\Core\Text\WordList;
-use Nemundo\Core\TextFile\Reader\TextFileReader;
 use Nemundo\Core\TextFile\Writer\TextFileWriter;
 use Nemundo\Core\WebRequest\BearerAuthentication\AbstractBearerAuthenticationWebRequest;
 
@@ -17,27 +13,23 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 {
 
 
-
-
-
     public function getData($endpoint, $parameter)
     {
 
 
-
-        $this->bearerAuthentication= PixxioConfig::$apiKey;
-        $url = 'https://'.PixxioConfig::$mediaSpace.'.px.media/api/v1/'.$endpoint.$parameter;
+        $this->bearerAuthentication = PixxioConfig::$apiKey;
+        $url = 'https://' . PixxioConfig::$mediaSpace . '.px.media/api/v1/' . $endpoint . $parameter;
         $response = $this->getUrl($url);
 
         if (PixxioConfig::$debugMode) {
 
             $filename = (new Path())
                 ->addPath('C:\test\pixxio_json')
-                ->addPath('pixxio_'.$endpoint.'.json')
+                ->addPath('pixxio_' . $endpoint . '.json')
                 ->getFullFilename();
 
             $file = new TextFileWriter($filename);
-            $file->overwriteExistingFile=true;
+            $file->overwriteExistingFile = true;
             $file->addLine($response->html);
             $file->writeFile();
 
@@ -48,12 +40,11 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     }
 
 
-
-    public function uploadFile($filename, $data=[])
+    public function uploadFile($filename, $data = [])
     {
 
         //$data=[];
-        $data['file']=  new \CURLFile($filename, mime_content_type($filename), basename($filename));
+        $data['file'] = new \CURLFile($filename, mime_content_type($filename), basename($filename));
         //$data['fileName']= (new File($filename))->getFilename();
 
 
@@ -79,25 +70,25 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         $endpoint = 'files';
 
-        $this->bearerAuthentication= PixxioConfig::$apiKey;
+        $this->bearerAuthentication = PixxioConfig::$apiKey;
         $url = $this->getServiceUrl($endpoint);
 
-        $response = $this->postUrl($url,$data );
+        $response = $this->postUrl($url, $data);
 
-        (new Debug())->write($response);
+        return $response;
+
+
+        //(new Debug())->write($response);
 
     }
 
 
-
-
-
     //public function deleteAsset($id)
-public function deleteData($endpoint,$id)
+    public function deleteData($endpoint, $id)
     {
 
         $url = $this->getServiceUrl($endpoint);
-        $url .= '?ids='.$id;
+        $url .= '?ids=' . $id;
 
 
         /*$data = [];
@@ -113,8 +104,8 @@ public function deleteData($endpoint,$id)
     private function getServiceUrl($endpoint)
     {
 
-        $this->bearerAuthentication= PixxioConfig::$apiKey;
-        $url = 'https://'.PixxioConfig::$mediaSpace.'.px.media/api/v1/'.$endpoint;  //.$parameter;
+        $this->bearerAuthentication = PixxioConfig::$apiKey;
+        $url = 'https://' . PixxioConfig::$mediaSpace . '.px.media/api/v1/' . $endpoint;  //.$parameter;
 
         return $url;
 
@@ -130,8 +121,6 @@ public function deleteData($endpoint,$id)
         return $data;
 
     }
-
-
 
 
 }
