@@ -60,11 +60,8 @@ class FileUpload extends AbstractBase
 
         $data = [];
 
-        $data['directoryID']=0;
-
-
         if (sizeof($this->keywordList) > 0) {
-            $keywordText = implode(',', $this->keywordList);
+            $keywordText = implode(',', array_unique($this->keywordList));
             $data['addKeywords'] = $keywordText;
         }
 
