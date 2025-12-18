@@ -8,7 +8,7 @@ $upload = new \LuzernTourismus\Pixxio\Json\FileUpload();
 $upload->fullFilename = $filename;
 $upload->title = 'Mars';
 $upload->addKeyword('LTAG')->addKeyword('Mars');
-//$upload->addMetadata(75540013,'hier ein beschreibungstext');  //->addMetadata(1968059366,'Nidwalden Tourismus');
+$upload->addMetadata(75540013,'hier ein beschreibungstext');  //->addMetadata(1968059366,'Nidwalden Tourismus');
 $upload->addMetadata(1968059366,26897557);
 $upload->description= 'NASAs Mars Perseverance rover acquired this image using its onboard Left Navigation Camera (Navcam). The camera is located high on the rovers mast and aids in driving.';
 $upload->upload();

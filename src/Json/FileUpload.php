@@ -4,6 +4,7 @@ namespace LuzernTourismus\Pixxio\Json;
 
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Core\Check\ValueCheck;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\File\File;
 use Nemundo\Core\Json\JsonText;
@@ -27,7 +28,10 @@ class FileUpload extends AbstractBase
     public function addKeyword($keyword)
     {
 
-        $this->keywordList[] = $keyword;
+        if ((new ValueCheck())->hasValue($keyword)) {
+            $this->keywordList[] = $keyword;
+        }
+
         return $this;
 
     }
@@ -79,18 +83,18 @@ class FileUpload extends AbstractBase
         $jsonData = $jsonReader->getData();
 
         $success = $jsonData['success'];
-        $jobId = $jsonData['jobID'];
 
-        if (!$success) {
+
+        if ($success) {
+            $jobId = $jsonData['jobID'];
+        } else {
+            //if (!$success) {
             (new Debug())->write($jsonData);
         }
 
         return $success;
 
 //        {"success":true,"jobID":17893200}
-
-
-
 
 
     }
