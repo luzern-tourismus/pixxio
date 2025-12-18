@@ -7,6 +7,7 @@ $filename = 'C:\Users\urs.lang\Downloads\Mars_Perseverance_NLG_1711_0818842024_9
 $upload = new \LuzernTourismus\Pixxio\Json\FileUpload();
 $upload->fullFilename = $filename;
 $upload->title = 'Mars';
+$upload->directoryId=853496557;
 $upload->addKeyword('LTAG')->addKeyword('Mars');
 $upload->addMetadata(75540013,'hier ein beschreibungstext');  //->addMetadata(1968059366,'Nidwalden Tourismus');
 $upload->addMetadata(1968059366,26897557);

@@ -20,6 +20,8 @@ class FileUpload extends AbstractBase
 
     public $description;
 
+    public $directoryId;
+
     private $keywordList = [];
 
     private $customList = [];
@@ -57,6 +59,10 @@ class FileUpload extends AbstractBase
     {
 
         $data = [];
+
+        $data['directoryID']=0;
+
+
         if (sizeof($this->keywordList) > 0) {
             $keywordText = implode(',', $this->keywordList);
             $data['addKeywords'] = $keywordText;
@@ -70,6 +76,10 @@ class FileUpload extends AbstractBase
 
         if ($this->description !== null) {
             $data['appendDescription'] = $this->description;
+        }
+
+        if ($this->directoryId !== null) {
+            $data['directoryID'] = $this->directoryId;
         }
 
         if (sizeof($this->customList) > 0) {
