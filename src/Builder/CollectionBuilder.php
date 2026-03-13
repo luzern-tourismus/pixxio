@@ -10,7 +10,8 @@ class CollectionBuilder extends AbstractBuilder
 
     public $collection;
 
-    public function build() {
+    public function build()
+    {
 
         $data = [];
         $data['name'] = $this->collection;
@@ -18,8 +19,6 @@ class CollectionBuilder extends AbstractBuilder
         $response = (new PixxioWebRequest())->postData('collections', $data);
 
         (new Debug())->write($response);
-
-
 
 
     }

@@ -1,7 +1,5 @@
 <?php
 
-use LuzernTourismus\Pixxio\Json\User\UserBuilder;
-
 require "config.php";
 
 $builder = new \LuzernTourismus\Pixxio\Builder\CollectionBuilder();

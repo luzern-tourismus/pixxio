@@ -4,7 +4,7 @@ use LuzernTourismus\Pixxio\Json\File\FileDelete;
 
 require "config.php";
 
-foreach ((new \LuzernTourismus\Pixxio\Json\FileJsonReader())->getData() as $file) {
+foreach ((new \LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson())->getData() as $file) {
 
     (new \Nemundo\Core\Debug\Debug())->write($file);
 
@@ -12,19 +12,3 @@ foreach ((new \LuzernTourismus\Pixxio\Json\FileJsonReader())->getData() as $file
 
 }
 
-
-/*
-
-
-do {
-
-
-    foreach ((new \LuzernTourismus\Pixxio\Json\FileJsonReader())->getData() as $file) {
-
-        (new \Nemundo\Core\Debug\Debug())->write($file);
-
-        (new FileDelete())->deleteFile($file->id);
-
-    }
-
-} while (true);*/

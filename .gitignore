@@ -1,3 +1,7 @@
-/vendor/
-/test/config.ini
+/config.ini
+/admin_web/
+/tmp/
 /.idea
+/composer.lock
+/vendor/
+/log/

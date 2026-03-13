@@ -1,0 +1,1 @@
+<?phpuse LuzernTourismus\Pixxio\PixxioProject;require __DIR__ . "/config.php";(new \Nemundo\App\ModelDesigner\ModelDesignerConfig())    ->addProject(new PixxioProject());

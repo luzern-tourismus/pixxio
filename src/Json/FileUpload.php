@@ -13,6 +13,11 @@ use Nemundo\Core\Json\Reader\JsonReader;
 class FileUpload extends AbstractBase
 {
 
+    public $mediaSpace;
+
+
+    public $apiKey;
+
 
     public $fullFilename;
 
@@ -83,7 +88,11 @@ class FileUpload extends AbstractBase
             $data['metadataCustom'] = (new JsonText())->addData($this->customList)->getJson();
         }
 
-        $response = (new PixxioWebRequest())->uploadFile($this->fullFilename, $data);
+
+        $request = new PixxioWebRequest();
+        $request->mediaSpace = $this->mediaSpace;
+        $request->apiKey = $this->apiKey;
+        $response = $request->uploadFile($this->fullFilename, $data);
 
         $jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);

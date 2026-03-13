@@ -6,32 +6,48 @@ use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Path\Path;
 use Nemundo\Core\TextFile\Writer\TextFileWriter;
+use Nemundo\Core\Type\Text\Text;
 use Nemundo\Core\WebRequest\BearerAuthentication\AbstractBearerAuthenticationWebRequest;
+use Nemundo\Project\Path\TmpPath;
 
 
 class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 {
 
+    public $mediaSpace;
+
+
+    public $apiKey;
+
+    private static $n = 0;
+
 
     public function getData($endpoint, $parameter)
     {
 
+        $this->bearerAuthentication = $this->apiKey;
+        $url = 'https://' . $this->mediaSpace . '.px.media/api/v1/' . $endpoint;
 
-        $this->bearerAuthentication = PixxioConfig::$apiKey;
-        $url = 'https://' . PixxioConfig::$mediaSpace . '.px.media/api/v1/' . $endpoint . $parameter;
+        if ($parameter !== null) {
+            $url .= $parameter;
+        }
+
         $response = $this->getUrl($url);
 
         if (PixxioConfig::$debugMode) {
 
-            $filename = (new Path())
-                ->addPath('C:\test\pixxio_json')
-                ->addPath('pixxio_' . $endpoint . '.json')
+            (new Debug())->write($url);
+
+            $filename = (new TmpPath())
+                ->addPath('pixxio_' . (new Text($endpoint))->replace('/', '_')->getValue() . '_' . PixxioWebRequest::$n . '.json')
                 ->getFullFilename();
 
             $file = new TextFileWriter($filename);
             $file->overwriteExistingFile = true;
             $file->addLine($response->html);
             $file->writeFile();
+
+            PixxioWebRequest::$n++;
 
         }
 
@@ -43,42 +59,21 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     public function uploadFile($filename, $data = [])
     {
 
-        //$data=[];
-        $data['file'] = new \CURLFile($filename, mime_content_type($filename), basename($filename));
-        //$data['fileName']= (new File($filename))->getFilename();
-
-
-        //$data['description']='bla bla bla';
-        //$data['rotation']= 90;
-
-
-        //$data['addKeywords']=$keywordList;
-
-        /*$list = new UniqueDirectory(); new WordList();
-        foreach ($keywordList as $keyword) {
-            $list->add
-        }*/
-
-        //$keywordText = implode(',', $keywordList);
-
-        //(new Debug())->write($keywordText);
-
-        //$data['keywords']= $keywordText;
-        //$data['addKeywords']= $keywordText;
-
-        //$data['collectionIDs']= 2016354951;
+        try {
+            $data['file'] = new \CURLFile($filename, mime_content_type($filename), basename($filename));
+        } catch (\Exception $exception) {
+            (new Debug())->write($exception->getMessage());
+        }
 
         $endpoint = 'files';
 
-        $this->bearerAuthentication = PixxioConfig::$apiKey;
+        $this->bearerAuthentication = $this->apiKey;
         $url = $this->getServiceUrl($endpoint);
 
         $response = $this->postUrl($url, $data);
 
         return $response;
 
-
-        //(new Debug())->write($response);
 
     }
 
@@ -91,9 +86,6 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $url .= '?ids=' . $id;
 
 
-        /*$data = [];
-        $data['ids'] = $id;*/
-
         $response = $this->deleteUrl($url);
 
         //(new Debug())->write($response);
@@ -104,8 +96,9 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     private function getServiceUrl($endpoint)
     {
 
-        $this->bearerAuthentication = PixxioConfig::$apiKey;
-        $url = 'https://' . PixxioConfig::$mediaSpace . '.px.media/api/v1/' . $endpoint;  //.$parameter;
+        //$this->bearerAuthentication = PixxioConfig::$apiKey;
+        //$url = 'https://' . PixxioConfig::$mediaSpace . '.px.media/api/v1/' . $endpoint;  //.$parameter;
+        $url = 'https://' . $this->mediaSpace . '.px.media/api/v1/' . $endpoint;  //.$parameter;
 
         return $url;
 

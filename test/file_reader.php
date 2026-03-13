@@ -2,8 +2,19 @@
 
 require "config.php";
 
-foreach ((new \LuzernTourismus\Pixxio\Json\FileJsonReader())->getData() as $file) {
 
-    (new \Nemundo\Core\Debug\Debug())->write($file);
+$reader = new \LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson();
+$reader->mediaSpace = '';
+$reader->apiKey = '';
 
-}
+do {
+
+    foreach ($reader->getData() as $file) {
+        //(new \Nemundo\Core\Debug\Debug())->write($file);
+    }
+
+    (new \Nemundo\Core\Debug\Debug())->write($reader->hasCursor());
+
+} while ($reader->hasCursor());
+
+

@@ -1,0 +1,252 @@
+{
+    "app": "Pixxio",
+    "name": "pixxio",
+    "namespace": "LuzernTourismus\\Pixxio",
+    "is_deleted": false,
+    "model": [
+        {
+            "template": "default",
+            "model_id": "45a1d05b-95ec-467b-9778-9ff99ee10ae5",
+            "label": "Collection",
+            "class_name": "Collection",
+            "table_name": "pixxio_collection",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\Collection",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Collection",
+                    "field_name": "collection",
+                    "variable_name": "collection",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Mediaspace",
+                    "field_name": "mediaspace",
+                    "variable_name": "mediaspace",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "79a7851e-b93d-4497-9dd6-4b7cf7a80394",
+            "label": "Directory",
+            "class_name": "Directory",
+            "table_name": "pixxio_directory",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\Directory",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Directory",
+                    "field_name": "directory",
+                    "variable_name": "directory",
+                    "allow_null": true,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Mediaspace",
+                    "field_name": "mediaspace",
+                    "variable_name": "mediaspace",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf",
+            "label": "File",
+            "class_name": "File",
+            "table_name": "pixxio_file",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\File",
+            "row_class_name": "LuzernTourismus\\Pixxio\\Reader\\File\\FileDataRow",
+            "primary_index": "large_number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Filename",
+                    "field_name": "filename",
+                    "variable_name": "filename",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Mediaspace",
+                    "field_name": "mediaspace",
+                    "variable_name": "mediaspace",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                },
+                {
+                    "type": "text",
+                    "label": "File Url",
+                    "field_name": "file_url",
+                    "variable_name": "fileUrl",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Creator",
+                    "field_name": "creator",
+                    "variable_name": "creator",
+                    "allow_null": true,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Directory",
+                    "field_name": "directory",
+                    "variable_name": "directory",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "79a7851e-b93d-4497-9dd6-4b7cf7a80394"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "fdc2d226-6f78-43ed-b075-a1bfa06b6c19",
+            "label": "File Keyword",
+            "class_name": "FileKeyword",
+            "table_name": "pixxio_file_keyword",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\FileKeyword",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf"
+                },
+                {
+                    "type": "external",
+                    "label": "Keyword",
+                    "field_name": "keyword",
+                    "variable_name": "keyword",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "7c1049ae-91d3-4c82-8fc2-f7831b8ede30"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "file_keyword",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "file",
+                        "keyword"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "7c1049ae-91d3-4c82-8fc2-f7831b8ede30",
+            "label": "Keyword",
+            "class_name": "Keyword",
+            "table_name": "pixxio_keyword",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\Keyword",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Keyword",
+                    "field_name": "keyword",
+                    "variable_name": "keyword",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "keyword",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "keyword"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3",
+            "label": "Mediaspace",
+            "class_name": "Mediaspace",
+            "table_name": "pixxio_mediaspace",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\Mediaspace",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Url",
+                    "field_name": "url",
+                    "variable_name": "url",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Api Key",
+                    "field_name": "api_key",
+                    "variable_name": "apiKey",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Mediaspace",
+                    "field_name": "mediaspace",
+                    "variable_name": "mediaspace",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "url",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "url"
+                    ]
+                }
+            ]
+        }
+    ]
+}
