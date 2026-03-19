@@ -27,7 +27,7 @@ class PixxioSite extends AbstractSite
         new MediaspaceSite($this);
         new CollectionSite($this);
         new FileSite($this);
-        new Keywordsite($this);
+        new KeywordSite($this);
         new DirectorySite($this);
 
     }
