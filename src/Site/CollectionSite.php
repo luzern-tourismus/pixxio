@@ -10,7 +10,7 @@ class CollectionSite extends AbstractSite
     protected function loadSite()
     {
         $this->title = 'Collection';
-        $this->url = 'Collection';
+        $this->url = 'collection';
     }
 
     public function loadContent()

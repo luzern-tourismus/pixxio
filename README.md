@@ -7,3 +7,15 @@ https://api.pixxio.com/docs
 composer require luzerntourismus/pixxio
 ```
 
+
+
+## Import Directory
+```
+php bin/cmd.php pixxio-directory-import 
+```
+
+
+## Clean
+```
+php bin/cmd.php pixxio-clean 
+```

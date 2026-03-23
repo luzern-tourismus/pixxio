@@ -15,12 +15,12 @@ class DirecotryJsonReader extends AbstractJsonPixxioReader
 
         $this->endpoint = 'directories';
 
-        $this->parameter =(new UrlBuilder(''))
-            ->addRequestValue('page',$this->page)
-            ->addRequestValue('pageSize',20)
-        ->getUrl();
+        $this->parameter = (new UrlBuilder(''))
+            ->addRequestValue('page', $this->page)
+            ->addRequestValue('pageSize', 20)
+            ->getUrl();
 
-            //'?page=2&pageSize=20';
+        //'?page=2&pageSize=20';
 
 
         $this->loopName = 'directories';
