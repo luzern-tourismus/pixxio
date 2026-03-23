@@ -82,6 +82,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     public function deleteData($endpoint, $id)
     {
 
+        $this->bearerAuthentication = $this->apiKey;
         $url = $this->getServiceUrl($endpoint);
         $url .= '?ids=' . $id;
 
