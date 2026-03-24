@@ -13,12 +13,11 @@ class CollectionImport extends AbstractImport
     public function importData()
     {
 
-
         $mediaspaceReader = new MediaspaceReader();
         foreach ($mediaspaceReader->getData() as $mediaspaceRow) {
 
             $collectionJsonReader = new CollectionJsonReaderJson();
-            $collectionJsonReader->mediaSpace = $mediaspaceRow->url;
+            $collectionJsonReader->subdomain = $mediaspaceRow->url;
             $collectionJsonReader->apiKey= $mediaspaceRow->apiKey;
             foreach ($collectionJsonReader->getData() as $collectionJsonRow) {
 
@@ -33,7 +32,6 @@ class CollectionImport extends AbstractImport
             }
 
         }
-
 
     }
 

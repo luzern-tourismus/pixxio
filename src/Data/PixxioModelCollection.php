@@ -9,5 +9,6 @@ $this->addModel(new \LuzernTourismus\Pixxio\Data\File\FileModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\FileKeyword\FileKeywordModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Keyword\KeywordModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceModel());
+$this->addModel(new \LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadataModel());
 }
 }

@@ -52,8 +52,10 @@ class FilePage extends AbstractTemplateDocument
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
             ->addText($reader->model->filename->label)
+            ->addText($reader->model->creator->label)
+            ->addText($reader->model->directory->label)
             ->addText($reader->model->mediaspace->label)
-            ->addText($reader->model->directory->label);
+        ->addText('Keyword');
 
         foreach ($reader->getData() as $fileRow) {
 

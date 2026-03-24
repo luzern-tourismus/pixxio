@@ -4,10 +4,10 @@ namespace LuzernTourismus\Pixxio\Mediaspace;
 
 use Nemundo\Core\Base\AbstractBase;
 
-abstract class AbstractMediaspace extends AbstractBase
+abstract class AbstractMediaspaceConfig extends AbstractBase
 {
 
-    public $mediaSpace;
+    public $subdomain;
 
     public $apiKey;
 

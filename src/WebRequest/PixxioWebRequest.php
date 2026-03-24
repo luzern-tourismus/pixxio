@@ -14,7 +14,7 @@ use Nemundo\Project\Path\TmpPath;
 class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 {
 
-    public $mediaSpace;
+    public $subdomain;
 
 
     public $apiKey;
@@ -26,7 +26,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     {
 
         $this->bearerAuthentication = $this->apiKey;
-        $url = 'https://' . $this->mediaSpace . '.px.media/api/v1/' . $endpoint;
+        $url = 'https://' . $this->subdomain . '.px.media/api/v1/' . $endpoint;
 
         if ($parameter !== null) {
             $url .= $parameter;
@@ -99,7 +99,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         //$this->bearerAuthentication = PixxioConfig::$apiKey;
         //$url = 'https://' . PixxioConfig::$mediaSpace . '.px.media/api/v1/' . $endpoint;  //.$parameter;
-        $url = 'https://' . $this->mediaSpace . '.px.media/api/v1/' . $endpoint;  //.$parameter;
+        $url = 'https://' . $this->subdomain . '.px.media/api/v1/' . $endpoint;  //.$parameter;
 
         return $url;
 

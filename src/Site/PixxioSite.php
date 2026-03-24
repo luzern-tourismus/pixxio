@@ -29,6 +29,7 @@ class PixxioSite extends AbstractSite
         new FileSite($this);
         new KeywordSite($this);
         new DirectorySite($this);
+        new CustomMetadataSite($this);
 
     }
 

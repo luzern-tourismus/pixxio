@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Json\Base;
 
 use LuzernTourismus\Pixxio\Json\PermissionGroup\PermissionGroup;
+use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\DataSource\AbstractDataSource;
 use Nemundo\Core\Debug\Debug;
@@ -11,7 +12,7 @@ use Nemundo\Core\Json\Reader\JsonReader;
 abstract class AbstractJsonPixxioReader extends AbstractDataSource
 {
 
-    public $mediaSpace;
+    public $subdomain;
 
 
     public $apiKey;
@@ -38,6 +39,15 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
     }
 
 
+    public function loadMediaSpace(AbstractMediaspaceConfig $mediaSpace)
+    {
+
+        $this->subdomain = $mediaSpace->subdomain;
+        $this->apiKey = $mediaSpace->apiKey;
+
+    }
+
+
     protected function loadData()
     {
 
@@ -48,7 +58,7 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
 
 
         $request = new PixxioWebRequest();
-        $request->mediaSpace = $this->mediaSpace;
+        $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
 
         //$response = (new PixxioWebRequest())->getData($this->endpoint, $this->parameter);

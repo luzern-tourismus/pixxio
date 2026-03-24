@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Json;
 
+use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Check\ValueCheck;
@@ -13,7 +14,7 @@ use Nemundo\Core\Json\Reader\JsonReader;
 class FileUpload extends AbstractBase
 {
 
-    public $mediaSpace;
+    public $subdomain;
 
 
     public $apiKey;
@@ -30,6 +31,16 @@ class FileUpload extends AbstractBase
     private $keywordList = [];
 
     private $customList = [];
+
+
+    public function fromMediaspaceConfig(AbstractMediaspaceConfig $config)
+    {
+        $this->subdomain = $config->subdomain;
+        $this->apiKey = $config->apiKey;
+
+        return $this;
+
+    }
 
 
     public function addKeyword($keyword)
@@ -90,7 +101,7 @@ class FileUpload extends AbstractBase
 
 
         $request = new PixxioWebRequest();
-        $request->mediaSpace = $this->mediaSpace;
+        $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
         $response = $request->uploadFile($this->fullFilename, $data);
 

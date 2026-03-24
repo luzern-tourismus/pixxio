@@ -23,7 +23,7 @@ class DirectoryImport extends AbstractImport
                 $count = 0;
 
                 $direcotryJsonReader = new DirecotryJsonReader();
-                $direcotryJsonReader->mediaSpace = $mediaspaceRow->url;
+                $direcotryJsonReader->subdomain = $mediaspaceRow->url;
                 $direcotryJsonReader->apiKey = $mediaspaceRow->apiKey;
                 $direcotryJsonReader->page = $page;
                 foreach ($direcotryJsonReader->getData() as $directoryJsonRow) {

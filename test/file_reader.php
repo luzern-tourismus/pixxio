@@ -4,7 +4,7 @@ require "config.php";
 
 
 $reader = new \LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson();
-$reader->mediaSpace = '';
+$reader->subdomain = '';
 $reader->apiKey = '';
 
 do {

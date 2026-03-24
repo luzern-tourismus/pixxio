@@ -23,7 +23,7 @@ class FileImport extends AbstractImport
 
 
             $jsonReader = new FileJsonReaderJson();
-            $jsonReader->mediaSpace = $mediaspaceRow->url;
+            $jsonReader->subdomain = $mediaspaceRow->url;
             $jsonReader->apiKey = $mediaspaceRow->apiKey;
 
             do {
