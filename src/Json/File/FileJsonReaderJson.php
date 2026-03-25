@@ -21,9 +21,6 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
             ->addRequestValue('pageSize', '20')
             ->addRequestValue('responseFields','id,fileName,clipFileURL,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases');
 
-//Items Enum: "clipFileURL" "colorspace" "createDate" "creator" "description" "directory" "dominantColor" "fileExtension" "fileName" "fileSize" "fileState" "fileType" "hasSubversions" "height" "id" "importantMetadata" "isArchived" "isCheckedOut" "isConvertible" "isDownloadLocked" "isMainVersion" "isMarked" "isRotatable" "keywords" "keywordsRecognition" "languageCodes" "licenseReleases" "location" "md5sum" "metadataFields" "modelReleases" "modifiedPreviewFileURLs" "modifyDate" "orientation" "originalFileURL" "permissions" "pixel" "previewFileURL" "propertyReleases" "rating" "rotation" "staticCollections" "subject" "uploadDate" "user" "variantStack" "versions" "width"
-
-
 
         if ($this->hasCursor()) {
             $url->addRequestValue('pageCursor', $this->getCursor());

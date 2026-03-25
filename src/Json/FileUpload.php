@@ -105,6 +105,8 @@ class FileUpload extends AbstractBase
         $request->apiKey = $this->apiKey;
         $response = $request->uploadFile($this->fullFilename, $data);
 
+        (new Debug())->write($response);
+
         $jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);
         $jsonData = $jsonReader->getData();

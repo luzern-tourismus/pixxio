@@ -3,6 +3,8 @@
 ## Api
 https://api.pixxio.com/docs
 
+https://api.pixxio.com/docs/unstable#tag/Custom-Metadata
+
 ## Installation
 ```
 composer require luzerntourismus/pixxio

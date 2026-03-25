@@ -3,8 +3,8 @@
 namespace LuzernTourismus\Pixxio\WebRequest;
 
 use LuzernTourismus\Pixxio\Config\PixxioConfig;
+use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use Nemundo\Core\Debug\Debug;
-use Nemundo\Core\Path\Path;
 use Nemundo\Core\TextFile\Writer\TextFileWriter;
 use Nemundo\Core\Type\Text\Text;
 use Nemundo\Core\WebRequest\BearerAuthentication\AbstractBearerAuthenticationWebRequest;
@@ -14,10 +14,12 @@ use Nemundo\Project\Path\TmpPath;
 class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 {
 
-    public $subdomain;
+    use MediaspaceConfigTrait;
+
+    //public $subdomain;
 
 
-    public $apiKey;
+    //public $apiKey;
 
     private static $n = 0;
 
@@ -25,8 +27,11 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     public function getData($endpoint, $parameter)
     {
 
+        //$version = 'v1';
+        //$version='unstable';
+
         $this->bearerAuthentication = $this->apiKey;
-        $url = 'https://' . $this->subdomain . '.px.media/api/v1/' . $endpoint;
+        $url = $this->getServiceUrl($endpoint);  // 'https://' . $this->subdomain . '.px.media/api/'.$version.'/' . $endpoint;
 
         if ($parameter !== null) {
             $url .= $parameter;
@@ -97,9 +102,12 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     private function getServiceUrl($endpoint)
     {
 
+        //$version = 'v1';
+        $version = 'unstable';
+
         //$this->bearerAuthentication = PixxioConfig::$apiKey;
         //$url = 'https://' . PixxioConfig::$mediaSpace . '.px.media/api/v1/' . $endpoint;  //.$parameter;
-        $url = 'https://' . $this->subdomain . '.px.media/api/v1/' . $endpoint;  //.$parameter;
+        $url = 'https://' . $this->subdomain . '.px.media/api/' . $version . '/' . $endpoint;  //.$parameter;
 
         return $url;
 
@@ -110,8 +118,23 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     {
 
         (new Debug())->write($json);
+        $this->bearerAuthentication = $this->apiKey;
 
         $data = $this->postUrl($this->getServiceUrl($endpoint), $json);
+        return $data;
+
+    }
+
+
+    public function putData($endpoint, $json)
+    {
+
+        (new Debug())->write($json);
+        $this->bearerAuthentication = $this->apiKey;
+
+        (new Debug())->write($this->bearerAuthentication);
+
+        $data = $this->putUrl($this->getServiceUrl($endpoint), $json);
         return $data;
 
     }
