@@ -61,7 +61,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     }
 
 
-    public function uploadFile($filename, $data = [])
+    public function uploadFile2($filename, $data = [])
     {
 
         try {
