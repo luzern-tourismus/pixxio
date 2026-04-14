@@ -14,17 +14,16 @@ use Nemundo\Core\Json\Reader\JsonReader;
 class FileUpload extends AbstractBase
 {
 
-    public $subdomain;
-
-
-    public $apiKey;
-
+    use MediaspaceConfigTrait;
 
     public $fullFilename;
 
+
     public $title;
 
+
     public $description;
+
 
     public $directoryId;
 
@@ -32,15 +31,6 @@ class FileUpload extends AbstractBase
 
     private $customList = [];
 
-
-    public function fromMediaspaceConfig(AbstractMediaspaceConfig $config)
-    {
-        $this->subdomain = $config->subdomain;
-        $this->apiKey = $config->apiKey;
-
-        return $this;
-
-    }
 
 
     public function addKeyword($keyword)
@@ -103,13 +93,10 @@ class FileUpload extends AbstractBase
             $data['metadataCustom'] = (new JsonText())->addData($this->customList)->getJson();
         }
 
-
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
-        $response = $request->uploadFile($this->fullFilename, $data);
-
-        (new Debug())->write($response);
+        $response = $request->uploadImage($this->fullFilename, $data);
 
         $jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);
@@ -121,13 +108,10 @@ class FileUpload extends AbstractBase
         if ($success) {
             $jobId = $jsonData['jobID'];
         } else {
-            //if (!$success) {
             (new Debug())->write($jsonData);
         }
 
         return $success;
-
-//        {"success":true,"jobID":17893200}
 
 
     }

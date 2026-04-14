@@ -4,15 +4,19 @@ use LuzernTourismus\Pixxio\Json\File\FileJsonDelete;
 
 require "config.php";
 
-foreach ((new \LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson())->getData() as $file) {
+$mediaspace = new \LuzernTourismus\Pixxio\Mediaspace\MediaspaceConfig();
+$mediaspace->subdomain = '';
+$mediaspace->apiKey = '';
 
-    (new \Nemundo\Core\Debug\Debug())->write($file);
 
+$reader = new \LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson();
+$reader->fromMediaspaceConfig($mediaspace);
+foreach ($reader->getData() as $file) {
 
-
+    (new \Nemundo\Core\Debug\Debug())->write($file->filename);
 
     $delete = new FileJsonDelete();
-
+    $delete->fromMediaspaceConfig($mediaspace);
     $delete->deleteFile($file->id);
 
 }
