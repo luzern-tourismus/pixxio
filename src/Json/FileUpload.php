@@ -58,12 +58,16 @@ class FileUpload extends AbstractBase
     public function addMetadata($id, $value)
     {
 
-        $custom = [];
-        $custom['action'] = 'add';
-        $custom['id'] = $id;
-        $custom['value'] = $value;
+        if ($value !== null) {
 
-        $this->customList[] = $custom;
+            $custom = [];
+            $custom['action'] = 'add';
+            $custom['id'] = $id;
+            $custom['value'] = $value;
+
+            $this->customList[] = $custom;
+
+        }
 
         return $this;
 
