@@ -38,6 +38,18 @@
         },
         {
             "template": "default",
+            "model_id": "54458648-a7e2-4608-a9a3-7b9a613d67de",
+            "label": "Custom Metadata",
+            "class_name": "CustomMetadata",
+            "table_name": "pixxio_custom_metadata",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\CustomMetadata",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "79a7851e-b93d-4497-9dd6-4b7cf7a80394",
             "label": "Directory",
             "class_name": "Directory",
@@ -247,18 +259,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "template": "default",
-            "model_id": "54458648-a7e2-4608-a9a3-7b9a613d67de",
-            "label": "Custom Metadata",
-            "class_name": "CustomMetadata",
-            "table_name": "pixxio_custom_metadata",
-            "namespace": "LuzernTourismus\\Pixxio\\Data\\CustomMetadata",
-            "row_class_name": "",
-            "primary_index": "number_id",
-            "is_deleted": false,
-            "index": []
         }
     ]
 }

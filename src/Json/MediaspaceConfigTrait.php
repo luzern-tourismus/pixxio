@@ -3,6 +3,10 @@
 namespace LuzernTourismus\Pixxio\Json;
 
 use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
+use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Http\Response\AbstractResponse;
+use Nemundo\Core\Json\Reader\JsonReader;
+use Nemundo\Core\WebRequest\WebResponse;
 
 trait MediaspaceConfigTrait
 {
@@ -20,6 +24,25 @@ trait MediaspaceConfigTrait
         return $this;
 
     }
+
+
+    protected function getSuccessMessage(WebResponse $response)
+    {
+
+        $jsonReader = new JsonReader();
+        $jsonReader->fromText($response->html);
+        $jsonData = $jsonReader->getData();
+
+        $success = $jsonData['src'];
+
+        if (!$success) {
+            (new Debug())->write($jsonData);
+        }
+
+        return $success;
+
+    }
+
 
 
 }

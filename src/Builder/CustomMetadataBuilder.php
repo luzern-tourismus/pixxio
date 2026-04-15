@@ -5,8 +5,9 @@ namespace LuzernTourismus\Pixxio\Builder;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Directory\TextDirectory;
+use Nemundo\Core\Json\Reader\JsonReader;
 
-class CustomMetaBuilder extends AbstractBuilder
+class CustomMetadataBuilder extends AbstractBuilder
 {
 
     public $name;
@@ -41,8 +42,7 @@ class CustomMetaBuilder extends AbstractBuilder
         $request->apiKey = $this->apiKey;
         $response = $request->postData('metadata/custom', $data);
 
-        (new Debug())->write($response);
-
+        $this->getSuccessMessage($response);
 
     }
 

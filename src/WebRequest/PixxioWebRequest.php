@@ -95,7 +95,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         /*
                 [statusCode] => 200
-            [html] => {"success":true,"jobID":22865113}*/
+            [html] => {"src":true,"jobID":22865113}*/
 
 
         //return $jobId;  // $response;

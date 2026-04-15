@@ -102,7 +102,7 @@ class FileUpload extends AbstractBase
         $jsonReader->fromText($response->html);
         $jsonData = $jsonReader->getData();
 
-        $success = $jsonData['success'];
+        $success = $jsonData['src'];
 
 
         if ($success) {
