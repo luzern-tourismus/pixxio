@@ -33,7 +33,7 @@ trait MediaspaceConfigTrait
         $jsonReader->fromText($response->html);
         $jsonData = $jsonReader->getData();
 
-        $success = $jsonData['src'];
+        $success = $jsonData['success'];
 
         if (!$success) {
             (new Debug())->write($jsonData);
@@ -42,7 +42,5 @@ trait MediaspaceConfigTrait
         return $success;
 
     }
-
-
 
 }

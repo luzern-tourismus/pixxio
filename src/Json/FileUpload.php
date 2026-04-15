@@ -98,9 +98,14 @@ class FileUpload extends AbstractBase
         $request->apiKey = $this->apiKey;
         $response = $request->uploadImage($this->fullFilename, $data);
 
-        $jsonReader = new JsonReader();
+        $success= $this->getSuccessMessage($response);
+
+
+        /*$jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);
         $jsonData = $jsonReader->getData();
+
+
 
         $success = $jsonData['src'];
 
@@ -109,7 +114,7 @@ class FileUpload extends AbstractBase
             $jobId = $jsonData['jobID'];
         } else {
             (new Debug())->write($jsonData);
-        }
+        }*/
 
         return $success;
 
