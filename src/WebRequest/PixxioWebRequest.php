@@ -33,7 +33,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         //$version='unstable';
 
         $this->bearerAuthentication = $this->apiKey;
-        $url = $this->getServiceUrl($endpoint);  // 'https://' . $this->subdomain . '.px.media/api/'.$version.'/' . $endpoint;
+        $url = $this->getServiceUrl($endpoint);
 
         if ($parameter !== null) {
             $url .= $parameter;
@@ -65,12 +65,6 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
     public function uploadImage($filename, $data)   //, $data = [])
     {
-
-        /*try {
-            $data['file'] = new \CURLFile($filename, mime_content_type($filename), basename($filename));
-        } catch (\Exception $exception) {
-            (new Debug())->write($exception->getMessage());
-        }*/
 
         $endpoint = 'files';
 
@@ -106,7 +100,6 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     }
 
 
-    //public function deleteAsset($id)
     public function deleteData($endpoint, $id)
     {
 

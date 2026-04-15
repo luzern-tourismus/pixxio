@@ -61,7 +61,6 @@ class FileUpload extends AbstractBase
 
         return $this;
 
-
     }
 
 
