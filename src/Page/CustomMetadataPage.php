@@ -7,6 +7,7 @@ use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadataReader;
 use LuzernTourismus\Pixxio\Data\CustomMetadataOption\CustomMetadataOptionReader;
 use LuzernTourismus\Pixxio\Json\CustomMetadata\CustomMetadataJsonReader;
+use LuzernTourismus\Pixxio\Reader\CustomMetadata\CustomMetadataDataReader;
 use LuzernTourismus\Pixxio\Reader\Mediaspace\MediaspaceDataReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
@@ -36,13 +37,13 @@ class CustomMetadataPage extends AbstractTemplateDocument
 
             $mediaspaceRow = (new MediaspaceDataReader())->getRowById($mediaspace->getValue());
 
-            $customMetadataReader = new CustomMetadataReader();
+            $customMetadataReader = new CustomMetadataDataReader();
             $customMetadataReader->filter->andEqual($customMetadataReader->model->mediaspaceId,$mediaspaceRow->id);
 
             (new AdminTableHeader($table))
                 ->addText($customMetadataReader->model->id->label)
                 ->addText($customMetadataReader->model->name->label)
-                ->addText('Type')
+                ->addText($customMetadataReader->model->type->label)
                 ->addText('Option');
 
             foreach ($customMetadataReader->getData() as $customMetadataRow) {
@@ -52,8 +53,7 @@ class CustomMetadataPage extends AbstractTemplateDocument
                 $row
                     ->addText($customMetadataRow->id)
                     ->addText($customMetadataRow->name)
-                    ->addEmpty();
-                    //->addText($customMetadataItem->type);
+                    ->addText($customMetadataRow->type->type);
 
                 $ul = new AdminUnorderedList($row);
 

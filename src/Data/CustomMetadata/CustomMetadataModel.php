@@ -21,6 +21,16 @@ public $mediaspace;
 */
 public $name;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $typeId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeExternalType
+*/
+public $type;
+
 protected function loadModel() {
 $this->tableName = "pixxio_custom_metadata";
 $this->aliasTableName = "pixxio_custom_metadata";
@@ -52,6 +62,13 @@ $this->name->label = "Name";
 $this->name->allowNullValue = false;
 $this->name->length = 255;
 
+$this->typeId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->typeId->tableName = "pixxio_custom_metadata";
+$this->typeId->fieldName = "type";
+$this->typeId->aliasFieldName = "pixxio_custom_metadata_type";
+$this->typeId->label = "Type";
+$this->typeId->allowNullValue = false;
+
 }
 public function loadMediaspace() {
 if ($this->mediaspace == null) {
@@ -60,6 +77,16 @@ $this->mediaspace->tableName = "pixxio_custom_metadata";
 $this->mediaspace->fieldName = "mediaspace";
 $this->mediaspace->aliasFieldName = "pixxio_custom_metadata_mediaspace";
 $this->mediaspace->label = "Mediaspace";
+}
+return $this;
+}
+public function loadType() {
+if ($this->type == null) {
+$this->type = new \LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeExternalType($this, "pixxio_custom_metadata_type");
+$this->type->tableName = "pixxio_custom_metadata";
+$this->type->fieldName = "type";
+$this->type->aliasFieldName = "pixxio_custom_metadata_type";
+$this->type->label = "Type";
 }
 return $this;
 }

@@ -31,6 +31,16 @@ public $mediaspace;
 */
 public $name;
 
+/**
+* @var int
+*/
+public $typeId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeRow
+*/
+public $type;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -40,8 +50,15 @@ if ($model->mediaspace !== null) {
 $this->loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model->mediaspace);
 }
 $this->name = $this->getModelValue($model->name);
+$this->typeId = intval($this->getModelValue($model->typeId));
+if ($model->type !== null) {
+$this->loadLuzernTourismusPixxioDataCustomMetadataTypeCustomMetadataTypetypeRow($model->type);
+}
 }
 private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model) {
 $this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);
+}
+private function loadLuzernTourismusPixxioDataCustomMetadataTypeCustomMetadataTypetypeRow($model) {
+$this->type = new \LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeRow($this->row, $model);
 }
 }

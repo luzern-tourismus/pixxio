@@ -64,6 +64,15 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Type",
+                    "field_name": "type",
+                    "variable_name": "type",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "5b832c76-1dba-4bc8-800d-09b761cebbb0"
                 }
             ],
             "index": []
@@ -99,6 +108,37 @@
                 }
             ],
             "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "5b832c76-1dba-4bc8-800d-09b761cebbb0",
+            "label": "Custom Metadata Type",
+            "class_name": "CustomMetadataType",
+            "table_name": "pixxio_custom_metadata_type",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\CustomMetadataType",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Type",
+                    "field_name": "type",
+                    "variable_name": "type",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "type",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "type"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",

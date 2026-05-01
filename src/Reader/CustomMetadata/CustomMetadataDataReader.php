@@ -11,7 +11,7 @@ class CustomMetadataDataReader extends CustomMetadataReader
     {
 
         parent::__construct();
-        $this->model->loadMediaspace();
+        $this->model->loadMediaspace()->loadType();
 
     }
 

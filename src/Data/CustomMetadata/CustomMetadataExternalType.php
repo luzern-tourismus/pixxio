@@ -21,6 +21,16 @@ public $mediaspace;
 */
 public $name;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $typeId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeExternalType
+*/
+public $type;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = CustomMetadataModel::class;
@@ -49,6 +59,13 @@ $this->name->aliasFieldName = $this->name->tableName . "_" . $this->name->fieldN
 $this->name->label = "Name";
 $this->addType($this->name);
 
+$this->typeId = new \Nemundo\Model\Type\Id\IdType();
+$this->typeId->fieldName = "type";
+$this->typeId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->typeId->aliasFieldName = $this->typeId->tableName ."_".$this->typeId->fieldName;
+$this->typeId->label = "Type";
+$this->addType($this->typeId);
+
 }
 public function loadMediaspace() {
 if ($this->mediaspace == null) {
@@ -58,6 +75,17 @@ $this->mediaspace->tableName = $this->parentFieldName . "_" . $this->externalTab
 $this->mediaspace->aliasFieldName = $this->mediaspace->tableName ."_".$this->mediaspace->fieldName;
 $this->mediaspace->label = "Mediaspace";
 $this->addType($this->mediaspace);
+}
+return $this;
+}
+public function loadType() {
+if ($this->type == null) {
+$this->type = new \LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeExternalType(null, $this->parentFieldName . "_type");
+$this->type->fieldName = "type";
+$this->type->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->type->aliasFieldName = $this->type->tableName ."_".$this->type->fieldName;
+$this->type->label = "Type";
+$this->addType($this->type);
 }
 return $this;
 }

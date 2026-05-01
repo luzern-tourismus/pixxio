@@ -4,6 +4,8 @@ namespace LuzernTourismus\Pixxio\Import;
 
 use LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadata;
 use LuzernTourismus\Pixxio\Data\CustomMetadataOption\CustomMetadataOption;
+use LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataType;
+use LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeId;
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
 use LuzernTourismus\Pixxio\Json\CustomMetadata\CustomMetadataJsonReader;
 use Nemundo\Core\Base\Import\AbstractImport;
@@ -21,13 +23,16 @@ class CustomMetadataImport extends AbstractImport
             $reader->subdomain = $mediaspaceRow->url;
             $reader->apiKey = $mediaspaceRow->apiKey;
 
-            /*(new AdminTableHeader($table))
-                ->addText('Id')
-                ->addText('Name')
-                ->addText('Type')
-                ->addText('Option');*/
-
             foreach ($reader->getData() as $customMetadataItem) {
+
+                $data = new CustomMetadataType();
+                $data->ignoreIfExists=true;
+                $data->type = $customMetadataItem->type;
+                $data->save();
+
+                $id = new CustomMetadataTypeId();
+                $id->filter->andEqual($id->model->type, $customMetadataItem->type);
+                $typeId = $id->getId();
 
 
                 $data = new CustomMetadata();
@@ -35,21 +40,10 @@ class CustomMetadataImport extends AbstractImport
                 $data->id = $customMetadataItem->id;
                 $data->mediaspaceId = $mediaspaceRow->id;
                 $data->name = $customMetadataItem->name;
+                $data->typeId = $typeId;
                 $data->save();
 
-
-                /*$row = new AdminTableRow($table);
-
-                $row
-                    ->addText($customMetadataItem->id)
-                    ->addText($customMetadataItem->name)
-                    ->addText($customMetadataItem->type);
-
-                $ul = new AdminUnorderedList($row);*/
-
                 foreach ($customMetadataItem->getOptionList() as $option) {
-
-                    //$ul->addText($option->id . ' - ' . $option->name);
 
                     $data = new CustomMetadataOption();
                     $data->updateOnDuplicate = true;
@@ -61,35 +55,6 @@ class CustomMetadataImport extends AbstractImport
                 }
 
             }
-
-
-            //$page = 1;
-
-            /*do {
-
-                $count = 0;
-
-                $direcotryJsonReader = new DirecotryJsonReader();
-                $direcotryJsonReader->subdomain = $mediaspaceRow->url;
-                $direcotryJsonReader->apiKey = $mediaspaceRow->apiKey;
-                $direcotryJsonReader->page = $page;
-                foreach ($direcotryJsonReader->getData() as $directoryJsonRow) {
-
-                    $data = new Directory();
-                    $data->updateOnDuplicate = true;
-                    $data->id = $directoryJsonRow->id;
-                    $data->directory = $directoryJsonRow->directory;
-                    $data->mediaspaceId = $mediaspaceRow->id;
-                    $data->save();
-
-                    $count++;
-
-                }
-
-                $page++;
-
-            } while ($count>0);*/
-
 
         }
 

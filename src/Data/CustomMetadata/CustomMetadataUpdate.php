@@ -17,6 +17,11 @@ public $mediaspaceId;
 */
 public $name;
 
+/**
+* @var string
+*/
+public $typeId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new CustomMetadataModel();
@@ -24,6 +29,7 @@ $this->model = new CustomMetadataModel();
 public function update() {
 $this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
 $this->typeValueList->setModelValue($this->model->name, $this->name);
+$this->typeValueList->setModelValue($this->model->typeId, $this->typeId);
 parent::update();
 }
 }
