@@ -46,6 +46,58 @@
             "row_class_name": "",
             "primary_index": "number_id",
             "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Mediaspace",
+                    "field_name": "mediaspace",
+                    "variable_name": "mediaspace",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                },
+                {
+                    "type": "text",
+                    "label": "Name",
+                    "field_name": "name",
+                    "variable_name": "name",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "7c5242db-81a8-41d8-87af-aa807cf0bd62",
+            "label": "Custom Metadata Option",
+            "class_name": "CustomMetadataOption",
+            "table_name": "pixxio_custom_metadata_option",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\CustomMetadataOption",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Custom Metadata",
+                    "field_name": "custom_metadata",
+                    "variable_name": "customMetadata",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "54458648-a7e2-4608-a9a3-7b9a613d67de"
+                },
+                {
+                    "type": "text",
+                    "label": "Option",
+                    "field_name": "option",
+                    "variable_name": "option",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
             "index": []
         },
         {

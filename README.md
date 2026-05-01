@@ -17,5 +17,5 @@ php bin/cmd.php pixxio-directory-import
 
 ## Clean
 ```
-php bin/cmd.php pixxio-clean 
+php bin/cmd.php pixxio-clean
 ```

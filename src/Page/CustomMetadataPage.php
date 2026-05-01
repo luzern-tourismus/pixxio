@@ -4,6 +4,8 @@ namespace LuzernTourismus\Pixxio\Page;
 
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
+use LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadataReader;
+use LuzernTourismus\Pixxio\Data\CustomMetadataOption\CustomMetadataOptionReader;
 use LuzernTourismus\Pixxio\Json\CustomMetadata\CustomMetadataJsonReader;
 use LuzernTourismus\Pixxio\Reader\Mediaspace\MediaspaceDataReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
@@ -34,9 +36,57 @@ class CustomMetadataPage extends AbstractTemplateDocument
 
             $mediaspaceRow = (new MediaspaceDataReader())->getRowById($mediaspace->getValue());
 
-            $reader = new CustomMetadataJsonReader();
-            $reader->subdomain = $mediaspaceRow->url;
-            $reader->apiKey = $mediaspaceRow->apiKey;
+            $customMetadataReader = new CustomMetadataReader();
+            $customMetadataReader->filter->andEqual($customMetadataReader->model->mediaspaceId,$mediaspaceRow->id);
+
+            (new AdminTableHeader($table))
+                ->addText($customMetadataReader->model->id->label)
+                ->addText($customMetadataReader->model->name->label)
+                ->addText('Type')
+                ->addText('Option');
+
+            foreach ($customMetadataReader->getData() as $customMetadataRow) {
+
+                $row = new AdminTableRow($table);
+
+                $row
+                    ->addText($customMetadataRow->id)
+                    ->addText($customMetadataRow->name)
+                    ->addEmpty();
+                    //->addText($customMetadataItem->type);
+
+                $ul = new AdminUnorderedList($row);
+
+                $optionReader = new CustomMetadataOptionReader();
+                $optionReader->filter->andEqual($optionReader->model->customMetadataId,$customMetadataRow->id);
+                foreach ($optionReader->getData() as $optionRow) {
+                    $ul->addText($optionRow->id . ' - ' . $optionRow->option);
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+        $search = new AdminSearchForm($layout);
+
+        $mediaspace = new MediaspaceListBox($search);
+        $mediaspace->searchMode = true;
+        $mediaspace->submitOnChange = true;
+
+        if ($mediaspace->hasValue()) {
+
+            $table = new AdminTable($layout);
+
+            $mediaspaceRow = (new MediaspaceDataReader())->getRowById($mediaspace->getValue());
+
+            $customMetadataReader = new CustomMetadataJsonReader();
+            $customMetadataReader->subdomain = $mediaspaceRow->url;
+            $customMetadataReader->apiKey = $mediaspaceRow->apiKey;
 
             (new AdminTableHeader($table))
                 ->addText('Id')
@@ -44,7 +94,7 @@ class CustomMetadataPage extends AbstractTemplateDocument
                 ->addText('Type')
                 ->addText('Option');
 
-            foreach ($reader->getData() as $customMetadataItem) {
+            foreach ($customMetadataReader->getData() as $customMetadataItem) {
 
                 $row = new AdminTableRow($table);
 

@@ -7,11 +7,23 @@ class CustomMetadataUpdate extends AbstractModelUpdate {
 */
 public $model;
 
+/**
+* @var string
+*/
+public $mediaspaceId;
+
+/**
+* @var string
+*/
+public $name;
+
 public function __construct() {
 parent::__construct();
 $this->model = new CustomMetadataModel();
 }
 public function update() {
+$this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
+$this->typeValueList->setModelValue($this->model->name, $this->name);
 parent::update();
 }
 }
