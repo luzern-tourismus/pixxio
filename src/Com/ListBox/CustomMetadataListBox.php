@@ -14,7 +14,8 @@ class CustomMetadataListBox extends AdminListBox
 
         $reader = new CustomMetadataDataReader();
         foreach ($reader->getData() as $customMetadataRow) {
-            $this->addItem($customMetadataRow->id, $customMetadataRow->mediaspace->mediaspace.' '. $customMetadataRow->name);
+            //$this->addItem($customMetadataRow->id, $customMetadataRow->mediaspace->mediaspace.' '. $customMetadataRow->name);
+            $this->addItem($customMetadataRow->id, $customMetadataRow->name);
         }
 
         return parent::getContent();

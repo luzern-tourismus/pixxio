@@ -71,7 +71,7 @@ class CustomMetadataPage extends AbstractTemplateDocument
 
 
 
-
+/*
         $search = new AdminSearchForm($layout);
 
         $mediaspace = new MediaspaceListBox($search);
@@ -111,7 +111,7 @@ class CustomMetadataPage extends AbstractTemplateDocument
 
             }
 
-        }
+        }*/
 
         return parent::getContent();
     }
