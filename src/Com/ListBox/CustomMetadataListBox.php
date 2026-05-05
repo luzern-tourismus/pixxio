@@ -13,8 +13,8 @@ class CustomMetadataListBox extends AdminListBox
         $this->label = 'Custom Metadata';
 
         $reader = new CustomMetadataDataReader();
+        $reader->orderByName();
         foreach ($reader->getData() as $customMetadataRow) {
-            //$this->addItem($customMetadataRow->id, $customMetadataRow->mediaspace->mediaspace.' '. $customMetadataRow->name);
             $this->addItem($customMetadataRow->id, $customMetadataRow->name);
         }
 

@@ -16,4 +16,13 @@ class CustomMetadataDataReader extends CustomMetadataReader
     }
 
 
+    public function orderByName()
+    {
+
+        $this->addOrder($this->model->name);
+        return $this;
+
+    }
+
+
 }
