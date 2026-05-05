@@ -2,14 +2,11 @@
 
 namespace LuzernTourismus\Pixxio\Json;
 
-use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Check\ValueCheck;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\File\File;
 use Nemundo\Core\Json\JsonText;
-use Nemundo\Core\Json\Reader\JsonReader;
 
 class FileUpload extends AbstractBase
 {
@@ -31,6 +28,8 @@ class FileUpload extends AbstractBase
 
     private $customList = [];
 
+
+    private $customMultiList = [];
 
 
     public function addKeyword($keyword)
@@ -64,6 +63,27 @@ class FileUpload extends AbstractBase
     }
 
 
+    public function addMultiMetadata($id, $value)
+    {
+
+        if ($value !== null) {
+
+            /*$custom = [];
+            $custom['action'] = 'add';
+            $custom['id'] = $id;
+            $custom['value'] = $value;*/
+
+            $this->customMultiList[$id]['action'] = 'add';
+            $this->customMultiList[$id]['id'] = $id;
+            $this->customMultiList[$id]['value'][] = $value;
+
+        }
+
+        return $this;
+
+    }
+
+
     public function upload()
     {
 
@@ -88,6 +108,12 @@ class FileUpload extends AbstractBase
             $data['directoryID'] = $this->directoryId;
         }
 
+
+        foreach ($this->customMultiList as $customMulti) {
+            $this->customList[] = $customMulti;
+        }
+
+
         if (sizeof($this->customList) > 0) {
             $data['metadataCustom'] = (new JsonText())->addData($this->customList)->getJson();
         }
@@ -97,26 +123,9 @@ class FileUpload extends AbstractBase
         $request->apiKey = $this->apiKey;
         $response = $request->uploadImage($this->fullFilename, $data);
 
-        $success= $this->getSuccessMessage($response);
-
-
-        /*$jsonReader = new JsonReader();
-        $jsonReader->fromText($response->html);
-        $jsonData = $jsonReader->getData();
-
-
-
-        $success = $jsonData['src'];
-
-
-        if ($success) {
-            $jobId = $jsonData['jobID'];
-        } else {
-            (new Debug())->write($jsonData);
-        }*/
+        $success = $this->getSuccessMessage($response);
 
         return $success;
-
 
     }
 
