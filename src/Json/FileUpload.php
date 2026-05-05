@@ -7,6 +7,7 @@ use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Check\ValueCheck;
 use Nemundo\Core\File\File;
 use Nemundo\Core\Json\JsonText;
+use Nemundo\Core\Json\Reader\JsonReader;
 
 class FileUpload extends AbstractBase
 {
@@ -123,9 +124,21 @@ class FileUpload extends AbstractBase
         $request->apiKey = $this->apiKey;
         $response = $request->uploadImage($this->fullFilename, $data);
 
-        $success = $this->getSuccessMessage($response);
+        $jsonReader = new JsonReader();
+        $jsonReader->fromText($response->html);
+        $jsonData = $jsonReader->getData();
 
-        return $success;
+        $jobId = $jsonData['jobID'];
+
+        return $jobId;
+
+
+        /*$success = $this->getSuccessMessage($response);
+
+        return $success;*/
+
+
+
 
     }
 
