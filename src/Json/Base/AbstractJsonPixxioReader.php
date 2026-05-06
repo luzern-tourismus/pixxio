@@ -5,6 +5,7 @@ namespace LuzernTourismus\Pixxio\Json\Base;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\DataSource\AbstractDataSource;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Json\Reader\JsonReader;
 
 abstract class AbstractJsonPixxioReader extends AbstractDataSource
@@ -50,6 +51,8 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
             foreach ($this->jsonData[$this->loopName] as $json) {
                 $this->onJson($json);
             }
+        } else {
+            (new Debug())->write($response);
         }
 
 
