@@ -30,6 +30,7 @@ class PixxioSite extends AbstractSite
         new KeywordSite($this);
         new DirectorySite($this);
         new CustomMetadataSite($this);
+        new JobSite($this);
 
     }
 

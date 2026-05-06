@@ -274,6 +274,69 @@
         },
         {
             "template": "default",
+            "model_id": "c536ec32-4ae5-48e8-84b9-abb0d6d5ce87",
+            "label": "Job",
+            "class_name": "Job",
+            "table_name": "pixxio_job",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\Job",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": true,
+                    "is_deleted": false,
+                    "external_model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf"
+                },
+                {
+                    "type": "date_time",
+                    "label": "Create Date Time",
+                    "field_name": "create_date_time",
+                    "variable_name": "createDateTime",
+                    "allow_null": true,
+                    "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Modify Date Time",
+                    "field_name": "modify_date_time",
+                    "variable_name": "modifyDateTime",
+                    "allow_null": true,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Is Duplicate",
+                    "field_name": "is_duplicate",
+                    "variable_name": "isDuplicate",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "large_text",
+                    "label": "Json",
+                    "field_name": "json",
+                    "variable_name": "json",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "create_date_time",
+                    "index_type": "index",
+                    "field_name": [
+                        "create_date_time"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "7c1049ae-91d3-4c82-8fc2-f7831b8ede30",
             "label": "Keyword",
             "class_name": "Keyword",

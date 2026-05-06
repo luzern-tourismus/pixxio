@@ -13,6 +13,8 @@ class FileJsonItem extends AbstractBase
 
     public $fileUrl;
 
+    public $description;
+
     public $directoryId;
 
     public $creator;

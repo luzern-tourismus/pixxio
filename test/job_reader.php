@@ -2,9 +2,8 @@
 
 require "config.php";
 
-$jobId = 0;
+$jobId = 23585884;
 
 $reader = new \LuzernTourismus\Pixxio\Json\Job\JobJsonReader();
-$reader->subdomain = '';
-$reader->apiKey = '';
+$reader->fromMediaspaceConfig(new \LuzernTourismus\PixxioTest\MediaspaceConfigTest());
 $reader->getJob($jobId);

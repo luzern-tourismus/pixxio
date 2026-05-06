@@ -3,10 +3,15 @@
 namespace LuzernTourismus\Pixxio\Json\File;
 
 use LuzernTourismus\Pixxio\Json\Base\AbstractJsonPixxioReader;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Http\Url\UrlBuilder;
 
 class FileJsonReaderJson extends AbstractJsonPixxioReader
 {
+
+
+    public $pageSize;
+
 
     protected $cursor;
 
@@ -18,8 +23,9 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
 
         $url = new UrlBuilder('');
         $url
-            ->addRequestValue('pageSize', '20')
-            ->addRequestValue('responseFields','id,fileName,clipFileURL,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases');
+            //->addRequestValue('showFiles',false)
+            ->addRequestValue('pageSize', $this->pageSize)
+            ->addRequestValue('responseFields','id,fileName,clipFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases');
 
 
         if ($this->hasCursor()) {
@@ -45,15 +51,20 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
     protected function onJson($json)
     {
 
+        (new Debug())->write($json);
+
         $item = new FileJsonItem();
         $item->id = $json['id'];
         $item->filename = $json['fileName'];
         $item->fileUrl = $json['clipFileURL'];
+        $item->description = $json['description'];
         $item->keywordList = $json['keywords'];
         $item->creator = $json['creator'];
         $item->directoryId = $json['directory']['id'];
 
         $this->addItem($item);
+
+
 
     }
 

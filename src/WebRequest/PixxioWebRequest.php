@@ -26,11 +26,8 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     private static $n = 0;
 
 
-    public function getData($endpoint, $parameter)
+    public function getData($endpoint, $parameter=null)
     {
-
-        //$version = 'v1';
-        //$version='unstable';
 
         $this->bearerAuthentication = $this->apiKey;
         $url = $this->getServiceUrl($endpoint);
@@ -63,7 +60,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     }
 
 
-    public function uploadImage($filename, $data)   //, $data = [])
+    public function uploadImage($filename, $data)
     {
 
         $endpoint = 'files';
@@ -71,31 +68,9 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $this->bearerAuthentication = $this->apiKey;
         $url = $this->getServiceUrl($endpoint);
 
-        $response = $this->uploadFile($url, 'file', $filename, $data);  //  ->postUrl($url, $data);
-
-
-        /*$jobId = null;
-        if ($response->statusCode === StatusCode::OK) {
-
-            $json = (new JsonReader())->fromText($response->html)->getData();
-            $jobId = $json['jobID'];
-
-        } else {
-
-            (new Debug())->write($response);
-
-        }
-
-
-        /*
-                [statusCode] => 200
-            [html] => {"src":true,"jobID":22865113}*/
-
-
-        //return $jobId;  // $response;
+        $response = $this->uploadFile($url, 'file', $filename, $data);
 
         return $response;
-
 
     }
 

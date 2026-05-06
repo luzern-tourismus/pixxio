@@ -5,6 +5,7 @@ namespace LuzernTourismus\Pixxio\Page;
 use LuzernTourismus\Pixxio\Com\ListBox\DirectoryListBox;
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
+use LuzernTourismus\Pixxio\Data\Job\JobPaginationReader;
 use LuzernTourismus\Pixxio\Reader\File\FileDataPaginationReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
@@ -15,9 +16,10 @@ use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
 use Nemundo\Admin\Parameter\PageParameter;
 use Nemundo\Com\Template\AbstractTemplateDocument;
+use Nemundo\Db\Sql\Order\SortOrder;
 use Nemundo\Html\Paragraph\Paragraph;
 
-class FilePage extends AbstractTemplateDocument
+class JobPage extends AbstractTemplateDocument
 {
     public function getContent()
     {
@@ -25,37 +27,25 @@ class FilePage extends AbstractTemplateDocument
         $layout = new AdminFlexboxLayout($this);
         new PixxioTab($layout);
 
-        $search = new AdminSearchForm($layout);
-
-        $mediaspace = new MediaspaceListBox($search);
-        $mediaspace->searchMode = true;
-        $mediaspace->submitOnChange = true;
-
-        $directory = new DirectoryListBox($search);
-        $directory->searchMode = true;
-        $directory->submitOnChange = true;
-
-
         $p = new Paragraph($layout);
 
 
         $table = new AdminTable($layout);
 
-        $reader = new FileDataPaginationReader();
+        $reader = new JobPaginationReader();
         $reader->currentPage = (new PageParameter())->getValue();
-        $reader
-            ->filterMediaspace($mediaspace->getValue())
-            ->filterDirecctory($directory->getValue());
+        $reader->addOrder($reader->model->createDateTime,SortOrder::DESCENDING);
+
 
         $p->content = $reader->getFormatTotalCount() . ' files found';
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
-            ->addText($reader->model->filename->label)
-            ->addText($reader->model->creator->label)
-            ->addText($reader->model->directory->label)
-            ->addText($reader->model->mediaspace->label)
-            ->addText('Keyword');
+            ->addText($reader->model->fileId->label)
+            ->addText($reader->model->isDuplicate->label)
+            ->addText($reader->model->createDateTime->label)
+            ->addText($reader->model->modifyDateTime->label)
+            ->addText($reader->model->json->label);
 
         foreach ($reader->getData() as $fileRow) {
 
@@ -63,17 +53,11 @@ class FilePage extends AbstractTemplateDocument
 
             $row
                 ->addText($fileRow->id)
-                ->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
-                ->addText($fileRow->creator)
-                ->addText($fileRow->directory->directory)
-                ->addText($fileRow->mediaspace->mediaspace);
-
-
-            $ul = new AdminUnorderedList($row);
-            foreach ($fileRow->getKeywordList() as $keywordRow) {
-                $ul->addText($keywordRow->keyword);
-            }
-
+                ->addText($fileRow->fileId)
+                ->addYesNo($fileRow->isDuplicate)
+                ->addText($fileRow->createDateTime->getShortDateTimeLeadingZeroFormat())
+                ->addText($fileRow->modifyDateTime->getShortDateTimeLeadingZeroFormat())
+                ->addText($fileRow->json);
 
         }
 

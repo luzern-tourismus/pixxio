@@ -10,6 +10,7 @@ $this->addModel(new \LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetada
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Directory\DirectoryModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\File\FileModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\FileKeyword\FileKeywordModel());
+$this->addModel(new \LuzernTourismus\Pixxio\Data\Job\JobModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Keyword\KeywordModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceModel());
 }

@@ -10,7 +10,8 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "LuzernTourismus\\Pixxio\\": "src/"
+      "LuzernTourismus\\Pixxio\\": "src/",
+      "LuzernTourismus\\PixxioTest\\": "src_test/"
     }
   },
   "require": {
