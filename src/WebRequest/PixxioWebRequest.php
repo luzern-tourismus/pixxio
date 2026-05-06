@@ -5,8 +5,6 @@ namespace LuzernTourismus\Pixxio\WebRequest;
 use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use Nemundo\Core\Debug\Debug;
-use Nemundo\Core\Http\Response\StatusCode;
-use Nemundo\Core\Json\Reader\JsonReader;
 use Nemundo\Core\TextFile\Writer\TextFileWriter;
 use Nemundo\Core\Type\Text\Text;
 use Nemundo\Core\WebRequest\BearerAuthentication\AbstractBearerAuthenticationWebRequest;
@@ -18,15 +16,10 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
     use MediaspaceConfigTrait;
 
-    //public $subdomain;
-
-
-    //public $apiKey;
-
     private static $n = 0;
 
 
-    public function getData($endpoint, $parameter=null)
+    public function getData($endpoint, $parameter = null)
     {
 
         $this->bearerAuthentication = $this->apiKey;
