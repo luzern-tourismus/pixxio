@@ -36,6 +36,11 @@ public $isDuplicate;
 */
 public $json;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $success;
+
 protected function loadModel() {
 $this->tableName = "pixxio_job";
 $this->aliasTableName = "pixxio_job";
@@ -89,6 +94,14 @@ $this->json->fieldName = "json";
 $this->json->aliasFieldName = "pixxio_job_json";
 $this->json->label = "Json";
 $this->json->allowNullValue = false;
+
+$this->success = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->success->tableName = "pixxio_job";
+$this->success->externalTableName = "pixxio_job";
+$this->success->fieldName = "success";
+$this->success->aliasFieldName = "pixxio_job_success";
+$this->success->label = "Success";
+$this->success->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "create_date_time";

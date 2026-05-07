@@ -46,6 +46,11 @@ public $isDuplicate;
 */
 public $json;
 
+/**
+* @var bool
+*/
+public $success;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -58,6 +63,7 @@ $this->createDateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModel
 $this->modifyDateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModelValue($model->modifyDateTime));
 $this->isDuplicate = boolval($this->getModelValue($model->isDuplicate));
 $this->json = $this->getModelValue($model->json);
+$this->success = boolval($this->getModelValue($model->success));
 }
 private function loadLuzernTourismusPixxioDataFileFilefileRow($model) {
 $this->file = new \LuzernTourismus\Pixxio\Reader\File\FileDataRow($this->row, $model);

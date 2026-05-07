@@ -32,6 +32,11 @@ public $isDuplicate;
 */
 public $json;
 
+/**
+* @var bool
+*/
+public $success;
+
 public function __construct() {
 parent::__construct();
 $this->model = new JobModel();
@@ -50,6 +55,7 @@ $property->setValue($this->modifyDateTime);
 }
 $this->typeValueList->setModelValue($this->model->isDuplicate, $this->isDuplicate);
 $this->typeValueList->setModelValue($this->model->json, $this->json);
+$this->typeValueList->setModelValue($this->model->success, $this->success);
 parent::update();
 }
 }

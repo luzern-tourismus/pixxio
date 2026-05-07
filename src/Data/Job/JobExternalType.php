@@ -36,6 +36,11 @@ public $isDuplicate;
 */
 public $json;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $success;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = JobModel::class;
@@ -87,6 +92,14 @@ $this->json->externalTableName = $this->externalTableName;
 $this->json->aliasFieldName = $this->json->tableName . "_" . $this->json->fieldName;
 $this->json->label = "Json";
 $this->addType($this->json);
+
+$this->success = new \Nemundo\Model\Type\Number\YesNoType();
+$this->success->fieldName = "success";
+$this->success->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->success->externalTableName = $this->externalTableName;
+$this->success->aliasFieldName = $this->success->tableName . "_" . $this->success->fieldName;
+$this->success->label = "Success";
+$this->addType($this->success);
 
 }
 public function loadFile() {

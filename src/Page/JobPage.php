@@ -41,6 +41,7 @@ class JobPage extends AbstractTemplateDocument
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
+            ->addText($reader->model->success->label)
             ->addText($reader->model->fileId->label)
             ->addText($reader->model->isDuplicate->label)
             ->addText($reader->model->createDateTime->label)
@@ -53,6 +54,7 @@ class JobPage extends AbstractTemplateDocument
 
             $row
                 ->addText($fileRow->id)
+                ->addYesNo($fileRow->success)
                 ->addText($fileRow->fileId)
                 ->addYesNo($fileRow->isDuplicate)
                 ->addText($fileRow->createDateTime->getShortDateTimeLeadingZeroFormat())

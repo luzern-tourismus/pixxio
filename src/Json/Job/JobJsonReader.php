@@ -67,6 +67,7 @@ class JobJsonReader extends AbstractBase
             $data->createDateTime = $item->createDateTime;
             $data->modifyDateTime = $item->modifyDateTime;
             $data->json = $response->html;
+            $data->success = $item->success;
             $data->save();
 
         } else {

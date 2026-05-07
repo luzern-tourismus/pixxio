@@ -323,6 +323,14 @@
                     "variable_name": "json",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Success",
+                    "field_name": "success",
+                    "variable_name": "success",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [
