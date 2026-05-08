@@ -3,13 +3,9 @@
 namespace LuzernTourismus\Pixxio\Script;
 
 use LuzernTourismus\DamMigration\Mediaspace\LuzernMediaspaceConfig;
-use LuzernTourismus\Pixxio\Data\Job\JobDelete;
-use LuzernTourismus\Pixxio\Data\Job\JobReader;
-use LuzernTourismus\Pixxio\Data\Job\JobUpdate;
-use LuzernTourismus\Pixxio\Json\Job\JobJsonReader;
-use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
+use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
+use LuzernTourismus\Pixxio\Import\JobImport;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
-use Nemundo\Core\Debug\Debug;
 
 class JobUpdateScript extends AbstractConsoleScript
 {
@@ -22,7 +18,18 @@ class JobUpdateScript extends AbstractConsoleScript
     {
 
 
-        $reader = new JobReader();
+        $reader = new MediaspaceReader();
+        foreach ($reader->getData() as $mediaspaceRow) {
+
+            $import = new JobImport();
+            $import->subdomain = $mediaspaceRow->mediaspace;
+            $import->apiKey = $mediaspaceRow->apiKey;
+            $import->updateJob();
+
+        }
+
+
+        /*$reader = new JobReader();
         $reader->filter->andEqual($reader->model->success, false);
         $reader->filter->andEqual($reader->model->jobExists,true);
 
@@ -44,7 +51,7 @@ class JobUpdateScript extends AbstractConsoleScript
             }
 
 
-        }
+        }*/
 
     }
 }
