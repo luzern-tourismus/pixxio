@@ -41,6 +41,16 @@ public $json;
 */
 public $success;
 
+/**
+* @var string
+*/
+public $mediaspaceId;
+
+/**
+* @var bool
+*/
+public $jobExists;
+
 public function __construct() {
 parent::__construct();
 $this->model = new JobModel();
@@ -62,6 +72,8 @@ $property->setValue($this->modifyDateTime);
 $this->typeValueList->setModelValue($this->model->isDuplicate, $this->isDuplicate);
 $this->typeValueList->setModelValue($this->model->json, $this->json);
 $this->typeValueList->setModelValue($this->model->success, $this->success);
+$this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
+$this->typeValueList->setModelValue($this->model->jobExists, $this->jobExists);
 $id = parent::save();
 return $id;
 }

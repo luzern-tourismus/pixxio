@@ -51,6 +51,21 @@ public $json;
 */
 public $success;
 
+/**
+* @var int
+*/
+public $mediaspaceId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow
+*/
+public $mediaspace;
+
+/**
+* @var bool
+*/
+public $jobExists;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -64,8 +79,16 @@ $this->modifyDateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModel
 $this->isDuplicate = boolval($this->getModelValue($model->isDuplicate));
 $this->json = $this->getModelValue($model->json);
 $this->success = boolval($this->getModelValue($model->success));
+$this->mediaspaceId = intval($this->getModelValue($model->mediaspaceId));
+if ($model->mediaspace !== null) {
+$this->loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model->mediaspace);
+}
+$this->jobExists = boolval($this->getModelValue($model->jobExists));
 }
 private function loadLuzernTourismusPixxioDataFileFilefileRow($model) {
 $this->file = new \LuzernTourismus\Pixxio\Reader\File\FileDataRow($this->row, $model);
+}
+private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model) {
+$this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);
 }
 }

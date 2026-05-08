@@ -7,6 +7,11 @@ use Nemundo\Core\Base\AbstractBase;
 class JobJsonItem extends AbstractBase
 {
 
+    /**
+     * @var bool
+     */
+    public $jobExists = true;
+
     public $id;
 
     public $jobType;

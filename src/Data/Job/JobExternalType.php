@@ -41,6 +41,21 @@ public $json;
 */
 public $success;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $mediaspaceId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType
+*/
+public $mediaspace;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $jobExists;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = JobModel::class;
@@ -101,6 +116,21 @@ $this->success->aliasFieldName = $this->success->tableName . "_" . $this->succes
 $this->success->label = "Success";
 $this->addType($this->success);
 
+$this->mediaspaceId = new \Nemundo\Model\Type\Id\IdType();
+$this->mediaspaceId->fieldName = "mediaspace";
+$this->mediaspaceId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->mediaspaceId->aliasFieldName = $this->mediaspaceId->tableName ."_".$this->mediaspaceId->fieldName;
+$this->mediaspaceId->label = "Mediaspace";
+$this->addType($this->mediaspaceId);
+
+$this->jobExists = new \Nemundo\Model\Type\Number\YesNoType();
+$this->jobExists->fieldName = "job_exists";
+$this->jobExists->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->jobExists->externalTableName = $this->externalTableName;
+$this->jobExists->aliasFieldName = $this->jobExists->tableName . "_" . $this->jobExists->fieldName;
+$this->jobExists->label = "Job Exists";
+$this->addType($this->jobExists);
+
 }
 public function loadFile() {
 if ($this->file == null) {
@@ -110,6 +140,17 @@ $this->file->tableName = $this->parentFieldName . "_" . $this->externalTableName
 $this->file->aliasFieldName = $this->file->tableName ."_".$this->file->fieldName;
 $this->file->label = "File";
 $this->addType($this->file);
+}
+return $this;
+}
+public function loadMediaspace() {
+if ($this->mediaspace == null) {
+$this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType(null, $this->parentFieldName . "_mediaspace");
+$this->mediaspace->fieldName = "mediaspace";
+$this->mediaspace->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->mediaspace->aliasFieldName = $this->mediaspace->tableName ."_".$this->mediaspace->fieldName;
+$this->mediaspace->label = "Mediaspace";
+$this->addType($this->mediaspace);
 }
 return $this;
 }

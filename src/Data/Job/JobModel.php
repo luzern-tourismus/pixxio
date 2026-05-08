@@ -41,6 +41,21 @@ public $json;
 */
 public $success;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $mediaspaceId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType
+*/
+public $mediaspace;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $jobExists;
+
 protected function loadModel() {
 $this->tableName = "pixxio_job";
 $this->aliasTableName = "pixxio_job";
@@ -103,6 +118,21 @@ $this->success->aliasFieldName = "pixxio_job_success";
 $this->success->label = "Success";
 $this->success->allowNullValue = false;
 
+$this->mediaspaceId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->mediaspaceId->tableName = "pixxio_job";
+$this->mediaspaceId->fieldName = "mediaspace";
+$this->mediaspaceId->aliasFieldName = "pixxio_job_mediaspace";
+$this->mediaspaceId->label = "Mediaspace";
+$this->mediaspaceId->allowNullValue = true;
+
+$this->jobExists = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->jobExists->tableName = "pixxio_job";
+$this->jobExists->externalTableName = "pixxio_job";
+$this->jobExists->fieldName = "job_exists";
+$this->jobExists->aliasFieldName = "pixxio_job_job_exists";
+$this->jobExists->label = "Job Exists";
+$this->jobExists->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "create_date_time";
 $index->addType($this->createDateTime);
@@ -115,6 +145,16 @@ $this->file->tableName = "pixxio_job";
 $this->file->fieldName = "file";
 $this->file->aliasFieldName = "pixxio_job_file";
 $this->file->label = "File";
+}
+return $this;
+}
+public function loadMediaspace() {
+if ($this->mediaspace == null) {
+$this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType($this, "pixxio_job_mediaspace");
+$this->mediaspace->tableName = "pixxio_job";
+$this->mediaspace->fieldName = "mediaspace";
+$this->mediaspace->aliasFieldName = "pixxio_job_mediaspace";
+$this->mediaspace->label = "Mediaspace";
 }
 return $this;
 }

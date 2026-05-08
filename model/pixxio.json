@@ -331,6 +331,23 @@
                     "variable_name": "success",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Mediaspace",
+                    "field_name": "mediaspace",
+                    "variable_name": "mediaspace",
+                    "allow_null": true,
+                    "is_deleted": false,
+                    "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Job Exists",
+                    "field_name": "job_exists",
+                    "variable_name": "jobExists",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [

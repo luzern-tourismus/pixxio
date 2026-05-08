@@ -41,6 +41,7 @@ class JobPage extends AbstractTemplateDocument
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
+            ->addText($reader->model->jobExists->label)
             ->addText($reader->model->success->label)
             ->addText($reader->model->fileId->label)
             ->addText($reader->model->isDuplicate->label)
@@ -54,6 +55,7 @@ class JobPage extends AbstractTemplateDocument
 
             $row
                 ->addText($fileRow->id)
+                ->addYesNo($fileRow->jobExists)
                 ->addYesNo($fileRow->success)
                 ->addText($fileRow->fileId)
                 ->addYesNo($fileRow->isDuplicate)

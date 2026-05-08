@@ -7,6 +7,7 @@ use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Http\Response\StatusCode;
 use Nemundo\Core\Json\Reader\JsonReader;
 use Nemundo\Core\Type\DateTime\DateTime;
 
@@ -32,6 +33,11 @@ class JobJsonReader extends AbstractBase
 
 
         $item = new JobJsonItem();
+
+        if ($response->statusCode == StatusCode::NOT_FOUND) {
+            $item->jobExists = false;
+        }
+
 
         if (isset($jsonData['job'])) {
             $jobData = $jsonData['job'];
@@ -62,6 +68,7 @@ class JobJsonReader extends AbstractBase
             $data = new Job();
             $data->updateOnDuplicate = true;
             $data->id = $jobId;
+            $data->jobExists = true;
             $data->fileId = $item->fileId;
             $data->isDuplicate = $item->isDuplicate;
             $data->createDateTime = $item->createDateTime;

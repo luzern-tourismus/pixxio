@@ -9,6 +9,7 @@ use LuzernTourismus\Pixxio\Script\CleanScript;
 use LuzernTourismus\Pixxio\Script\DirectoryImportScript;
 use LuzernTourismus\Pixxio\Script\ImportScript;
 use LuzernTourismus\Pixxio\Script\JobCleanScript;
+use LuzernTourismus\Pixxio\Script\JobUpdateScript;
 use LuzernTourismus\Pixxio\Script\TestScript;
 use LuzernTourismus\Pixxio\Usergroup\PixxioUsergroup;
 use Nemundo\App\Application\Type\Install\AbstractInstall;
@@ -31,13 +32,13 @@ class PixxioInstall extends AbstractInstall
         (new ScriptSetup(new PixxioApplication()))
             ->addScript(new ImportScript())
             ->addScript(new DirectoryImportScript())
+            ->addScript(new JobUpdateScript())
             ->addScript(new JobCleanScript())
             ->addScript(new CleanScript())
             ->addScript(new TestScript());
 
         (new UsergroupSetup())
             ->addUsergroup(new PixxioUsergroup());
-
 
     }
 }
