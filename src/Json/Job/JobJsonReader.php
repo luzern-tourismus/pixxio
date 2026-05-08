@@ -77,11 +77,11 @@ class JobJsonReader extends AbstractBase
             $data->success = $item->success;
             $data->save();
 
-        } else {
+        } /*else {
 
             (new Debug())->write($response);
 
-        }
+        }*/
 
         return $item;
 
