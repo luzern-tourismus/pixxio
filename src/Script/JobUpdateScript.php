@@ -21,16 +21,17 @@ class JobUpdateScript extends AbstractConsoleScript
     public function run()
     {
 
-        //$reader = new MigrationLogReader();
+
         $reader = new JobReader();
         $reader->filter->andEqual($reader->model->success, false);
         $reader->filter->andEqual($reader->model->jobExists,true);
-        //$reader->filter->andEqual($reader->model->success celumId);
+
         foreach ($reader->getData() as $jobRow) {
+
+            (new Debug())->write($jobRow->id);
 
             $reader = new JobJsonReader();
             $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
-            //$reader->fromMediaspaceConfig(new LuzernMediaspaceConfig());
             $item = $reader->getJob($jobRow->id);
 
             //(new Debug())->write($item);
