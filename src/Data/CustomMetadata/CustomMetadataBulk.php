@@ -26,6 +26,16 @@ public $name;
 */
 public $typeId;
 
+/**
+* @var bool
+*/
+public $importStatus;
+
+/**
+* @var bool
+*/
+public $active;
+
 public function __construct() {
 parent::__construct();
 $this->model = new CustomMetadataModel();
@@ -36,6 +46,8 @@ $this->typeValueList->setModelValue($this->model->id, $id);
 $this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
 $this->typeValueList->setModelValue($this->model->name, $this->name);
 $this->typeValueList->setModelValue($this->model->typeId, $this->typeId);
+$this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 $id = parent::save();
 return $id;
 }

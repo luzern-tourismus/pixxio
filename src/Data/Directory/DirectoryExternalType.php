@@ -21,6 +21,16 @@ public $mediaspaceId;
 */
 public $mediaspace;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $importStatus;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DirectoryModel::class;
@@ -48,6 +58,22 @@ $this->mediaspaceId->tableName = $this->parentFieldName . "_" . $this->externalT
 $this->mediaspaceId->aliasFieldName = $this->mediaspaceId->tableName ."_".$this->mediaspaceId->fieldName;
 $this->mediaspaceId->label = "Mediaspace";
 $this->addType($this->mediaspaceId);
+
+$this->importStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->importStatus->fieldName = "import_status";
+$this->importStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->importStatus->externalTableName = $this->externalTableName;
+$this->importStatus->aliasFieldName = $this->importStatus->tableName . "_" . $this->importStatus->fieldName;
+$this->importStatus->label = "Import Status";
+$this->addType($this->importStatus);
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType();
+$this->active->fieldName = "active";
+$this->active->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->active->externalTableName = $this->externalTableName;
+$this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->fieldName;
+$this->active->label = "Active";
+$this->addType($this->active);
 
 }
 public function loadMediaspace() {

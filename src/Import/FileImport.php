@@ -33,11 +33,13 @@ class FileImport extends AbstractImport
                     $data = new File();
                     $data->updateOnDuplicate = true;
                     $data->id = $file->id;
+                    $data->importStatus = true;
+                    $data->active = true;
                     $data->mediaspaceId = $mediaspaceRow->id;
                     $data->filename = $file->filename;
                     $data->fileUrl = $file->fileUrl;
                     $data->directoryId = $file->directoryId;
-                    $data->creator= $file->creator;
+                    $data->creator = $file->creator;
                     $data->save();
 
                     foreach ($file->keywordList as $keyword) {
@@ -48,7 +50,7 @@ class FileImport extends AbstractImport
                         $data->save();
 
                         $id = new KeywordId();
-                        $id->filter->andEqual($id->model->keyword,$keyword);
+                        $id->filter->andEqual($id->model->keyword, $keyword);
                         $keywordId = $id->getId();
 
                         $data = new FileKeyword();

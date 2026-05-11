@@ -73,6 +73,22 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "5b832c76-1dba-4bc8-800d-09b761cebbb0"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []
@@ -105,6 +121,22 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []
@@ -168,6 +200,22 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []
@@ -227,6 +275,22 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "79a7851e-b93d-4497-9dd6-4b7cf7a80394"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []

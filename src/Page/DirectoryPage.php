@@ -38,6 +38,7 @@ class DirectoryPage extends AbstractTemplateDocument
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
+            ->addText($reader->model->active->label)
             ->addText($reader->model->directory->label)
             ->addText($reader->model->mediaspace->label);
 
@@ -45,11 +46,14 @@ class DirectoryPage extends AbstractTemplateDocument
 
             (new AdminTableRow($table))
                 ->addText($collectionRow->id)
+                ->addYesNo($collectionRow->active)
                 ->addText($collectionRow->directory)
                 ->addText($collectionRow->mediaspace->mediaspace);
 
         }
 
         return parent::getContent();
+
     }
+
 }

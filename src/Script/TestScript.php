@@ -2,8 +2,6 @@
 
 namespace LuzernTourismus\Pixxio\Script;
 
-use LuzernTourismus\Pixxio\Import\CustomMetadataImport;
-use LuzernTourismus\Pixxio\Import\FileImport;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 
 class TestScript extends AbstractConsoleScript
@@ -16,7 +14,6 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
-        (new CustomMetadataImport())->importData();
 
     }
 }

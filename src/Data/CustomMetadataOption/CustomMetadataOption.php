@@ -21,6 +21,16 @@ public $customMetadataId;
 */
 public $option;
 
+/**
+* @var bool
+*/
+public $importStatus;
+
+/**
+* @var bool
+*/
+public $active;
+
 public function __construct() {
 parent::__construct();
 $this->model = new CustomMetadataOptionModel();
@@ -30,6 +40,8 @@ $id = $this->id;
 $this->typeValueList->setModelValue($this->model->id, $id);
 $this->typeValueList->setModelValue($this->model->customMetadataId, $this->customMetadataId);
 $this->typeValueList->setModelValue($this->model->option, $this->option);
+$this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 $id = parent::save();
 return $id;
 }

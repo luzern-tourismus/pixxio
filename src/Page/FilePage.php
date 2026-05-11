@@ -51,6 +51,7 @@ class FilePage extends AbstractTemplateDocument
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
+            ->addText($reader->model->active->label)
             ->addText($reader->model->filename->label)
             ->addText($reader->model->creator->label)
             ->addText($reader->model->directory->label)
@@ -63,6 +64,7 @@ class FilePage extends AbstractTemplateDocument
 
             $row
                 ->addText($fileRow->id)
+                ->addYesNo($fileRow->active)
                 ->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
                 ->addText($fileRow->creator)
                 ->addText($fileRow->directory->directory)

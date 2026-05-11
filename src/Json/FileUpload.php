@@ -137,10 +137,6 @@ class FileUpload extends AbstractBase
 
         return $jobId;
 
-        /*$success = $this->getSuccessMessage($response);
-        return $success;*/
-
-
     }
 
 }

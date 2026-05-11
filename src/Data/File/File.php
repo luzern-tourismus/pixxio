@@ -36,6 +36,16 @@ public $creator;
 */
 public $directoryId;
 
+/**
+* @var bool
+*/
+public $importStatus;
+
+/**
+* @var bool
+*/
+public $active;
+
 public function __construct() {
 parent::__construct();
 $this->model = new FileModel();
@@ -48,6 +58,8 @@ $this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspac
 $this->typeValueList->setModelValue($this->model->fileUrl, $this->fileUrl);
 $this->typeValueList->setModelValue($this->model->creator, $this->creator);
 $this->typeValueList->setModelValue($this->model->directoryId, $this->directoryId);
+$this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 $id = parent::save();
 return $id;
 }

@@ -31,6 +31,16 @@ public $customMetadata;
 */
 public $option;
 
+/**
+* @var bool
+*/
+public $importStatus;
+
+/**
+* @var bool
+*/
+public $active;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -40,6 +50,8 @@ if ($model->customMetadata !== null) {
 $this->loadLuzernTourismusPixxioDataCustomMetadataCustomMetadatacustomMetadataRow($model->customMetadata);
 }
 $this->option = $this->getModelValue($model->option);
+$this->importStatus = boolval($this->getModelValue($model->importStatus));
+$this->active = boolval($this->getModelValue($model->active));
 }
 private function loadLuzernTourismusPixxioDataCustomMetadataCustomMetadatacustomMetadataRow($model) {
 $this->customMetadata = new \LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadataRow($this->row, $model);

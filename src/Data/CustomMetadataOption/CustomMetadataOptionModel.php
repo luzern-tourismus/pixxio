@@ -21,6 +21,16 @@ public $customMetadata;
 */
 public $option;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $importStatus;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
 protected function loadModel() {
 $this->tableName = "pixxio_custom_metadata_option";
 $this->aliasTableName = "pixxio_custom_metadata_option";
@@ -51,6 +61,22 @@ $this->option->aliasFieldName = "pixxio_custom_metadata_option_option";
 $this->option->label = "Option";
 $this->option->allowNullValue = false;
 $this->option->length = 255;
+
+$this->importStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->importStatus->tableName = "pixxio_custom_metadata_option";
+$this->importStatus->externalTableName = "pixxio_custom_metadata_option";
+$this->importStatus->fieldName = "import_status";
+$this->importStatus->aliasFieldName = "pixxio_custom_metadata_option_import_status";
+$this->importStatus->label = "Import Status";
+$this->importStatus->allowNullValue = false;
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->active->tableName = "pixxio_custom_metadata_option";
+$this->active->externalTableName = "pixxio_custom_metadata_option";
+$this->active->fieldName = "active";
+$this->active->aliasFieldName = "pixxio_custom_metadata_option_active";
+$this->active->label = "Active";
+$this->active->allowNullValue = false;
 
 }
 public function loadCustomMetadata() {
