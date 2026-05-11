@@ -70,11 +70,6 @@ class FileUpload extends AbstractBase
 
         if ($value !== null) {
 
-            /*$custom = [];
-            $custom['action'] = 'add';
-            $custom['id'] = $id;
-            $custom['value'] = $value;*/
-
             $this->customMultiList[$id]['action'] = 'add';
             $this->customMultiList[$id]['id'] = $id;
             $this->customMultiList[$id]['value'][] = $value;
@@ -93,7 +88,8 @@ class FileUpload extends AbstractBase
 
         if (sizeof($this->keywordList) > 0) {
             $keywordText = implode(',', array_unique($this->keywordList));
-            $data['addKeywords'] = $keywordText;
+            //$data['addKeywords'] = $keywordText;
+            $data['keywords'] = $keywordText;
         }
 
         if ($this->title !== null) {
@@ -103,7 +99,8 @@ class FileUpload extends AbstractBase
         }
 
         if ($this->description !== null) {
-            $data['appendDescription'] = $this->description;
+            //$data['appendDescription'] = $this->description;
+            $data['description'] = $this->description;
         }
 
         if ($this->directoryId !== null) {
