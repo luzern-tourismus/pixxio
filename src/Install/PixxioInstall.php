@@ -6,6 +6,7 @@ use LuzernTourismus\Pixxio\Application\PixxioApplication;
 use LuzernTourismus\Pixxio\Data\PixxioModelCollection;
 use LuzernTourismus\Pixxio\Scheduler\ImportScheduler;
 use LuzernTourismus\Pixxio\Script\CleanScript;
+use LuzernTourismus\Pixxio\Script\CustommetadataImportScript;
 use LuzernTourismus\Pixxio\Script\DirectoryImportScript;
 use LuzernTourismus\Pixxio\Script\ImportScript;
 use LuzernTourismus\Pixxio\Script\JobCleanScript;
@@ -31,6 +32,7 @@ class PixxioInstall extends AbstractInstall
 
         (new ScriptSetup(new PixxioApplication()))
             ->addScript(new ImportScript())
+            ->addScript(new CustommetadataImportScript())
             ->addScript(new DirectoryImportScript())
             ->addScript(new JobUpdateScript())
             ->addScript(new JobCleanScript())

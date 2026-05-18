@@ -10,6 +10,11 @@ https://api.pixxio.com/docs/unstable#tag/Custom-Metadata
 composer require luzerntourismus/pixxio
 ```
 
+## Import Custommetadata
+```
+php bin/cmd.php pixxio-custommetadata-import 
+```
+
 ## Import Directory
 ```
 php bin/cmd.php pixxio-directory-import 
