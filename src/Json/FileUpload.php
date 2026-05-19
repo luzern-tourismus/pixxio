@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Json;
 
+use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Check\ValueCheck;
@@ -26,7 +27,9 @@ class FileUpload extends AbstractBase
 
     public $directoryId;
 
+
     private $keywordList = [];
+
 
     private $customList = [];
 
@@ -88,7 +91,6 @@ class FileUpload extends AbstractBase
 
         if (sizeof($this->keywordList) > 0) {
             $keywordText = implode(',', array_unique($this->keywordList));
-            //$data['addKeywords'] = $keywordText;
             $data['keywords'] = $keywordText;
         }
 
@@ -99,7 +101,6 @@ class FileUpload extends AbstractBase
         }
 
         if ($this->description !== null) {
-            //$data['appendDescription'] = $this->description;
             $data['description'] = $this->description;
         }
 
@@ -107,14 +108,16 @@ class FileUpload extends AbstractBase
             $data['directoryID'] = $this->directoryId;
         }
 
-
         foreach ($this->customMultiList as $customMulti) {
             $this->customList[] = $customMulti;
         }
 
-
         if (sizeof($this->customList) > 0) {
             $data['metadataCustom'] = (new JsonText())->addData($this->customList)->getJson();
+        }
+
+        if (PixxioConfig::$debugMode) {
+            (new Debug())->write($data);
         }
 
         $request = new PixxioWebRequest();

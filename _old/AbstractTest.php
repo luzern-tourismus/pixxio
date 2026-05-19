@@ -1,6 +1,5 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest;
 
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Project\Config\ProjectConfigReader;

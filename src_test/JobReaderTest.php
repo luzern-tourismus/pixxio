@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\PixxioTest;
 
+use AbstractTest;
 use LuzernTourismus\Pixxio\Json\Job\JobJsonReader;
 use Nemundo\Core\Debug\Debug;
 

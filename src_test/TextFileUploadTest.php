@@ -2,7 +2,7 @@
 
 namespace LuzernTourismus\PixxioTest;
 
-use LuzernTourismus\Pixxio\Data\Job\Job;
+use AbstractTest;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Random\RandomText;
 use Nemundo\Core\System\Delay;

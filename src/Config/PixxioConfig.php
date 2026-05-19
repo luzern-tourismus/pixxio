@@ -14,6 +14,6 @@ class PixxioConfig extends AbstractBase
     /**
      * @var bool
      */
-    public static $debugMode=false;
+    public static $debugMode = false;
 
 }
