@@ -12,7 +12,7 @@ composer require luzerntourismus/pixxio
 
 ## Import Custommetadata
 ```
-php bin/cmd.php pixxio-custommetadata-import 
+php bin/cmd.php pixxio-custommetadata-import
 ```
 
 ## Import Directory

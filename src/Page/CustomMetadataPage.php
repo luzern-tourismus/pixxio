@@ -15,6 +15,7 @@ use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
 use Nemundo\Com\Template\AbstractTemplateDocument;
 use Nemundo\Core\Type\Number\YesNo;
+use Nemundo\Html\Formatting\Strike;
 
 class CustomMetadataPage extends AbstractTemplateDocument
 {
@@ -61,7 +62,19 @@ class CustomMetadataPage extends AbstractTemplateDocument
                 $optionReader = new CustomMetadataOptionReader();
                 $optionReader->filter->andEqual($optionReader->model->customMetadataId, $customMetadataRow->id);
                 foreach ($optionReader->getData() as $optionRow) {
-                    $ul->addText((new YesNo($optionRow->active))->getValue() . ': ' . $optionRow->id . ' - ' . $optionRow->option);
+                    //$ul->addText((new YesNo($optionRow->active))->getValue() . ': ' . $optionRow->id . ' - ' . $optionRow->option);
+                    //$ul->addText((new YesNo($optionRow->active))->getValue() . ': ' . $optionRow->id . ' - ' . $optionRow->option);
+
+                    $text =$optionRow->option.' (' . $optionRow->id . ')';
+
+                    if ($optionRow->active) {
+                        $ul->addText($text);
+                    } else {
+                        $strike = new Strike($ul);
+                        $strike->content = $text;
+                    }
+
+
                 }
 
             }
