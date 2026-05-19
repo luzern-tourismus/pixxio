@@ -9,12 +9,14 @@ class DirectoryListBox extends AdminListBox
 {
     public function getContent()
     {
+
         $this->label = 'Directory';
 
-        foreach ((new DirectoryDataReader())->getData() as $directory) {
-            $this->addItem($directory->id, $directory->directory);
+        $reader = new DirectoryDataReader();
+        $reader->filterByActive();
+        foreach ($reader->getData() as $directoryRow) {
+            $this->addItem($directoryRow->id, $directoryRow->directory);
         }
-
 
         return parent::getContent();
     }

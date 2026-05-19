@@ -70,18 +70,15 @@ class FilePage extends AbstractTemplateDocument
                 ->addText($fileRow->directory->directory)
                 ->addText($fileRow->mediaspace->mediaspace);
 
-
             $ul = new AdminUnorderedList($row);
             foreach ($fileRow->getKeywordList() as $keywordRow) {
                 $ul->addText($keywordRow->keyword);
             }
 
-
         }
 
         $pagination = new AdminPagination($layout);
         $pagination->paginationReader = $reader;
-
 
         return parent::getContent();
     }

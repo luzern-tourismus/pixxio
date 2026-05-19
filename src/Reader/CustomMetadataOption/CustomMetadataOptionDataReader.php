@@ -16,4 +16,13 @@ class CustomMetadataOptionDataReader extends CustomMetadataOptionReader
     }
 
 
+    public function filterByActive()
+    {
+
+        $this->filter->andEqual($this->model->active,true);
+        return $this;
+
+    }
+
+
 }

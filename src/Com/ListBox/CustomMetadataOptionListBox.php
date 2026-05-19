@@ -12,8 +12,10 @@ class CustomMetadataOptionListBox extends AdminListBox
         $this->label = 'Custom Metadata Option';
 
         $reader = new CustomMetadataOptionDataReader();
+        $reader->filterByActive();
         $reader->model->loadCustomMetadata();
         $reader
+            ->filterByActive()
             ->addOrder($reader->model->customMetadata->name)
             ->addOrder($reader->model->option);
         foreach ($reader->getData() as $customMetadataRow) {

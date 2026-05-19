@@ -16,6 +16,15 @@ class CustomMetadataDataReader extends CustomMetadataReader
     }
 
 
+    public function filterByActive()
+    {
+
+        $this->filter->andEqual($this->model->active,true);
+        return $this;
+
+    }
+
+
     public function orderByName()
     {
 
