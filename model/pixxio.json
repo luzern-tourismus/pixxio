@@ -350,6 +350,14 @@
                     "field_name": "file_size",
                     "variable_name": "fileSize",
                     "allow_null": false,
+                    "is_deleted": true
+                },
+                {
+                    "type": "large_number",
+                    "label": "File Size",
+                    "field_name": "file_size",
+                    "variable_name": "fileSize",
+                    "allow_null": false,
                     "is_deleted": false
                 }
             ],

@@ -67,7 +67,7 @@ public $subject;
 public $fileExtension;
 
 /**
-* @var \Nemundo\Model\Type\Number\NumberType
+* @var \Nemundo\Model\Type\Number\LargeNumberType
 */
 public $fileSize;
 
@@ -162,7 +162,7 @@ $this->fileExtension->aliasFieldName = $this->fileExtension->tableName . "_" . $
 $this->fileExtension->label = "File Extension";
 $this->addType($this->fileExtension);
 
-$this->fileSize = new \Nemundo\Model\Type\Number\NumberType();
+$this->fileSize = new \Nemundo\Model\Type\Number\LargeNumberType();
 $this->fileSize->fieldName = "file_size";
 $this->fileSize->tableName = $this->parentFieldName . "_" . $this->externalTableName;
 $this->fileSize->externalTableName = $this->externalTableName;

@@ -67,7 +67,7 @@ public $subject;
 public $fileExtension;
 
 /**
-* @var \Nemundo\Model\Type\Number\NumberType
+* @var \Nemundo\Model\Type\Number\LargeNumberType
 */
 public $fileSize;
 
@@ -169,7 +169,7 @@ $this->fileExtension->label = "File Extension";
 $this->fileExtension->allowNullValue = false;
 $this->fileExtension->length = 20;
 
-$this->fileSize = new \Nemundo\Model\Type\Number\NumberType($this);
+$this->fileSize = new \Nemundo\Model\Type\Number\LargeNumberType($this);
 $this->fileSize->tableName = "pixxio_file";
 $this->fileSize->externalTableName = "pixxio_file";
 $this->fileSize->fieldName = "file_size";
