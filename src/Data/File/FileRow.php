@@ -66,6 +66,11 @@ public $active;
 */
 public $description;
 
+/**
+* @var string
+*/
+public $subject;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -84,6 +89,7 @@ $this->loadLuzernTourismusPixxioDataDirectoryDirectorydirectoryRow($model->direc
 $this->importStatus = boolval($this->getModelValue($model->importStatus));
 $this->active = boolval($this->getModelValue($model->active));
 $this->description = $this->getModelValue($model->description);
+$this->subject = $this->getModelValue($model->subject);
 }
 private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model) {
 $this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);

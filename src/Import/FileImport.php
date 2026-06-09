@@ -2,7 +2,6 @@
 
 namespace LuzernTourismus\Pixxio\Import;
 
-use LuzernTourismus\Pixxio\Data\Directory\Directory;
 use LuzernTourismus\Pixxio\Data\File\File;
 use LuzernTourismus\Pixxio\Data\FileKeyword\FileKeyword;
 use LuzernTourismus\Pixxio\Data\Keyword\Keyword;
@@ -11,10 +10,10 @@ use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
 use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
 use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
 use Nemundo\Core\Base\Import\AbstractImport;
+use Nemundo\Core\Check\ValueCheck;
 
 class FileImport extends AbstractImport
 {
-
 
     private $mediaspaceReader;
 
@@ -38,12 +37,11 @@ class FileImport extends AbstractImport
     public function filterByMediaspaceId($mediaspaceId)
     {
 
-        /*if ((new ValueCheck())->hasValue($mediaspaceId)) {
-            $this->filter->andEqual($this->model->idimediaspaceId, $mediaspaceId);
+        if ((new ValueCheck())->hasValue($mediaspaceId)) {
+            $this->mediaspaceReader->filter->andEqual($this->mediaspaceReader->model->id, $mediaspaceId);
         }
 
-        return $this;*/
-
+        return $this;
 
     }
 
@@ -51,10 +49,7 @@ class FileImport extends AbstractImport
     public function importData()
     {
 
-
-        //$mediaspaceReader = new MediaspaceReader();
         foreach ($this->mediaspaceReader->getData() as $mediaspaceRow) {
-
 
             $jsonReader = new FileJsonReaderJson();
             $jsonReader->subdomain = $mediaspaceRow->url;
@@ -70,7 +65,8 @@ class FileImport extends AbstractImport
                     $data->importStatus = true;
                     $data->active = true;
                     $data->mediaspaceId = $mediaspaceRow->id;
-                    $data->filename = $file->filename;
+                    $data->filename = $file->fileName;
+                    $data->subject = $file->subject;
                     $data->description = $file->description;
                     $data->fileUrl = $file->fileUrl;
                     $data->directoryId = $file->directoryId;
@@ -94,27 +90,7 @@ class FileImport extends AbstractImport
                         $data->keywordId = $keywordId;
                         $data->save();
 
-
                     }
-
-
-                    $data = new Directory();
-                    $data->id = $file->directoryId;
-
-
-                    /*$itemReader = new FileItemJsonReaderJson();
-                    $itemReader->mediaSpace = $mediaspaceRow->url;
-                    $itemReader->apiKey= $mediaspaceRow->apiKey;
-
-                    $itemReader->id = $file->id;
-                    foreach ( $itemReader->getData() as $fileItemJson) {
-
-                        //$update = new FileUpdate();
-
-
-
-                    }*/
-
 
                 }
 

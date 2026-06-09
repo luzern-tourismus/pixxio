@@ -13,7 +13,7 @@ $reader = new \LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson();
 $reader->fromMediaspaceConfig($mediaspace);
 foreach ($reader->getData() as $file) {
 
-    (new \Nemundo\Core\Debug\Debug())->write($file->filename);
+    (new \Nemundo\Core\Debug\Debug())->write($file->fileName);
 
     $delete = new FileJsonDelete();
     $delete->fromMediaspaceConfig($mediaspace);

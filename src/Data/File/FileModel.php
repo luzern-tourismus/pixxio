@@ -56,6 +56,11 @@ public $active;
 */
 public $description;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $subject;
+
 protected function loadModel() {
 $this->tableName = "pixxio_file";
 $this->aliasTableName = "pixxio_file";
@@ -135,6 +140,19 @@ $this->description->fieldName = "description";
 $this->description->aliasFieldName = "pixxio_file_description";
 $this->description->label = "Description";
 $this->description->allowNullValue = true;
+
+$this->subject = new \Nemundo\Model\Type\Text\TextType($this);
+$this->subject->tableName = "pixxio_file";
+$this->subject->externalTableName = "pixxio_file";
+$this->subject->fieldName = "subject";
+$this->subject->aliasFieldName = "pixxio_file_subject";
+$this->subject->label = "Subject";
+$this->subject->allowNullValue = true;
+$this->subject->length = 255;
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "mediaspace";
+$index->addType($this->mediaspaceId);
 
 }
 public function loadMediaspace() {

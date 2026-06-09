@@ -41,8 +41,6 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
 
         $response = $request->getData($this->endpoint, $this->parameter);
 
-        //(new Debug())->write($response);
-
         $jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);
         $this->jsonData = $jsonReader->getData();
@@ -54,7 +52,6 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
         } else {
             (new Debug())->write($response);
         }
-
 
         $this->onFinished();
 

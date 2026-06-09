@@ -2,7 +2,7 @@
 
 namespace LuzernTourismus\PixxioTest;
 
-use LuzernTourismus\Pixxio\Json\FileUpload;
+use LuzernTourismus\Pixxio\Builder\FileUpload;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Test\AbstractTest;
 
@@ -15,7 +15,8 @@ class FileUploadTest extends AbstractTest
         $upload = new FileUpload();
         $upload->fromMediaspaceConfig(new MediaspaceConfigTest());
         $upload->fullFilename =  $this->getValue('test_filename');
-        $upload->title = 'Beschreibung xy';
+        //$upload->subject = 'Beschreibung xy';
+        $upload->description = 'hier etwas text ...';
         $upload->directoryId = $this->getValue('test_directory_id');
         $jobId = $upload->upload();
 

@@ -17,7 +17,7 @@ class FileJsonReaderTest extends AbstractTest
         //$reader->
         /*$reader->subdomain = $subdomain;
         $reader->apiKey = $api;*/
-        $reader->pageSize = 5;
+        $reader->pageSize = 1;
         foreach ($reader->getData() as $file) {
             (new \Nemundo\Core\Debug\Debug())->write($file);
         }

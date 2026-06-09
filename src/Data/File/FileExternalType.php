@@ -56,6 +56,11 @@ public $active;
 */
 public $description;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $subject;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FileModel::class;
@@ -130,6 +135,14 @@ $this->description->externalTableName = $this->externalTableName;
 $this->description->aliasFieldName = $this->description->tableName . "_" . $this->description->fieldName;
 $this->description->label = "Description";
 $this->addType($this->description);
+
+$this->subject = new \Nemundo\Model\Type\Text\TextType();
+$this->subject->fieldName = "subject";
+$this->subject->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->subject->externalTableName = $this->externalTableName;
+$this->subject->aliasFieldName = $this->subject->tableName . "_" . $this->subject->fieldName;
+$this->subject->label = "Subject";
+$this->addType($this->subject);
 
 }
 public function loadMediaspace() {

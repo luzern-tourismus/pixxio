@@ -1,10 +1,6 @@
 <?php
 
-use LuzernTourismus\Pixxio\Application\PixxioApplication;
 use LuzernTourismus\Pixxio\Builder\CustomMetadataBuilder;
-use LuzernTourismus\Pixxio\Import\FileImport;
-use LuzernTourismus\Pixxio\Json\FileUpload;
-use LuzernTourismus\Pixxio\Setup\MediaspaceSetup;
 
 require "config.php";
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace LuzernTourismus\Pixxio\Json;
+namespace LuzernTourismus\Pixxio\Builder;
 
 use LuzernTourismus\Pixxio\Config\PixxioConfig;
+use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Check\ValueCheck;
@@ -19,7 +20,7 @@ class FileUpload extends AbstractBase
     public $fullFilename;
 
 
-    public $title;
+    public $subject;
 
 
     public $description;
@@ -94,10 +95,16 @@ class FileUpload extends AbstractBase
             $data['keywords'] = $keywordText;
         }
 
-        if ($this->title !== null) {
-            $data['fileName'] = $this->title;
-        } else {
+
+
+        /*if ($this->subject !== null) {
+            $data['fileName'] = $this->subject;
+        } else {*/
             $data['fileName'] = (new File($this->fullFilename))->getFilename();
+        //}
+
+        if ($this->subject !== null) {
+            $data['subject'] = $this->subject;
         }
 
         if ($this->description !== null) {

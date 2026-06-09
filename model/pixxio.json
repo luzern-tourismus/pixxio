@@ -299,9 +299,35 @@
                     "variable_name": "description",
                     "allow_null": true,
                     "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Name",
+                    "field_name": "name",
+                    "variable_name": "name",
+                    "allow_null": false,
+                    "is_deleted": true,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Subject",
+                    "field_name": "subject",
+                    "variable_name": "subject",
+                    "allow_null": true,
+                    "is_deleted": false,
+                    "length": "255"
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "mediaspace",
+                    "index_type": "index",
+                    "field_name": [
+                        "mediaspace"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",

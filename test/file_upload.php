@@ -11,10 +11,10 @@ $mediaspace->apiKey = $api '';*/
 $filename ='C:\test\test.png';  // 'C:\test\webp.webp';
 $directoryId = 1900732808;
 
-$upload = new \LuzernTourismus\Pixxio\Json\FileUpload();
+$upload = new \LuzernTourismus\Pixxio\Builder\FileUpload();
 $upload->fromMediaspaceConfig(new \LuzernTourismus\PixxioTest\MediaspaceConfigTest());
 $upload->fullFilename = $filename;
-$upload->title = 'Test';
+$upload->subject = 'Test';
 $upload->directoryId = $directoryId;
 $upload->addKeyword('');
 $upload->addMetadata(628208860, 'Copyright by xy');
