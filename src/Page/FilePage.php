@@ -9,12 +9,14 @@ use LuzernTourismus\Pixxio\Reader\File\FileDataPaginationReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
+use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
 use Nemundo\Admin\Parameter\PageParameter;
 use Nemundo\Com\Template\AbstractTemplateDocument;
+use Nemundo\Core\Text\BoldText;
 use Nemundo\Html\Paragraph\Paragraph;
 
 class FilePage extends AbstractTemplateDocument
@@ -27,6 +29,11 @@ class FilePage extends AbstractTemplateDocument
 
         $search = new AdminSearchForm($layout);
 
+        $subject = new AdminTextBox($search);
+        $subject->label = 'Subject';
+        $subject->searchMode = true;
+
+
         $mediaspace = new MediaspaceListBox($search);
         $mediaspace->searchMode = true;
         $mediaspace->submitOnChange = true;
@@ -38,12 +45,16 @@ class FilePage extends AbstractTemplateDocument
 
         $p = new Paragraph($layout);
 
+        $bold = new BoldText();
+        $bold->addKeyword($subject->getValue());
+
 
         $table = new AdminTable($layout);
 
         $reader = new FileDataPaginationReader();
         $reader->currentPage = (new PageParameter())->getValue();
         $reader
+            ->filterBySubject($subject->getValue())
             ->filterByMediaspaceId($mediaspace->getValue())
             ->filterDirecctory($directory->getValue());
 
@@ -59,6 +70,7 @@ class FilePage extends AbstractTemplateDocument
             ->addText($reader->model->description->label)
             ->addText($reader->model->creator->label)
             ->addText($reader->model->directory->label)
+            ->addText($reader->model->directory->label.' List')
             ->addText($reader->model->mediaspace->label)
             ->addText('Keyword');
 
@@ -72,16 +84,17 @@ class FilePage extends AbstractTemplateDocument
                 ->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
                 ->addText($fileRow->fileExtension)
                 ->addText($fileRow->fileSize)
-                ->addText($fileRow->subject)
+                ->addText($bold->getBoldText($fileRow->subject))
                 ->addText($fileRow->description)
                 ->addText($fileRow->creator)
-                ->addText($fileRow->directory->id)
+                //->addText($fileRow->directory->id)
                 ->addText($fileRow->directory->directory);
 
             $ul = new AdminUnorderedList($row);
             //$ul->addText($fileRow->directoryId);
             foreach ($fileRow->directory->getParentDirectoryList() as $parentDirectoryRow) {
-                $ul->addText($parentDirectoryRow->id.' '.$parentDirectoryRow->directory);
+                //$ul->addText($parentDirectoryRow->id . ' ' . $parentDirectoryRow->directory);
+                $ul->addText($parentDirectoryRow->directory);
             }
 
             $row->addText($fileRow->mediaspace->mediaspace);

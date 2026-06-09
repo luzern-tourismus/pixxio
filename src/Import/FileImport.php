@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Import;
 
+use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use LuzernTourismus\Pixxio\Data\File\File;
 use LuzernTourismus\Pixxio\Data\FileKeyword\FileKeyword;
 use LuzernTourismus\Pixxio\Data\Keyword\Keyword;
@@ -11,6 +12,8 @@ use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
 use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
 use Nemundo\Core\Base\Import\AbstractImport;
 use Nemundo\Core\Check\ValueCheck;
+use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Time\Stopwatch;
 
 class FileImport extends AbstractImport
 {
@@ -49,15 +52,26 @@ class FileImport extends AbstractImport
     public function importData()
     {
 
+        $count=0;
+
         foreach ($this->mediaspaceReader->getData() as $mediaspaceRow) {
 
             $jsonReader = new FileJsonReaderJson();
             $jsonReader->subdomain = $mediaspaceRow->url;
             $jsonReader->apiKey = $mediaspaceRow->apiKey;
+            $jsonReader->pageSize = 500;
 
             do {
 
+                $count++;
+
+                if (PixxioConfig::$debugMode) {
+                    (new Debug())->write($count);
+                }
+
                 foreach ($jsonReader->getData() as $file) {
+
+                    //$stoppwatch = new Stopwatch('Save File');
 
                     $data = new File();
                     $data->updateOnDuplicate = true;
@@ -74,6 +88,8 @@ class FileImport extends AbstractImport
                     $data->directoryId = $file->directoryId;
                     $data->creator = $file->creator;
                     $data->save();
+
+
 
                     foreach ($file->keywordList as $keyword) {
 
@@ -93,6 +109,8 @@ class FileImport extends AbstractImport
                         $data->save();
 
                     }
+
+
 
                 }
 

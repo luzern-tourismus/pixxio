@@ -8,6 +8,16 @@ use Nemundo\Core\Check\ValueCheck;
 trait FileFilterTrait
 {
 
+    public function filterBySubject($subject)
+    {
+
+        if ((new ValueCheck())->hasValue($subject)) {
+            $this->filter->andContains($this->model->subject, $subject);
+        }
+        return $this;
+
+    }
+
 
     public function filterByMediaspaceConfig(AbstractMediaspaceConfig $mediaspace)
     {

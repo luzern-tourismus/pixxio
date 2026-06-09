@@ -6,6 +6,7 @@ use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\TextFile\Writer\TextFileWriter;
+use Nemundo\Core\Time\Stopwatch;
 use Nemundo\Core\Type\Text\Text;
 use Nemundo\Core\WebRequest\BearerAuthentication\AbstractBearerAuthenticationWebRequest;
 use Nemundo\Project\Path\TmpPath;
@@ -29,7 +30,9 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
             $url .= $parameter;
         }
 
+        $stoppwatch = new Stopwatch();
         $response = $this->getUrl($url);
+        $stoppwatch->stopAndPrintOutput();
 
         if (PixxioConfig::$debugMode) {
 
