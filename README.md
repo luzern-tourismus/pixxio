@@ -17,7 +17,7 @@ php bin/cmd.php pixxio-custommetadata-import
 
 ## Import Directory
 ```
-php bin/cmd.php pixxio-directory-import 
+php bin/cmd.php pixxio-directory-import
 ```
 
 ## Clean

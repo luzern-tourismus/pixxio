@@ -9,17 +9,51 @@ use LuzernTourismus\Pixxio\Data\Keyword\Keyword;
 use LuzernTourismus\Pixxio\Data\Keyword\KeywordId;
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
 use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
+use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
 use Nemundo\Core\Base\Import\AbstractImport;
 
 class FileImport extends AbstractImport
 {
 
+
+    private $mediaspaceReader;
+
+    public function __construct()
+    {
+
+        $this->mediaspaceReader = new MediaspaceReader();
+
+    }
+
+
+    public function filterMediaspaceConfig(AbstractMediaspaceConfig $mediaspace)
+    {
+
+        $this->mediaspaceReader->filter->andEqual($this->mediaspaceReader->model->apiKey, $mediaspace->apiKey);
+        return $this;
+
+    }
+
+
+    public function filterMediaspaceId($mediaspaceId)
+    {
+
+        /*if ((new ValueCheck())->hasValue($mediaspaceId)) {
+            $this->filter->andEqual($this->model->idimediaspaceId, $mediaspaceId);
+        }
+
+        return $this;*/
+
+
+    }
+
+
     public function importData()
     {
 
 
-        $mediaspaceReader = new MediaspaceReader();
-        foreach ($mediaspaceReader->getData() as $mediaspaceRow) {
+        //$mediaspaceReader = new MediaspaceReader();
+        foreach ($this->mediaspaceReader->getData() as $mediaspaceRow) {
 
 
             $jsonReader = new FileJsonReaderJson();

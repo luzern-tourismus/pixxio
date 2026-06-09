@@ -7,4 +7,6 @@ require "config.php";
 
 //(new \LuzernTourismus\Pixxio\Setup\MediaspaceSetup())->addMediaspaceConfig(new \LuzernTourismus\PixxioTest\MediaspaceConfigTest());
 
+//(new \LuzernTourismus\PixxioTest\FileUploadTest())->runTest();
+
 (new \LuzernTourismus\PixxioTest\FileUploadTest())->runTest();

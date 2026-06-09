@@ -88,6 +88,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         //$version = 'v1';
         $version = 'unstable';
+
         $url = 'https://' . $this->subdomain . '.px.media/api/' . $version . '/' . $endpoint;
 
         return $url;

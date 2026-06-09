@@ -35,7 +35,6 @@ class DirectoryDataReader extends DirectoryReader
 
         return $this;
 
-
     }
 
 }
