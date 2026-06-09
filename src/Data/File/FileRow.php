@@ -47,7 +47,7 @@ public $creator;
 public $directoryId;
 
 /**
-* @var \LuzernTourismus\Pixxio\Data\Directory\DirectoryRow
+* @var \LuzernTourismus\Pixxio\Reader\Directory\DirectoryDataRow
 */
 public $directory;
 
@@ -107,6 +107,6 @@ private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow(
 $this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);
 }
 private function loadLuzernTourismusPixxioDataDirectoryDirectorydirectoryRow($model) {
-$this->directory = new \LuzernTourismus\Pixxio\Data\Directory\DirectoryRow($this->row, $model);
+$this->directory = new \LuzernTourismus\Pixxio\Reader\Directory\DirectoryDataRow($this->row, $model);
 }
 }

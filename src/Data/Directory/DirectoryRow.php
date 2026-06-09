@@ -52,7 +52,7 @@ public $quantity;
 public $parentId;
 
 /**
-* @var \LuzernTourismus\Pixxio\Data\Directory\DirectoryRow
+* @var \LuzernTourismus\Pixxio\Reader\Directory\DirectoryDataRow
 */
 public $parent;
 
@@ -77,6 +77,6 @@ private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow(
 $this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);
 }
 private function loadLuzernTourismusPixxioDataDirectoryDirectoryparentRow($model) {
-$this->parent = new \LuzernTourismus\Pixxio\Data\Directory\DirectoryRow($this->row, $model);
+$this->parent = new \LuzernTourismus\Pixxio\Reader\Directory\DirectoryDataRow($this->row, $model);
 }
 }

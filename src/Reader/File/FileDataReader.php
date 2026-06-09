@@ -14,7 +14,6 @@ class FileDataReader extends FileReader
 
         parent::__construct();
         $this->loadModel();
-        //$this->model->loadMediaspace();
 
     }
 
@@ -25,7 +24,6 @@ class FileDataReader extends FileReader
         return parent::getData();
 
     }
-
 
 
 }
