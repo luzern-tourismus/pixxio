@@ -6,6 +6,7 @@ use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Reader\Directory\DirectoryDataReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
+use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
@@ -44,15 +45,23 @@ class DirectoryPage extends AbstractTemplateDocument
             ->addText($reader->model->quantity->label)
             ->addText($reader->model->mediaspace->label);
 
-        foreach ($reader->getData() as $collectionRow) {
+        foreach ($reader->getData() as $directoryRow) {
 
-            (new AdminTableRow($table))
-                ->addText($collectionRow->id)
-                ->addYesNo($collectionRow->active)
-                ->addText($collectionRow->directory)
-                ->addText($collectionRow->parent->directory)
-                ->addText($collectionRow->quantity)
-                ->addText($collectionRow->mediaspace->mediaspace);
+            $row = new AdminTableRow($table);
+
+            $row
+                ->addText($directoryRow->id)
+                ->addYesNo($directoryRow->active)
+                ->addText($directoryRow->directory);
+
+            $ul = new AdminUnorderedList($row);
+            foreach ($directoryRow->getParentDirectoryList() as $directoryRow2) {
+                $ul->addText($directoryRow2->directory);
+            }
+
+            $row
+                ->addText($directoryRow->quantity)
+                ->addText($directoryRow->mediaspace->mediaspace);
 
         }
 
