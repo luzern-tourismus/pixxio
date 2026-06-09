@@ -61,6 +61,16 @@ public $description;
 */
 public $subject;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $fileExtension;
+
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $fileSize;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FileModel::class;
@@ -143,6 +153,22 @@ $this->subject->externalTableName = $this->externalTableName;
 $this->subject->aliasFieldName = $this->subject->tableName . "_" . $this->subject->fieldName;
 $this->subject->label = "Subject";
 $this->addType($this->subject);
+
+$this->fileExtension = new \Nemundo\Model\Type\Text\TextType();
+$this->fileExtension->fieldName = "file_extension";
+$this->fileExtension->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->fileExtension->externalTableName = $this->externalTableName;
+$this->fileExtension->aliasFieldName = $this->fileExtension->tableName . "_" . $this->fileExtension->fieldName;
+$this->fileExtension->label = "File Extension";
+$this->addType($this->fileExtension);
+
+$this->fileSize = new \Nemundo\Model\Type\Number\NumberType();
+$this->fileSize->fieldName = "file_size";
+$this->fileSize->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->fileSize->externalTableName = $this->externalTableName;
+$this->fileSize->aliasFieldName = $this->fileSize->tableName . "_" . $this->fileSize->fieldName;
+$this->fileSize->label = "File Size";
+$this->addType($this->fileSize);
 
 }
 public function loadMediaspace() {

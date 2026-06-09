@@ -52,6 +52,16 @@ public $description;
 */
 public $subject;
 
+/**
+* @var string
+*/
+public $fileExtension;
+
+/**
+* @var int
+*/
+public $fileSize;
+
 public function __construct() {
 parent::__construct();
 $this->model = new FileModel();
@@ -66,6 +76,8 @@ $this->typeValueList->setModelValue($this->model->importStatus, $this->importSta
 $this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->description, $this->description);
 $this->typeValueList->setModelValue($this->model->subject, $this->subject);
+$this->typeValueList->setModelValue($this->model->fileExtension, $this->fileExtension);
+$this->typeValueList->setModelValue($this->model->fileSize, $this->fileSize);
 parent::update();
 }
 }

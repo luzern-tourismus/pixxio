@@ -317,6 +317,23 @@
                     "allow_null": true,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "File Extension",
+                    "field_name": "file_extension",
+                    "variable_name": "fileExtension",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "20"
+                },
+                {
+                    "type": "number",
+                    "label": "File Size",
+                    "field_name": "file_size",
+                    "variable_name": "fileSize",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [

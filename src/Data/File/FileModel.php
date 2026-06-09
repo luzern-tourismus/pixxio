@@ -61,6 +61,16 @@ public $description;
 */
 public $subject;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $fileExtension;
+
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $fileSize;
+
 protected function loadModel() {
 $this->tableName = "pixxio_file";
 $this->aliasTableName = "pixxio_file";
@@ -149,6 +159,23 @@ $this->subject->aliasFieldName = "pixxio_file_subject";
 $this->subject->label = "Subject";
 $this->subject->allowNullValue = true;
 $this->subject->length = 255;
+
+$this->fileExtension = new \Nemundo\Model\Type\Text\TextType($this);
+$this->fileExtension->tableName = "pixxio_file";
+$this->fileExtension->externalTableName = "pixxio_file";
+$this->fileExtension->fieldName = "file_extension";
+$this->fileExtension->aliasFieldName = "pixxio_file_file_extension";
+$this->fileExtension->label = "File Extension";
+$this->fileExtension->allowNullValue = false;
+$this->fileExtension->length = 20;
+
+$this->fileSize = new \Nemundo\Model\Type\Number\NumberType($this);
+$this->fileSize->tableName = "pixxio_file";
+$this->fileSize->externalTableName = "pixxio_file";
+$this->fileSize->fieldName = "file_size";
+$this->fileSize->aliasFieldName = "pixxio_file_file_size";
+$this->fileSize->label = "File Size";
+$this->fileSize->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "mediaspace";
