@@ -27,7 +27,7 @@ class TestScript extends AbstractConsoleScript
 
         //(new FileUploadTest())->runTest();
 
-        (new DirecctoryReaderTest())->runTest();
+        //(new DirecctoryReaderTest())->runTest();
 
     }
 }

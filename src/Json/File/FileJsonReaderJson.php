@@ -22,7 +22,7 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
         $url = new UrlBuilder('');
         $url
             ->addRequestValue('pageSize', $this->pageSize)
-            ->addRequestValue('responseFields', 'id,createDate,fileExtension,fileSize,fileName,subject,id,clipFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases');
+            ->addRequestValue('responseFields', 'id,createDate,fileExtension,fileSize,fileName,subject,id,clipFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases,originalFileURL');
 
         if ($this->hasCursor()) {
             $url->addRequestValue('pageCursor', $this->getCursor());
@@ -54,7 +54,7 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
         $item->fileName = $json['fileName'];
         $item->fileExtension = $json['fileExtension'];
         $item->fileSize = $json['fileSize'];
-        $item->fileUrl = $json['clipFileURL'];
+        $item->fileUrl = $json['originalFileURL'];
         $item->description = $json['description'];
         $item->keywordList = $json['keywords'];
         $item->creator = $json['creator'];
