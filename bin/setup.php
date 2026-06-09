@@ -13,5 +13,6 @@ $reset = new ProjectReset();
 (new ScriptSetup())->addScript(new AdminUserScript());
 
 (new \LuzernTourismus\Pixxio\Application\PixxioApplication())->installApp();
+(new \LuzernTourismus\PixxioTest\Install\PixxioTestInstall())->install();
 
 $reset->remove();

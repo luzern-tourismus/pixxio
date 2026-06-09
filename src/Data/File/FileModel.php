@@ -51,6 +51,11 @@ public $importStatus;
 */
 public $active;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $description;
+
 protected function loadModel() {
 $this->tableName = "pixxio_file";
 $this->aliasTableName = "pixxio_file";
@@ -122,6 +127,14 @@ $this->active->fieldName = "active";
 $this->active->aliasFieldName = "pixxio_file_active";
 $this->active->label = "Active";
 $this->active->allowNullValue = false;
+
+$this->description = new \Nemundo\Model\Type\Text\LargeTextType($this);
+$this->description->tableName = "pixxio_file";
+$this->description->externalTableName = "pixxio_file";
+$this->description->fieldName = "description";
+$this->description->aliasFieldName = "pixxio_file_description";
+$this->description->label = "Description";
+$this->description->allowNullValue = true;
 
 }
 public function loadMediaspace() {

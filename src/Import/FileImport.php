@@ -71,6 +71,7 @@ class FileImport extends AbstractImport
                     $data->active = true;
                     $data->mediaspaceId = $mediaspaceRow->id;
                     $data->filename = $file->filename;
+                    $data->description = $file->description;
                     $data->fileUrl = $file->fileUrl;
                     $data->directoryId = $file->directoryId;
                     $data->creator = $file->creator;

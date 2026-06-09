@@ -46,6 +46,11 @@ public $importStatus;
 */
 public $active;
 
+/**
+* @var string
+*/
+public $description;
+
 public function __construct() {
 parent::__construct();
 $this->model = new FileModel();
@@ -60,6 +65,7 @@ $this->typeValueList->setModelValue($this->model->creator, $this->creator);
 $this->typeValueList->setModelValue($this->model->directoryId, $this->directoryId);
 $this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
 $this->typeValueList->setModelValue($this->model->active, $this->active);
+$this->typeValueList->setModelValue($this->model->description, $this->description);
 $id = parent::save();
 return $id;
 }

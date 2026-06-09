@@ -51,6 +51,11 @@ public $importStatus;
 */
 public $active;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $description;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FileModel::class;
@@ -117,6 +122,14 @@ $this->active->externalTableName = $this->externalTableName;
 $this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->fieldName;
 $this->active->label = "Active";
 $this->addType($this->active);
+
+$this->description = new \Nemundo\Model\Type\Text\LargeTextType();
+$this->description->fieldName = "description";
+$this->description->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->description->externalTableName = $this->externalTableName;
+$this->description->aliasFieldName = $this->description->tableName . "_" . $this->description->fieldName;
+$this->description->label = "Description";
+$this->addType($this->description);
 
 }
 public function loadMediaspace() {

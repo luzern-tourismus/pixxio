@@ -44,7 +44,7 @@ class FilePage extends AbstractTemplateDocument
         $reader = new FileDataPaginationReader();
         $reader->currentPage = (new PageParameter())->getValue();
         $reader
-            ->filterByMediaspace($mediaspace->getValue())
+            ->filterByMediaspaceId($mediaspace->getValue())
             ->filterDirecctory($directory->getValue());
 
         $p->content = $reader->getFormatTotalCount() . ' files found';
@@ -53,6 +53,7 @@ class FilePage extends AbstractTemplateDocument
             ->addText($reader->model->id->label)
             ->addText($reader->model->active->label)
             ->addText($reader->model->filename->label)
+            ->addText($reader->model->description->label)
             ->addText($reader->model->creator->label)
             ->addText($reader->model->directory->label)
             ->addText($reader->model->mediaspace->label)
@@ -66,6 +67,7 @@ class FilePage extends AbstractTemplateDocument
                 ->addText($fileRow->id)
                 ->addYesNo($fileRow->active)
                 ->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
+                ->addText($fileRow->description)
                 ->addText($fileRow->creator)
                 ->addText($fileRow->directory->directory)
                 ->addText($fileRow->mediaspace->mediaspace);

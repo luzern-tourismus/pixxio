@@ -291,6 +291,14 @@
                     "variable_name": "active",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "large_text",
+                    "label": "Description",
+                    "field_name": "description",
+                    "variable_name": "description",
+                    "allow_null": true,
+                    "is_deleted": false
                 }
             ],
             "index": []

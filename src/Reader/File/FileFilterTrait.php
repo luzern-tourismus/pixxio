@@ -18,7 +18,7 @@ trait FileFilterTrait
     }
 
 
-    public function filterByMediaspace($mediaspaceId)
+    public function filterByMediaspaceId($mediaspaceId)
     {
 
         if ((new ValueCheck())->hasValue($mediaspaceId)) {
