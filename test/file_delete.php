@@ -5,7 +5,7 @@ use LuzernTourismus\Pixxio\Json\File\FileJsonDelete;
 require "config.php";
 
 $mediaspace = new \LuzernTourismus\Pixxio\Mediaspace\MediaspaceConfig();
-$mediaspace->subdomain = '';
+$mediaspace->url = '';
 $mediaspace->apiKey = '';
 
 

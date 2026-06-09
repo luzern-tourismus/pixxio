@@ -26,7 +26,7 @@ class FileImport extends AbstractImport
     }
 
 
-    public function filterMediaspaceConfig(AbstractMediaspaceConfig $mediaspace)
+    public function filterByMediaspaceConfig(AbstractMediaspaceConfig $mediaspace)
     {
 
         $this->mediaspaceReader->filter->andEqual($this->mediaspaceReader->model->apiKey, $mediaspace->apiKey);
@@ -35,7 +35,7 @@ class FileImport extends AbstractImport
     }
 
 
-    public function filterMediaspaceId($mediaspaceId)
+    public function filterByMediaspaceId($mediaspaceId)
     {
 
         /*if ((new ValueCheck())->hasValue($mediaspaceId)) {

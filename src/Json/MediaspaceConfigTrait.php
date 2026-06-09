@@ -18,7 +18,7 @@ trait MediaspaceConfigTrait
 
     public function fromMediaspaceConfig(AbstractMediaspaceConfig $config)
     {
-        $this->subdomain = $config->subdomain;
+        $this->subdomain = $config->url;
         $this->apiKey = $config->apiKey;
 
         return $this;

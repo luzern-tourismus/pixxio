@@ -2,13 +2,23 @@
 
 namespace LuzernTourismus\Pixxio\Reader\File;
 
+use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
 use Nemundo\Core\Check\ValueCheck;
 
-trait MediaspaceFilterTrait
+trait FileFilterTrait
 {
 
 
-    public function filterMediaspace($mediaspaceId)
+    public function filterByMediaspaceConfig(AbstractMediaspaceConfig $mediaspace)
+    {
+
+        $this->filter->andEqual($this->model->mediaspace->apiKey, $mediaspace->apiKey);
+        return $this;
+
+    }
+
+
+    public function filterByMediaspace($mediaspaceId)
     {
 
         if ((new ValueCheck())->hasValue($mediaspaceId)) {
@@ -39,7 +49,7 @@ trait MediaspaceFilterTrait
 
         $this->model
             ->loadMediaspace()
-        ->loadDirectory();
+            ->loadDirectory();
 
     }
 

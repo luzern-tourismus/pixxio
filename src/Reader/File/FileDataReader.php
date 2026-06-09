@@ -7,7 +7,7 @@ use LuzernTourismus\Pixxio\Data\File\FileReader;
 class FileDataReader extends FileReader
 {
 
-    use MediaspaceFilterTrait;
+    use FileFilterTrait;
 
     public function __construct()
     {

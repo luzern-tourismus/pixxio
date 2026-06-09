@@ -44,7 +44,7 @@ class FilePage extends AbstractTemplateDocument
         $reader = new FileDataPaginationReader();
         $reader->currentPage = (new PageParameter())->getValue();
         $reader
-            ->filterMediaspace($mediaspace->getValue())
+            ->filterByMediaspace($mediaspace->getValue())
             ->filterDirecctory($directory->getValue());
 
         $p->content = $reader->getFormatTotalCount() . ' files found';

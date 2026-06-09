@@ -11,7 +11,7 @@ class MediaspaceConfigTest extends AbstractMediaspaceConfig
     protected function loadMediaspace()
     {
 
-        $this->subdomain = (new ProjectConfigReader())->getValue('pixxio_subdomain');
+        $this->url = (new ProjectConfigReader())->getValue('pixxio_subdomain');
         $this->apiKey = (new ProjectConfigReader())->getValue('pixxio_api');
 
     }

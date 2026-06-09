@@ -11,7 +11,7 @@ require "config.php";
 
 $config = new \LuzernTourismus\Pixxio\Mediaspace\MediaspaceConfig();
 $config->apiKey = '';
-$config->subdomain = '';
+$config->url = '';
 
 $builder = new CustomMetadataBuilder();
 $builder->fromMediaspaceConfig($config);

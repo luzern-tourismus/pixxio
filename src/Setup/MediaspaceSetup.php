@@ -14,7 +14,7 @@ class MediaspaceSetup extends AbstractBase
     public function addMediaspaceConfig(AbstractMediaspaceConfig $mediaspaceConfig)
     {
 
-        $this->addMediaspace($mediaspaceConfig->subdomain, $mediaspaceConfig->subdomain, $mediaspaceConfig->apiKey);
+        $this->addMediaspace($mediaspaceConfig->url, $mediaspaceConfig->url, $mediaspaceConfig->apiKey);
         return $this;
 
     }

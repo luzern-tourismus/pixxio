@@ -8,7 +8,7 @@ use LuzernTourismus\Pixxio\Data\File\FileReader;
 class FileDataPaginationReader extends FilePaginationReader
 {
 
-    use MediaspaceFilterTrait;
+    use FileFilterTrait;
 
     public function __construct()
     {
