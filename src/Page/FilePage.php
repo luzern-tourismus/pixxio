@@ -72,10 +72,19 @@ class FilePage extends AbstractTemplateDocument
                 ->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
                 ->addText($fileRow->fileExtension)
                 ->addText($fileRow->fileSize)
+                ->addText($fileRow->subject)
                 ->addText($fileRow->description)
                 ->addText($fileRow->creator)
-                ->addText($fileRow->directory->directory)
-                ->addText($fileRow->mediaspace->mediaspace);
+                ->addText($fileRow->directory->id)
+                ->addText($fileRow->directory->directory);
+
+            $ul = new AdminUnorderedList($row);
+            //$ul->addText($fileRow->directoryId);
+            foreach ($fileRow->directory->getParentDirectoryList() as $parentDirectoryRow) {
+                $ul->addText($parentDirectoryRow->id.' '.$parentDirectoryRow->directory);
+            }
+
+            $row->addText($fileRow->mediaspace->mediaspace);
 
             $ul = new AdminUnorderedList($row);
             foreach ($fileRow->getKeywordList() as $keywordRow) {
