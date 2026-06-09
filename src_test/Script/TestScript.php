@@ -4,8 +4,10 @@ namespace LuzernTourismus\PixxioTest\Script;
 
 use LuzernTourismus\Pixxio\Setup\MediaspaceSetup;
 use LuzernTourismus\PixxioTest\FileUploadTest;
+use LuzernTourismus\PixxioTest\Json\DirecctoryJsonReaderTest;
 use LuzernTourismus\PixxioTest\Json\FileJsonReaderTest;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
+use LuzernTourismus\PixxioTest\Reader\DirecctoryReaderTest;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 
 class TestScript extends AbstractConsoleScript
@@ -23,8 +25,9 @@ class TestScript extends AbstractConsoleScript
 
         //(new FileJsonReaderTest())->runTest();
 
-        (new FileUploadTest())->runTest();
+        //(new FileUploadTest())->runTest();
 
+        (new DirecctoryReaderTest())->runTest();
 
     }
 }

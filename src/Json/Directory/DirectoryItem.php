@@ -11,4 +11,8 @@ class DirectoryItem extends AbstractBase
 
     public $directory;
 
+    public $quantity;
+
+    public $parentId;
+
 }

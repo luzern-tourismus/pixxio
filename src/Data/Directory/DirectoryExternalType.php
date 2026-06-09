@@ -31,6 +31,21 @@ public $importStatus;
 */
 public $active;
 
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $quantity;
+
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $parentId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Directory\DirectoryExternalType
+*/
+public $parent;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = DirectoryModel::class;
@@ -75,6 +90,21 @@ $this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->
 $this->active->label = "Active";
 $this->addType($this->active);
 
+$this->quantity = new \Nemundo\Model\Type\Number\NumberType();
+$this->quantity->fieldName = "quantity";
+$this->quantity->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->quantity->externalTableName = $this->externalTableName;
+$this->quantity->aliasFieldName = $this->quantity->tableName . "_" . $this->quantity->fieldName;
+$this->quantity->label = "Quantity";
+$this->addType($this->quantity);
+
+$this->parentId = new \Nemundo\Model\Type\Id\IdType();
+$this->parentId->fieldName = "parent";
+$this->parentId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->parentId->aliasFieldName = $this->parentId->tableName ."_".$this->parentId->fieldName;
+$this->parentId->label = "Parent";
+$this->addType($this->parentId);
+
 }
 public function loadMediaspace() {
 if ($this->mediaspace == null) {
@@ -84,6 +114,17 @@ $this->mediaspace->tableName = $this->parentFieldName . "_" . $this->externalTab
 $this->mediaspace->aliasFieldName = $this->mediaspace->tableName ."_".$this->mediaspace->fieldName;
 $this->mediaspace->label = "Mediaspace";
 $this->addType($this->mediaspace);
+}
+return $this;
+}
+public function loadParent() {
+if ($this->parent == null) {
+$this->parent = new \LuzernTourismus\Pixxio\Data\Directory\DirectoryExternalType(null, $this->parentFieldName . "_parent");
+$this->parent->fieldName = "parent";
+$this->parent->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->parent->aliasFieldName = $this->parent->tableName ."_".$this->parent->fieldName;
+$this->parent->label = "Parent";
+$this->addType($this->parent);
 }
 return $this;
 }

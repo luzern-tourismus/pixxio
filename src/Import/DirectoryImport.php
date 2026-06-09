@@ -7,6 +7,7 @@ use LuzernTourismus\Pixxio\Data\Directory\DirectoryUpdate;
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
 use LuzernTourismus\Pixxio\Json\Directory\DirecotryJsonReader;
 use Nemundo\Core\Base\Import\AbstractImport;
+use Nemundo\Core\Debug\Debug;
 
 class DirectoryImport extends AbstractImport
 {
@@ -33,12 +34,16 @@ class DirectoryImport extends AbstractImport
                 $direcotryJsonReader->page = $page;
                 foreach ($direcotryJsonReader->getData() as $directoryJsonRow) {
 
+                    //(new Debug())->write($directoryJsonRow);
+
                     $data = new Directory();
                     $data->updateOnDuplicate = true;
                     $data->id = $directoryJsonRow->id;
                     $data->importStatus = true;
                     $data->active = true;
                     $data->directory = $directoryJsonRow->directory;
+                    $data->parentId = $directoryJsonRow->parentId;
+                    $data->quantity = $directoryJsonRow->quantity;
                     $data->mediaspaceId = $mediaspaceRow->id;
                     $data->save();
 
@@ -50,14 +55,12 @@ class DirectoryImport extends AbstractImport
 
             } while ($count > 0);
 
-
         }
 
         $update = new DirectoryUpdate();
         $update->active = false;
         $update->filter->andEqual($update->model->importStatus, false);
         $update->update();
-
 
     }
 

@@ -31,6 +31,21 @@ public $importStatus;
 */
 public $active;
 
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $quantity;
+
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $parentId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Directory\DirectoryExternalType
+*/
+public $parent;
+
 protected function loadModel() {
 $this->tableName = "pixxio_directory";
 $this->aliasTableName = "pixxio_directory";
@@ -78,6 +93,21 @@ $this->active->aliasFieldName = "pixxio_directory_active";
 $this->active->label = "Active";
 $this->active->allowNullValue = false;
 
+$this->quantity = new \Nemundo\Model\Type\Number\NumberType($this);
+$this->quantity->tableName = "pixxio_directory";
+$this->quantity->externalTableName = "pixxio_directory";
+$this->quantity->fieldName = "quantity";
+$this->quantity->aliasFieldName = "pixxio_directory_quantity";
+$this->quantity->label = "Quantity";
+$this->quantity->allowNullValue = false;
+
+$this->parentId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->parentId->tableName = "pixxio_directory";
+$this->parentId->fieldName = "parent";
+$this->parentId->aliasFieldName = "pixxio_directory_parent";
+$this->parentId->label = "Parent";
+$this->parentId->allowNullValue = true;
+
 }
 public function loadMediaspace() {
 if ($this->mediaspace == null) {
@@ -86,6 +116,16 @@ $this->mediaspace->tableName = "pixxio_directory";
 $this->mediaspace->fieldName = "mediaspace";
 $this->mediaspace->aliasFieldName = "pixxio_directory_mediaspace";
 $this->mediaspace->label = "Mediaspace";
+}
+return $this;
+}
+public function loadParent() {
+if ($this->parent == null) {
+$this->parent = new \LuzernTourismus\Pixxio\Data\Directory\DirectoryExternalType($this, "pixxio_directory_parent");
+$this->parent->tableName = "pixxio_directory";
+$this->parent->fieldName = "parent";
+$this->parent->aliasFieldName = "pixxio_directory_parent";
+$this->parent->label = "Parent";
 }
 return $this;
 }

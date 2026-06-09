@@ -40,6 +40,8 @@ class DirectoryPage extends AbstractTemplateDocument
             ->addText($reader->model->id->label)
             ->addText($reader->model->active->label)
             ->addText($reader->model->directory->label)
+            ->addText($reader->model->parent->label)
+            ->addText($reader->model->quantity->label)
             ->addText($reader->model->mediaspace->label);
 
         foreach ($reader->getData() as $collectionRow) {
@@ -48,6 +50,8 @@ class DirectoryPage extends AbstractTemplateDocument
                 ->addText($collectionRow->id)
                 ->addYesNo($collectionRow->active)
                 ->addText($collectionRow->directory)
+                ->addText($collectionRow->parent->directory)
+                ->addText($collectionRow->quantity)
                 ->addText($collectionRow->mediaspace->mediaspace);
 
         }

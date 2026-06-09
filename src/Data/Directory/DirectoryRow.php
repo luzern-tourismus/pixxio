@@ -41,6 +41,21 @@ public $importStatus;
 */
 public $active;
 
+/**
+* @var int
+*/
+public $quantity;
+
+/**
+* @var int
+*/
+public $parentId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Directory\DirectoryRow
+*/
+public $parent;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -52,8 +67,16 @@ $this->loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model->me
 }
 $this->importStatus = boolval($this->getModelValue($model->importStatus));
 $this->active = boolval($this->getModelValue($model->active));
+$this->quantity = intval($this->getModelValue($model->quantity));
+$this->parentId = intval($this->getModelValue($model->parentId));
+if ($model->parent !== null) {
+$this->loadLuzernTourismusPixxioDataDirectoryDirectoryparentRow($model->parent);
+}
 }
 private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model) {
 $this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);
+}
+private function loadLuzernTourismusPixxioDataDirectoryDirectoryparentRow($model) {
+$this->parent = new \LuzernTourismus\Pixxio\Data\Directory\DirectoryRow($this->row, $model);
 }
 }

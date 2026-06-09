@@ -31,6 +31,16 @@ public $importStatus;
 */
 public $active;
 
+/**
+* @var int
+*/
+public $quantity;
+
+/**
+* @var string
+*/
+public $parentId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new DirectoryModel();
@@ -42,6 +52,8 @@ $this->typeValueList->setModelValue($this->model->directory, $this->directory);
 $this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
 $this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
 $this->typeValueList->setModelValue($this->model->active, $this->active);
+$this->typeValueList->setModelValue($this->model->quantity, $this->quantity);
+$this->typeValueList->setModelValue($this->model->parentId, $this->parentId);
 $id = parent::save();
 return $id;
 }

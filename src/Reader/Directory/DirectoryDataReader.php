@@ -12,7 +12,9 @@ class DirectoryDataReader extends DirectoryReader
     {
 
         parent::__construct();
-        $this->model->loadMediaspace();
+        $this->model
+            ->loadMediaspace()
+            ->loadParent();
 
     }
 
@@ -20,7 +22,7 @@ class DirectoryDataReader extends DirectoryReader
     public function filterByActive()
     {
 
-        $this->filter->andEqual($this->model->active,true);
+        $this->filter->andEqual($this->model->active, true);
         return $this;
 
     }

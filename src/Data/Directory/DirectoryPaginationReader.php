@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new DirectoryModel();
 }
 /**
-* @return DirectoryRow[]
+* @return \LuzernTourismus\Pixxio\Reader\Directory\DirectoryDataRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new DirectoryRow($dataRow, $this->model);
+$row = new \LuzernTourismus\Pixxio\Reader\Directory\DirectoryDataRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

@@ -179,7 +179,7 @@
             "class_name": "Directory",
             "table_name": "pixxio_directory",
             "namespace": "LuzernTourismus\\Pixxio\\Data\\Directory",
-            "row_class_name": "",
+            "row_class_name": "LuzernTourismus\\Pixxio\\Reader\\Directory\\DirectoryDataRow",
             "primary_index": "number_id",
             "is_deleted": false,
             "type": [
@@ -216,6 +216,23 @@
                     "variable_name": "active",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "number",
+                    "label": "Quantity",
+                    "field_name": "quantity",
+                    "variable_name": "quantity",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Parent",
+                    "field_name": "parent",
+                    "variable_name": "parent",
+                    "allow_null": true,
+                    "is_deleted": false,
+                    "external_model_id": "79a7851e-b93d-4497-9dd6-4b7cf7a80394"
                 }
             ],
             "index": []
