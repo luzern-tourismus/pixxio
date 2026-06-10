@@ -30,9 +30,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
             $url .= $parameter;
         }
 
-        $stoppwatch = new Stopwatch();
         $response = $this->getUrl($url);
-        $stoppwatch->stopAndPrintOutput();
 
         if (PixxioConfig::$debugMode) {
 
@@ -78,7 +76,6 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $url = $this->getServiceUrl($endpoint);
         $url .= '?ids=' . $id;
 
-
         $response = $this->deleteUrl($url);
 
         //(new Debug())->write($response);
@@ -102,7 +99,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     public function postData($endpoint, $json)
     {
 
-        (new Debug())->write($json);
+        //(new Debug())->write($json);
         $this->bearerAuthentication = $this->apiKey;
 
         $data = $this->postUrl($this->getServiceUrl($endpoint), $json);
@@ -114,10 +111,10 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     public function putData($endpoint, $json)
     {
 
-        (new Debug())->write($json);
+        //(new Debug())->write($json);
         $this->bearerAuthentication = $this->apiKey;
 
-        (new Debug())->write($this->bearerAuthentication);
+        //(new Debug())->write($this->bearerAuthentication);
 
         $data = $this->putUrl($this->getServiceUrl($endpoint), $json);
         return $data;

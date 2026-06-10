@@ -71,8 +71,6 @@ class FileImport extends AbstractImport
 
                 foreach ($jsonReader->getData() as $file) {
 
-                    //$stoppwatch = new Stopwatch('Save File');
-
                     $data = new File();
                     $data->updateOnDuplicate = true;
                     $data->id = $file->id;
@@ -88,8 +86,6 @@ class FileImport extends AbstractImport
                     $data->directoryId = $file->directoryId;
                     $data->creator = $file->creator;
                     $data->save();
-
-
 
                     foreach ($file->keywordList as $keyword) {
 
@@ -109,8 +105,6 @@ class FileImport extends AbstractImport
                         $data->save();
 
                     }
-
-
 
                 }
 
