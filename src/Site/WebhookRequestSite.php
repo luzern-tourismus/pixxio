@@ -33,13 +33,13 @@ class WebhookRequestSite extends AbstractSite
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            ob_start();
+      //      ob_start();
 
             $json = file_get_contents('php://input');
-            //$object = json_decode($json);
+            $object = json_decode($json);
 
 
-            $reader = new JsonReader();
+       /*     $reader = new JsonReader();
             $reader->fromText($json);
             $jsonData = $reader->getData();
 
@@ -81,7 +81,7 @@ class WebhookRequestSite extends AbstractSite
                                     )*/
 
 
-            if (json_last_error() !== JSON_ERROR_NONE) {
+         /*   if (json_last_error() !== JSON_ERROR_NONE) {
 
             }
 
@@ -89,11 +89,11 @@ class WebhookRequestSite extends AbstractSite
 
             //file_put_contents($filename, print_r($object, true));
 
-            $content = ob_get_contents();
+            $content = ob_get_contents();*/
 
             $file = new TextFileWriter((new TmpPath())->addPath('webhook.txt')->getFullFilename());
             $file->overwriteExistingFile = true;
-            $file->addLine($content);
+            $file->addLine($json);
             $file->writeFile();
 
         } else {
