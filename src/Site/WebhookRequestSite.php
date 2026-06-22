@@ -39,14 +39,32 @@ class WebhookRequestSite extends AbstractSite
             $object = json_decode($json);
 
 
+            try {
+
             $reader = new JsonReader();
             $reader->fromText($json);
             $jsonData = $reader->getData();
 
-            (new Debug())->write($jsonData);
+            $eventData = $jsonData['events'];   // $ json_decode(json_encode($eventData), true);
+
+            (new Debug())->write($eventData);
 
 
-          /*  $data = new Webhook();
+            /*[events] => Array
+            (
+                [0] => Array
+                (
+                    [id] => 2098540229
+                    [eventKey] => commentCreated
+            [action] => created
+            [name] => createComment
+            [createDate] => 2026-06-22 18:30:19
+                    [modifyDate] => 2026-06-22 18:30:19
+                    [applicationKe*/
+
+
+
+            $data = new Webhook();
             $data->id = $jsonData['id'];
             $data->dateTime = new DateTime($jsonData['createDate']);
             $data->actionName = $jsonData['name'];
@@ -55,9 +73,12 @@ class WebhookRequestSite extends AbstractSite
                 $data->fileId = $data['data']['fileID'];
             }
 
-            $data->save();*/
+            $data->save();
 
 
+            } catch (\Exception $ex) {
+                (new Debug())->write($ex->getMessage());
+            }
 
 
 
