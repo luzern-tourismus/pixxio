@@ -31,6 +31,7 @@ class PixxioSite extends AbstractSite
         new DirectorySite($this);
         new CustomMetadataSite($this);
         new JobSite($this);
+        new WebhookSite($this);
 
     }
 

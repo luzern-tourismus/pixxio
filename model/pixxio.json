@@ -579,6 +579,46 @@
                     ]
                 }
             ]
+        },
+        {
+            "template": "default",
+            "model_id": "c1c91110-02e3-44f9-8f2a-1171af3e33c4",
+            "label": "Webhook",
+            "class_name": "Webhook",
+            "table_name": "pixxio_webhook",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\Webhook",
+            "row_class_name": "",
+            "primary_index": "large_number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Action Name",
+                    "field_name": "action_name",
+                    "variable_name": "actionName",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": true,
+                    "is_deleted": false,
+                    "external_model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf"
+                }
+            ],
+            "index": []
         }
     ]
 }

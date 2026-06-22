@@ -13,5 +13,6 @@ $this->addModel(new \LuzernTourismus\Pixxio\Data\FileKeyword\FileKeywordModel())
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Job\JobModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Keyword\KeywordModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceModel());
+$this->addModel(new \LuzernTourismus\Pixxio\Data\Webhook\WebhookModel());
 }
 }
