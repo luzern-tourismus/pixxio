@@ -21,17 +21,17 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
 
         $url = new UrlBuilder('');
         $url
-//            ->addRequestValue('pageSize', $this->pageSize)
+            ->addRequestValue('pageSize', $this->pageSize)
             ->addRequestValue('responseFields', 'id,createDate,fileExtension,fileSize,fileName,subject,id,clipFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases,originalFileURL');
 
         if ($this->hasCursor()) {
-  //          $url->addRequestValue('pageCursor', $this->getCursor());
+            $url->addRequestValue('pageCursor', $this->getCursor());
         }
 
 
-        //$this->parameter =  $url->getUrl();
+        $this->parameter =  $url->getUrl();
 
-        $this->parameter = '/989429490'. $url->getUrl();
+        //$this->parameter = '/989429490'. $url->getUrl();
 
 
         $this->loopName = 'files';

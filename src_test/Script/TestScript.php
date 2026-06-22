@@ -23,10 +23,10 @@ class TestScript extends AbstractConsoleScript
         //$id = 989429490;
 
 
-        /*(new MediaspaceSetup())
+        (new MediaspaceSetup())
             ->addMediaspaceConfig(new MediaspaceConfigTest());
 
-        (new FileJsonReaderTest())->runTest();*/
+        (new FileJsonReaderTest())->runTest();
 
 
         //(new DirecctoryJsonReaderTest())->runTest();
