@@ -39,7 +39,7 @@ class WebhookRequestSite extends AbstractSite
             $object = json_decode($json);
 
 
-       /*     $reader = new JsonReader();
+            $reader = new JsonReader();
             $reader->fromText($json);
             $jsonData = $reader->getData();
 
@@ -56,29 +56,8 @@ class WebhookRequestSite extends AbstractSite
             $data->save();
 
 
-            /*
-                        [id] => 2019240742
-                                [eventKey] => commentCreated
-                        [action] => created
-                        [name] => createComment
-                        [createDate] => 2026-06-22 17:36:40
-                                [modifyDate] => 2026-06-22 17:36:40
-                                [applicationKey] => iM91iRu6kb86Y6IaWMsK9T9q7
-                        [applicationName] => pixx.io
-                        [userType] => user
-                        [userID] => 1
-                                [userName] => admin
-                        [userDescriptiveName] => System Administrator
-                        [resourceType] => comment
-                        [resourceID] => 1920544565
-                                [resourceName] => Comment
-                        [resourceOwnerUserType] => user
-                        [resourceOwnerUserID] => 0
-                                [resourceOwnerUserName] => admin
-                        [data] => stdClass Object
-                        (
-                            [fileID] => 1166093766
-                                    )*/
+
+
 
 
          /*   if (json_last_error() !== JSON_ERROR_NONE) {
