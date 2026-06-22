@@ -6,6 +6,7 @@ use LuzernTourismus\Pixxio\Data\PixxioModelCollection;
 use LuzernTourismus\Pixxio\Install\PixxioInstall;
 use LuzernTourismus\Pixxio\Install\PixxioUninstall;
 use LuzernTourismus\Pixxio\Site\PixxioSite;
+use LuzernTourismus\Pixxio\Site\WebhookSite;
 use Nemundo\App\Application\Type\AbstractApplication;
 
 class PixxioApplication extends AbstractApplication
@@ -18,5 +19,6 @@ class PixxioApplication extends AbstractApplication
         $this->installClass = PixxioInstall::class;
         $this->uninstallClass = PixxioUninstall::class;
         $this->appSiteClass = PixxioSite::class;
+        $this->publicSiteClass = WebhookSite::class;
     }
 }

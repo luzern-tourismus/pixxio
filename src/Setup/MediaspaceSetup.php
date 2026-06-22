@@ -4,7 +4,6 @@ namespace LuzernTourismus\Pixxio\Setup;
 
 use LuzernTourismus\Pixxio\Data\Mediaspace\Mediaspace;
 use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
-use LuzernTourismus\Pixxio\Mediaspace\MediaspaceConfig;
 use Nemundo\Core\Base\AbstractBase;
 
 class MediaspaceSetup extends AbstractBase
