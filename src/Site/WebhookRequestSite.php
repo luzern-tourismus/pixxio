@@ -45,9 +45,9 @@ class WebhookRequestSite extends AbstractSite
                 $reader->fromText($json);
                 $jsonData = $reader->getData();
 
-                $eventData = $jsonData['events'];   // $ json_decode(json_encode($eventData), true);
+                $eventData = $jsonData['events'][0];   // $ json_decode(json_encode($eventData), true);
 
-                //(new Debug())->write($eventData);
+                (new Debug())->write($eventData);
 
 
                 /*[events] => Array
@@ -83,13 +83,13 @@ class WebhookRequestSite extends AbstractSite
 
                    //file_put_contents($filename, print_r($object, true));*/
 
-                /*$content = ob_get_contents();
+                $content = ob_get_contents();
 
                 $file = new TextFileWriter((new TmpPath())->addPath('webhook.txt')->getFullFilename());
                 $file->overwriteExistingFile = true;
                 $file->addLine($json);
                 $file->addLine($content);
-                $file->writeFile();*/
+                $file->writeFile();
 
             } else {
 

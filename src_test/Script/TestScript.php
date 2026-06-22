@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\PixxioTest\Script;
 
+use LuzernTourismus\Pixxio\Data\Webhook\WebhookDelete;
 use LuzernTourismus\Pixxio\Setup\MediaspaceSetup;
 use LuzernTourismus\PixxioTest\Json\FileJsonReaderTest;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
@@ -17,13 +18,15 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
+        (new WebhookDelete())->delete();
+
         //$id = 989429490;
 
 
-        (new MediaspaceSetup())
+        /*(new MediaspaceSetup())
             ->addMediaspaceConfig(new MediaspaceConfigTest());
 
-        (new FileJsonReaderTest())->runTest();
+        (new FileJsonReaderTest())->runTest();*/
 
 
         //(new DirecctoryJsonReaderTest())->runTest();
