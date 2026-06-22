@@ -18,7 +18,7 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
-        (new WebhookDelete())->delete();
+        //(new WebhookDelete())->delete();
 
         //$id = 989429490;
 
