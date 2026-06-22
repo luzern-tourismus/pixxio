@@ -22,6 +22,7 @@ class WebhookPage extends AbstractTemplateDocument
         $table = new AdminTable($layout);
 
         $reader = new WebhookReader();
+        $reader->model->loadFile();
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
