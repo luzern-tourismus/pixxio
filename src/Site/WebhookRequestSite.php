@@ -39,12 +39,14 @@ class WebhookRequestSite extends AbstractSite
             $object = json_decode($json);
 
 
-          /*  $reader = new JsonReader();
+            $reader = new JsonReader();
             $reader->fromText($json);
             $jsonData = $reader->getData();
 
+            (new Debug())->write($jsonData);
 
-            $data = new Webhook();
+
+          /*  $data = new Webhook();
             $data->id = $jsonData['id'];
             $data->dateTime = new DateTime($jsonData['createDate']);
             $data->actionName = $jsonData['name'];
