@@ -22,7 +22,7 @@ class FileJsonDelete extends AbstractBase
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;  // mediaSpace;
         $request->apiKey = $this->apiKey;
-        $request->deleteData('files', $id);
+        $request->deleteId('files', $id);
 
     }
 

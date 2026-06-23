@@ -5,10 +5,9 @@ namespace LuzernTourismus\Pixxio\WebRequest;
 use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use Nemundo\Core\Debug\Debug;
-use Nemundo\Core\Http\Response\AbstractResponse;
+use Nemundo\Core\Http\Url\UrlBuilder;
 use Nemundo\Core\Json\Reader\JsonReader;
 use Nemundo\Core\TextFile\Writer\TextFileWriter;
-use Nemundo\Core\Time\Stopwatch;
 use Nemundo\Core\Type\Text\Text;
 use Nemundo\Core\WebRequest\BearerAuthentication\AbstractBearerAuthenticationWebRequest;
 use Nemundo\Core\WebRequest\WebResponse;
@@ -72,7 +71,28 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     }
 
 
-    public function deleteData($endpoint, $id)
+    public function deleteParameter($endpoint, $parameter = [])
+    {
+
+        $this->bearerAuthentication = $this->apiKey;
+
+        $urlBuilder = new UrlBuilder($this->getServiceUrl($endpoint));
+        foreach ($parameter as $key => $value) {
+            $urlBuilder->addRequestValue($key, $value);
+        }
+
+        $url = $urlBuilder->getUrl();
+
+        $response = $this->deleteUrl($url);
+
+        (new Debug())->write($response);
+
+        $this->checkResponse($response);
+
+    }
+
+
+    public function deleteId($endpoint, $id)
     {
 
         $this->bearerAuthentication = $this->apiKey;
@@ -88,9 +108,6 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         //(new Debug())->write($response);
 
     }
-
-
-
 
 
     public function postData($endpoint, $json)
@@ -143,18 +160,15 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $jsonData = $jsonReader->getData();
 
         //if (isset($jsonData['success'])) {
-            if (!$jsonData['success']) {
-                (new Debug())->write($jsonData);
+        if (!$jsonData['success']) {
+            (new Debug())->write($jsonData);
             //$success = $jsonData['success'];
         } /*else {
             (new Debug())->write($jsonData);
         }*/
 
 
-
     }
-
-
 
 
 }
