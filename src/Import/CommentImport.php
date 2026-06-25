@@ -31,6 +31,7 @@ class CommentImport extends AbstractBase
             $data->fileId = $fileId;
             $data->userId= $item->userId;
             $data->comment = $item->comment;
+            $data->dateTime = $item->dateTime;
             $data->save();
 
         }

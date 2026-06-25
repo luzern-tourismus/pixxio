@@ -5,6 +5,7 @@ namespace LuzernTourismus\PixxioTest\Script;
 use LuzernTourismus\Pixxio\Import\CommentImport;
 use LuzernTourismus\Pixxio\Import\DirectoryImport;
 use LuzernTourismus\Pixxio\Import\FileImport;
+use LuzernTourismus\Pixxio\Import\UserImport;
 use LuzernTourismus\Pixxio\Json\File\FileJson;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
@@ -19,8 +20,13 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
+        //(new UserImport())->importData();
+
+
         $id = 1976817110;
-        (new CommentImport())->importComment($id);
+        $import =  new CommentImport();
+        $import->fromMediaspaceConfig(new MediaspaceConfigTest());
+        $import->importComment($id);
 
 
         /*(new DirectoryImport())->importData();

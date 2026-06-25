@@ -72,6 +72,14 @@
                     "variable_name": "comment",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []
@@ -648,6 +656,15 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "external",
+                    "label": "Mediaspace",
+                    "field_name": "mediaspace",
+                    "variable_name": "mediaspace",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
                 }
             ],
             "index": []

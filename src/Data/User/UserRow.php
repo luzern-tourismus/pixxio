@@ -26,11 +26,28 @@ public $userName;
 */
 public $displayName;
 
+/**
+* @var int
+*/
+public $mediaspaceId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow
+*/
+public $mediaspace;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
 $this->id = $this->getModelValue($model->id);
 $this->userName = $this->getModelValue($model->userName);
 $this->displayName = $this->getModelValue($model->displayName);
+$this->mediaspaceId = intval($this->getModelValue($model->mediaspaceId));
+if ($model->mediaspace !== null) {
+$this->loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model->mediaspace);
+}
+}
+private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model) {
+$this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);
 }
 }

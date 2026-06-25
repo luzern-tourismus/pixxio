@@ -22,14 +22,24 @@ public $userId;
 */
 public $comment;
 
+/**
+* @var \Nemundo\Core\Type\DateTime\DateTime
+*/
+public $dateTime;
+
 public function __construct() {
 parent::__construct();
 $this->model = new CommentModel();
+$this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime();
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->fileId, $this->fileId);
 $this->typeValueList->setModelValue($this->model->userId, $this->userId);
 $this->typeValueList->setModelValue($this->model->comment, $this->comment);
+if ($this->dateTime->hasValue()) {
+$property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this->model->dateTime, $this->typeValueList);
+$property->setValue($this->dateTime);
+}
 parent::update();
 }
 }

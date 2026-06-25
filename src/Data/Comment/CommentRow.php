@@ -41,6 +41,11 @@ public $user;
 */
 public $comment;
 
+/**
+* @var \Nemundo\Core\Type\DateTime\DateTime
+*/
+public $dateTime;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -54,6 +59,7 @@ if ($model->user !== null) {
 $this->loadLuzernTourismusPixxioDataUserUseruserRow($model->user);
 }
 $this->comment = $this->getModelValue($model->comment);
+$this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModelValue($model->dateTime));
 }
 private function loadLuzernTourismusPixxioDataFileFilefileRow($model) {
 $this->file = new \LuzernTourismus\Pixxio\Reader\File\FileDataRow($this->row, $model);

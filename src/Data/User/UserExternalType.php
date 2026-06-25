@@ -16,6 +16,16 @@ public $userName;
 */
 public $displayName;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $mediaspaceId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType
+*/
+public $mediaspace;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = UserModel::class;
@@ -45,5 +55,23 @@ $this->displayName->aliasFieldName = $this->displayName->tableName . "_" . $this
 $this->displayName->label = "Display Name";
 $this->addType($this->displayName);
 
+$this->mediaspaceId = new \Nemundo\Model\Type\Id\IdType();
+$this->mediaspaceId->fieldName = "mediaspace";
+$this->mediaspaceId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->mediaspaceId->aliasFieldName = $this->mediaspaceId->tableName ."_".$this->mediaspaceId->fieldName;
+$this->mediaspaceId->label = "Mediaspace";
+$this->addType($this->mediaspaceId);
+
+}
+public function loadMediaspace() {
+if ($this->mediaspace == null) {
+$this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType(null, $this->parentFieldName . "_mediaspace");
+$this->mediaspace->fieldName = "mediaspace";
+$this->mediaspace->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->mediaspace->aliasFieldName = $this->mediaspace->tableName ."_".$this->mediaspace->fieldName;
+$this->mediaspace->label = "Mediaspace";
+$this->addType($this->mediaspace);
+}
+return $this;
 }
 }

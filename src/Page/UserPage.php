@@ -4,6 +4,7 @@ namespace LuzernTourismus\Pixxio\Page;
 
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Data\User\UserReader;
+use LuzernTourismus\Pixxio\Reader\User\UserDataReader;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
@@ -24,7 +25,7 @@ class UserPage extends AbstractTemplateDocument
 
         $table = new AdminTable($layout);
 
-        $reader = new UserReader();
+        $reader = new UserDataReader();
         //$reader->currentPage = (new PageParameter())->getValue();
         //$reader->addOrder($reader->model->createDateTime,SortOrder::DESCENDING);
 
@@ -34,7 +35,8 @@ class UserPage extends AbstractTemplateDocument
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
             ->addText($reader->model->userName->label)
-            ->addText($reader->model->displayName->label);
+            ->addText($reader->model->displayName->label)
+            ->addText($reader->model->mediaspace->label);
 
         foreach ($reader->getData() as $userRow) {
 
@@ -43,7 +45,8 @@ class UserPage extends AbstractTemplateDocument
             $row
                 ->addText($userRow->id)
                 ->addText($userRow->userName)
-                ->addText($userRow->displayName);
+                ->addText($userRow->displayName)
+                ->addText($userRow->mediaspace->url);
 
         }
 

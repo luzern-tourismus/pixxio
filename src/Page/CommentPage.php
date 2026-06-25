@@ -5,6 +5,7 @@ namespace LuzernTourismus\Pixxio\Page;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Data\Comment\CommentReader;
 use LuzernTourismus\Pixxio\Data\User\UserReader;
+use LuzernTourismus\Pixxio\Reader\Comment\CommentDataReader;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
@@ -23,11 +24,12 @@ class CommentPage extends AbstractTemplateDocument
 
         $table = new AdminTable($layout);
 
-        $reader = new CommentReader();
-        $reader->model->loadFile()->loadUser();
+        $reader = new CommentDataReader();
+        //$reader->model->loadFile()->loadUser();
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
+            ->addText($reader->model->dateTime->label)
             ->addText($reader->model->file->label)
             ->addText($reader->model->user->label)
             ->addText($reader->model->comment->label);
@@ -38,6 +40,7 @@ class CommentPage extends AbstractTemplateDocument
 
             $row
                 ->addText($userRow->id)
+                ->addText($userRow->dateTime->getShortDateTimeLeadingZeroFormat())
                 ->addText($userRow->file->filename)
                 ->addText($userRow->user->userName)
                 ->addText($userRow->comment);

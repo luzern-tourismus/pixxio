@@ -17,6 +17,11 @@ public $userName;
 */
 public $displayName;
 
+/**
+* @var string
+*/
+public $mediaspaceId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new UserModel();
@@ -24,6 +29,7 @@ $this->model = new UserModel();
 public function update() {
 $this->typeValueList->setModelValue($this->model->userName, $this->userName);
 $this->typeValueList->setModelValue($this->model->displayName, $this->displayName);
+$this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
 parent::update();
 }
 }

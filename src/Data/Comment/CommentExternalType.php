@@ -31,6 +31,11 @@ public $user;
 */
 public $comment;
 
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $dateTime;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = CommentModel::class;
@@ -65,6 +70,14 @@ $this->comment->externalTableName = $this->externalTableName;
 $this->comment->aliasFieldName = $this->comment->tableName . "_" . $this->comment->fieldName;
 $this->comment->label = "Comment";
 $this->addType($this->comment);
+
+$this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType();
+$this->dateTime->fieldName = "date_time";
+$this->dateTime->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->dateTime->externalTableName = $this->externalTableName;
+$this->dateTime->aliasFieldName = $this->dateTime->tableName . "_" . $this->dateTime->fieldName;
+$this->dateTime->label = "Date Time";
+$this->addType($this->dateTime);
 
 }
 public function loadFile() {

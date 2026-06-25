@@ -31,6 +31,11 @@ public $user;
 */
 public $comment;
 
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $dateTime;
+
 protected function loadModel() {
 $this->tableName = "pixxio_comment";
 $this->aliasTableName = "pixxio_comment";
@@ -67,6 +72,14 @@ $this->comment->fieldName = "comment";
 $this->comment->aliasFieldName = "pixxio_comment_comment";
 $this->comment->label = "Comment";
 $this->comment->allowNullValue = false;
+
+$this->dateTime = new \Nemundo\Model\Type\DateTime\DateTimeType($this);
+$this->dateTime->tableName = "pixxio_comment";
+$this->dateTime->externalTableName = "pixxio_comment";
+$this->dateTime->fieldName = "date_time";
+$this->dateTime->aliasFieldName = "pixxio_comment_date_time";
+$this->dateTime->label = "Date Time";
+$this->dateTime->allowNullValue = false;
 
 }
 public function loadFile() {

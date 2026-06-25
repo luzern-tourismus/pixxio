@@ -7,6 +7,16 @@ use LuzernTourismus\Pixxio\Data\Comment\CommentReader;
 class CommentDataReader extends CommentReader
 {
 
+
+    public function __construct() {
+        parent::__construct();
+        $this->model
+            ->loadFile()
+            ->loadUser();
+    }
+
+
+
     public function filterByFileId($fileId)
     {
         $this->model->loadFile();

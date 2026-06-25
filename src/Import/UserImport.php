@@ -2,23 +2,25 @@
 
 namespace LuzernTourismus\Pixxio\Import;
 
+use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow;
 use LuzernTourismus\Pixxio\Data\User\User;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\Json\User\UserJsonReader;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\Core\Base\Import\AbstractImport;
 
-class UserImport extends AbstractImport
+class UserImport extends AbstractMediaspaceImport
 {
 
-    use MediaspaceConfigTrait;
+    //use MediaspaceConfigTrait;
 
-    public function importData() {
+
+    protected function onMediaspace(MediaspaceRow $mediaspaceRow)
+    {
 
         $reader = new UserJsonReader();
-        $reader->subdomain = $this->subdomain;
-        $reader->apiKey = $this->apiKey;
-        $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
+        $reader->subdomain = $mediaspaceRow->url;
+        $reader->apiKey = $mediaspaceRow->apiKey;
         foreach ($reader->getData() as $item) {
             //(new \Nemundo\Core\Debug\Debug())->write($item);
 
@@ -27,6 +29,7 @@ class UserImport extends AbstractImport
             $data->id = $item->id;
             $data->userName= $item->userName;
             $data->displayName= $item->displayName;
+            $data->mediaspaceId= $mediaspaceRow->id;
             $data->save();
 
 
@@ -34,5 +37,9 @@ class UserImport extends AbstractImport
 
 
     }
+
+
+
+
 
 }

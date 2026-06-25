@@ -16,6 +16,16 @@ public $userName;
 */
 public $displayName;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $mediaspaceId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType
+*/
+public $mediaspace;
+
 protected function loadModel() {
 $this->tableName = "pixxio_user";
 $this->aliasTableName = "pixxio_user";
@@ -49,5 +59,22 @@ $this->displayName->label = "Display Name";
 $this->displayName->allowNullValue = false;
 $this->displayName->length = 255;
 
+$this->mediaspaceId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->mediaspaceId->tableName = "pixxio_user";
+$this->mediaspaceId->fieldName = "mediaspace";
+$this->mediaspaceId->aliasFieldName = "pixxio_user_mediaspace";
+$this->mediaspaceId->label = "Mediaspace";
+$this->mediaspaceId->allowNullValue = false;
+
+}
+public function loadMediaspace() {
+if ($this->mediaspace == null) {
+$this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceExternalType($this, "pixxio_user_mediaspace");
+$this->mediaspace->tableName = "pixxio_user";
+$this->mediaspace->fieldName = "mediaspace";
+$this->mediaspace->aliasFieldName = "pixxio_user_mediaspace";
+$this->mediaspace->label = "Mediaspace";
+}
+return $this;
 }
 }
