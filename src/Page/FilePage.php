@@ -105,7 +105,7 @@ class FilePage extends AbstractTemplateDocument
                 $ul->addText($parentDirectoryRow->directory);
             }
 
-            $row->addText($fileRow->mediaspace->mediaspace);
+            $row->addText($fileRow->mediaspace->url);
 
             $ul = new AdminUnorderedList($row);
             foreach ($fileRow->getKeywordList() as $keywordRow) {

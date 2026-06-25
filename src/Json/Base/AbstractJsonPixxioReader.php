@@ -49,9 +49,9 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
             foreach ($this->jsonData[$this->loopName] as $json) {
                 $this->onJson($json);
             }
-        } else {
+        } /*else {
             (new Debug())->write($response);
-        }
+        }*/
 
         $this->onFinished();
 

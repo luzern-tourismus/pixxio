@@ -16,11 +16,6 @@ public $url;
 */
 public $apiKey;
 
-/**
-* @var \Nemundo\Model\Type\Text\TextType
-*/
-public $mediaspace;
-
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = MediaspaceModel::class;
@@ -49,14 +44,6 @@ $this->apiKey->externalTableName = $this->externalTableName;
 $this->apiKey->aliasFieldName = $this->apiKey->tableName . "_" . $this->apiKey->fieldName;
 $this->apiKey->label = "Api Key";
 $this->addType($this->apiKey);
-
-$this->mediaspace = new \Nemundo\Model\Type\Text\TextType();
-$this->mediaspace->fieldName = "mediaspace";
-$this->mediaspace->tableName = $this->parentFieldName . "_" . $this->externalTableName;
-$this->mediaspace->externalTableName = $this->externalTableName;
-$this->mediaspace->aliasFieldName = $this->mediaspace->tableName . "_" . $this->mediaspace->fieldName;
-$this->mediaspace->label = "Mediaspace";
-$this->addType($this->mediaspace);
 
 }
 }

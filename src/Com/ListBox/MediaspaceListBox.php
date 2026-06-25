@@ -21,7 +21,7 @@ class MediaspaceListBox extends AdminListBox
         $this->label = 'Mediaspace';
 
         foreach ((new MediaspaceDataReader())->getData() as $mediaspaceRow) {
-            $this->addItem($mediaspaceRow->id,$mediaspaceRow->mediaspace);
+            $this->addItem($mediaspaceRow->id,$mediaspaceRow->url);
         }
 
         return parent::getContent();

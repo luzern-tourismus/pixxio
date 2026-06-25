@@ -43,7 +43,7 @@ class CollectionPage extends AbstractTemplateDocument
             (new AdminTableRow($table))
                 ->addText($collectionRow->id)
                 ->addText($collectionRow->collection)
-                ->addText($collectionRow->mediaspace->mediaspace);
+                ->addText($collectionRow->mediaspace->url);
 
         }
 

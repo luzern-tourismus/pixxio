@@ -2,23 +2,11 @@
 
 namespace LuzernTourismus\PixxioTest\Script;
 
-use LuzernTourismus\Pixxio\Data\Webhook\WebhookDelete;
-use LuzernTourismus\Pixxio\Import\CommentImport;
+use LuzernTourismus\Pixxio\Import\DirectoryImport;
 use LuzernTourismus\Pixxio\Import\FileImport;
-use LuzernTourismus\Pixxio\Import\UserImport;
-use LuzernTourismus\Pixxio\Json\Comment\CommentJsonReader;
 use LuzernTourismus\Pixxio\Json\File\FileJson;
-use LuzernTourismus\Pixxio\Json\File\FileJsonItem;
-use LuzernTourismus\Pixxio\Json\User\UserJsonReader;
-use LuzernTourismus\Pixxio\Setup\MediaspaceSetup;
-use LuzernTourismus\PixxioTest\Json\CommentJsonReaderTest;
-use LuzernTourismus\PixxioTest\Json\DirecctoryJsonReaderTest;
-use LuzernTourismus\PixxioTest\Json\FileJsonReaderTest;
-use LuzernTourismus\PixxioTest\Json\TrashJsonTest;
-use LuzernTourismus\PixxioTest\Json\UserJsonReaderTest;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
-use Nemundo\Core\Debug\Debug;
 
 class TestScript extends AbstractConsoleScript
 {
@@ -31,7 +19,10 @@ class TestScript extends AbstractConsoleScript
     {
 
 
-$fileId = 1948276688;
+        (new DirectoryImport())->importData();
+
+
+        /*$fileId = 1948276688;
 
 
         $file = new FileJson();

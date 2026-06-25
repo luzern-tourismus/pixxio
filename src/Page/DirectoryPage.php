@@ -61,7 +61,7 @@ class DirectoryPage extends AbstractTemplateDocument
 
             $row
                 ->addText($directoryRow->quantity)
-                ->addText($directoryRow->mediaspace->mediaspace);
+                ->addText($directoryRow->mediaspace->url);
 
         }
 

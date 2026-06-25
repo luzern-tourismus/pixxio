@@ -33,6 +33,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         }
 
         $response = $this->getUrl($url);
+        $this->checkResponse($response);
 
         if (PixxioConfig::$debugMode) {
 
@@ -85,7 +86,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         $response = $this->deleteUrl($url);
 
-        (new Debug())->write($response);
+        //(new Debug())->write($response);
 
         $this->checkResponse($response);
 
@@ -161,11 +162,14 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         //if (isset($jsonData['success'])) {
         if (!$jsonData['success']) {
-            (new Debug())->write($jsonData);
+            (new Debug())->write('Pixxio Error: '. $jsonData['errormessage']);
+            //(new Debug())->write($jsonData);
             //$success = $jsonData['success'];
         } /*else {
-            (new Debug())->write($jsonData);
+            (new Debug())->write('Pixxio Error: '. $jsonData['errormessage']);
         }*/
+
+
 
 
     }

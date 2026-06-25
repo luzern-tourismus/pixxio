@@ -16,11 +16,6 @@ public $url;
 */
 public $apiKey;
 
-/**
-* @var \Nemundo\Model\Type\Text\TextType
-*/
-public $mediaspace;
-
 protected function loadModel() {
 $this->tableName = "pixxio_mediaspace";
 $this->aliasTableName = "pixxio_mediaspace";
@@ -53,15 +48,6 @@ $this->apiKey->aliasFieldName = "pixxio_mediaspace_api_key";
 $this->apiKey->label = "Api Key";
 $this->apiKey->allowNullValue = false;
 $this->apiKey->length = 255;
-
-$this->mediaspace = new \Nemundo\Model\Type\Text\TextType($this);
-$this->mediaspace->tableName = "pixxio_mediaspace";
-$this->mediaspace->externalTableName = "pixxio_mediaspace";
-$this->mediaspace->fieldName = "mediaspace";
-$this->mediaspace->aliasFieldName = "pixxio_mediaspace_mediaspace";
-$this->mediaspace->label = "Mediaspace";
-$this->mediaspace->allowNullValue = false;
-$this->mediaspace->length = 255;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "url";
