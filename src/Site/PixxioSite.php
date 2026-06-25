@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Site;
 
 use LuzernTourismus\Pixxio\Page\PixxioPage;
+use LuzernTourismus\Pixxio\Site\File\FileSite;
 use LuzernTourismus\Pixxio\Usergroup\PixxioUsergroup;
 use Nemundo\Web\Site\AbstractSite;
 
@@ -30,7 +31,10 @@ class PixxioSite extends AbstractSite
         new KeywordSite($this);
         new DirectorySite($this);
         new CustomMetadataSite($this);
+        new UserSite($this);
+        new CommentSite($this);
         new JobSite($this);
+
         new WebhookSite($this);
 
     }

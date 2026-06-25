@@ -5,9 +5,8 @@ namespace LuzernTourismus\Pixxio\Reader\File;
 use LuzernTourismus\Pixxio\Data\File\FileRow;
 use LuzernTourismus\Pixxio\Data\FileKeyword\FileKeywordReader;
 use LuzernTourismus\Pixxio\Data\Keyword\KeywordRow;
-
-
-// LuzernTourismus\Pixxio\Reader\File\FileDataRow
+use LuzernTourismus\Pixxio\Parameter\FileParameter;
+use LuzernTourismus\Pixxio\Site\File\FileItemSite;
 
 class FileDataRow extends FileRow
 {
@@ -16,16 +15,28 @@ class FileDataRow extends FileRow
     {
 
         /** @var KeywordRow $list */
-        $list=[];
+        $list = [];
 
         $reader = new FileKeywordReader();
         $reader->model->loadKeyword();
-        $reader->filter->andEqual($reader->model->fileId,$this->id);
+        $reader->filter->andEqual($reader->model->fileId, $this->id);
         foreach ($reader->getData() as $fileKeywordRow) {
             $list[] = $fileKeywordRow->keyword;
         }
 
         return $list;
+
+    }
+
+
+    public function getSite()
+    {
+
+        $site = clone(FileItemSite::$site);
+        $site->addParameter(new FileParameter($this->id));
+        $site->title = $this->filename;
+
+        return $site;
 
     }
 

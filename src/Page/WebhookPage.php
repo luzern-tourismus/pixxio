@@ -4,6 +4,7 @@ namespace LuzernTourismus\Pixxio\Page;
 
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Data\Webhook\WebhookReader;
+use LuzernTourismus\Pixxio\Reader\Webhook\WebhookDataReader;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
@@ -21,8 +22,8 @@ class WebhookPage extends AbstractTemplateDocument
 
         $table = new AdminTable($layout);
 
-        $reader = new WebhookReader();
-        $reader->model->loadFile();
+        $reader = new WebhookDataReader();
+        //$reader->model->loadFile();
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
@@ -41,7 +42,8 @@ class WebhookPage extends AbstractTemplateDocument
                 ->addText($mediaspaceRow->id)
                 ->addText($mediaspaceRow->dateTime->getShortDateTimeLeadingZeroFormat())
                 ->addText($mediaspaceRow->actionName)
-                ->addText($mediaspaceRow->fileId)
+                ->addSite($mediaspaceRow->file->getSite())
+                //->addText($mediaspaceRow->fileId)
                 ->addHyperlink($url, 'Comments');
 
         }

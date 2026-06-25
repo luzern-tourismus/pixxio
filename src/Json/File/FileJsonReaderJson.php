@@ -8,6 +8,7 @@ use Nemundo\Core\Http\Url\UrlBuilder;
 class FileJsonReaderJson extends AbstractJsonPixxioReader
 {
 
+
     public $pageSize;
 
 
@@ -31,7 +32,7 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
 
         $this->parameter =  $url->getUrl();
 
-        //$this->parameter = '/989429490'. $url->getUrl();
+        //$this->parameter = '/1415387842'. $url->getUrl();
 
 
         $this->loopName = 'files';

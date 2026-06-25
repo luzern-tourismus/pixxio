@@ -23,14 +23,10 @@ class JobImport extends AbstractBase
 
         foreach ($reader->getData() as $jobRow) {
 
-            //(new Debug())->write($jobRow->id);
-
             $reader = new JobJsonReader();
             $reader->subdomain = $this->subdomain;
             $reader->apiKey = $this->apiKey;
             $item = $reader->getJob($jobRow->id);
-
-            //(new Debug())->write($item);
 
             if (!$item->jobExists) {
                 $update = new JobUpdate();

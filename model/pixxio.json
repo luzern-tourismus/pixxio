@@ -38,6 +38,46 @@
         },
         {
             "template": "default",
+            "model_id": "8f4b5a3b-120a-4638-a7ee-fc340c07c1c5",
+            "label": "Comment",
+            "class_name": "Comment",
+            "table_name": "pixxio_comment",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\Comment",
+            "row_class_name": "",
+            "primary_index": "large_number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf"
+                },
+                {
+                    "type": "external",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "203bf3d5-e945-452d-a71e-0df1cb8ad42a"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Comment",
+                    "field_name": "comment",
+                    "variable_name": "comment",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "54458648-a7e2-4608-a9a3-7b9a613d67de",
             "label": "Custom Metadata",
             "class_name": "CustomMetadata",
@@ -579,6 +619,38 @@
                     ]
                 }
             ]
+        },
+        {
+            "template": "default",
+            "model_id": "203bf3d5-e945-452d-a71e-0df1cb8ad42a",
+            "label": "User",
+            "class_name": "User",
+            "table_name": "pixxio_user",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\User",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "User Name",
+                    "field_name": "user_name",
+                    "variable_name": "userName",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "text",
+                    "label": "Display Name",
+                    "field_name": "display_name",
+                    "variable_name": "displayName",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
         },
         {
             "template": "default",

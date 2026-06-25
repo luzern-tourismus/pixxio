@@ -5,7 +5,9 @@ namespace LuzernTourismus\Pixxio\Page;
 use LuzernTourismus\Pixxio\Com\ListBox\DirectoryListBox;
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
+use LuzernTourismus\Pixxio\Parameter\FileParameter;
 use LuzernTourismus\Pixxio\Reader\File\FileDataPaginationReader;
+use LuzernTourismus\Pixxio\Site\File\FileItemSite;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
@@ -78,10 +80,16 @@ class FilePage extends AbstractTemplateDocument
 
             $row = new AdminTableRow($table);
 
+            /*$site = clone(FileItemSite::$site);
+            $site->addParameter(new FileParameter($fileRow->id));
+            $site->title = $fileRow->filename;*/
+
+
             $row
                 ->addText($fileRow->id)
                 ->addYesNo($fileRow->active)
-                ->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
+                ->addSite($fileRow->getSite())
+                //->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
                 ->addText($fileRow->fileExtension)
                 ->addText($fileRow->fileSize)
                 ->addText($bold->getBoldText($fileRow->subject))

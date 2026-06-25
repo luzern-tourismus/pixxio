@@ -1,0 +1,53 @@
+<?php
+namespace LuzernTourismus\Pixxio\Data\User;
+class UserModel extends \Nemundo\Model\Definition\Model\AbstractModel {
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $id;
+
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $userName;
+
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $displayName;
+
+protected function loadModel() {
+$this->tableName = "pixxio_user";
+$this->aliasTableName = "pixxio_user";
+$this->label = "User";
+
+$this->primaryIndex = new \Nemundo\Db\Index\NumberIdPrimaryIndex();
+
+$this->id = new \Nemundo\Model\Type\Id\IdType($this);
+$this->id->tableName = "pixxio_user";
+$this->id->externalTableName = "pixxio_user";
+$this->id->fieldName = "id";
+$this->id->aliasFieldName = "pixxio_user_id";
+$this->id->label = "Id";
+$this->id->allowNullValue = false;
+
+$this->userName = new \Nemundo\Model\Type\Text\TextType($this);
+$this->userName->tableName = "pixxio_user";
+$this->userName->externalTableName = "pixxio_user";
+$this->userName->fieldName = "user_name";
+$this->userName->aliasFieldName = "pixxio_user_user_name";
+$this->userName->label = "User Name";
+$this->userName->allowNullValue = false;
+$this->userName->length = 255;
+
+$this->displayName = new \Nemundo\Model\Type\Text\TextType($this);
+$this->displayName->tableName = "pixxio_user";
+$this->displayName->externalTableName = "pixxio_user";
+$this->displayName->fieldName = "display_name";
+$this->displayName->aliasFieldName = "pixxio_user_display_name";
+$this->displayName->label = "Display Name";
+$this->displayName->allowNullValue = false;
+$this->displayName->length = 255;
+
+}
+}
