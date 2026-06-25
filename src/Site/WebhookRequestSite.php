@@ -64,8 +64,13 @@ class WebhookRequestSite extends AbstractSite
             $mediaspaceId = $id->getId();
 
 
+            $mediaspaceRow = (new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader())->getRowById($mediaspaceId);
+
+
             $file = new FileJson();
-            $file->fromMediaspaceConfig(new MediaspaceConfigTest());
+            //$file->fromMediaspaceConfig(new MediaspaceConfigTest());
+            $file->subdomain= $mediaspaceRow->url;
+            $file->apiKey = $mediaspaceRow->apiKey;
             $fileItem = $file->getFile($fileId);
 
             (new FileImport())->importFile($fileItem, $mediaspaceId);
