@@ -10,7 +10,9 @@ use LuzernTourismus\Pixxio\Json\File\FileJson;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Json\Reader\JsonReader;
+use Nemundo\Core\TextFile\Writer\TextFileWriter;
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Project\Path\TmpPath;
 use Nemundo\Web\Site\AbstractSite;
 
 class WebhookRequestSite extends AbstractSite
@@ -35,7 +37,7 @@ class WebhookRequestSite extends AbstractSite
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            //ob_start();
+            ob_start();
 
             $json = file_get_contents('php://input');
 
@@ -47,16 +49,20 @@ class WebhookRequestSite extends AbstractSite
 
 
             $fileId = null;
+            if (isset($eventData['data']['fileID'])) {
+                $fileId = $eventData['data']['fileID'];
+             //   $data->fileId = $eventData['data']['fileID'];
+            }
 
             $data = new Webhook();
             $data->id = $eventData['id'];
             $data->dateTime = new DateTime($eventData['createDate']);
             $data->actionName = $eventData['name'];
 
-            if (isset($eventData['data']['fileID'])) {
-                $fileId = $eventData['data']['fileID'];
-                $data->fileId = $eventData['data']['fileID'];
-            }
+            //if (isset($eventData['data']['fileID'])) {
+              //  $fileId = $eventData['data']['fileID'];
+                $data->fileId =$fileId;  // $eventData['data']['fileID'];
+            //}
 
 
             $data->save();
@@ -67,7 +73,11 @@ class WebhookRequestSite extends AbstractSite
             $mediaspaceId = $id->getId();
 
 
+            (new Debug())->write($mediaspaceId);
+
             $mediaspaceRow = (new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader())->getRowById($mediaspaceId);
+
+            //(new Debug())->write($mediaspaceRow);
 
 
             $file = new FileJson();
@@ -116,13 +126,13 @@ class WebhookRequestSite extends AbstractSite
 
 
 
-            /*    $content = ob_get_contents();
+                $content = ob_get_contents();
 
                 $file = new TextFileWriter((new TmpPath())->addPath('webhook.txt')->getFullFilename());
                 $file->overwriteExistingFile = true;
                 $file->addLine($json);
                 $file->addLine($content);
-                $file->writeFile();*/
+                $file->writeFile();
 
         } else {
 
