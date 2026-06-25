@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Site;
 
 use LuzernTourismus\Pixxio\Page\PixxioPage;
+use LuzernTourismus\Pixxio\Site\Comment\CommentSite;
 use LuzernTourismus\Pixxio\Site\File\FileSite;
 use LuzernTourismus\Pixxio\Site\Mediaspace\MediaspaceSite;
 use LuzernTourismus\Pixxio\Usergroup\PixxioUsergroup;

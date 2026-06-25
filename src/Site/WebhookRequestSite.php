@@ -82,7 +82,10 @@ class WebhookRequestSite extends AbstractSite
             $import->importFile($fileItem, $mediaspaceId);
 
 
-            (new CommentImport())->importComment($fileId);
+            $import = new CommentImport();
+            $import->subdomain = $mediaspaceRow->url;
+            $import->apiKey = $mediaspaceRow->apiKey;
+            $import->importComment($fileId);
 
 
             /*
