@@ -22,6 +22,12 @@ abstract class AbstractMediaspaceImport extends AbstractImport
     private $mediaspaceReader;
 
 
+    abstract protected function beforeImport();
+
+
+    abstract protected function afterImport();
+
+
     protected abstract function onMediaspace(MediaspaceRow $mediaspaceRow);
 
 
@@ -60,11 +66,13 @@ abstract class AbstractMediaspaceImport extends AbstractImport
     public function importData()
     {
 
+        $this->beforeImport();
+
         foreach ($this->mediaspaceReader->getData() as $mediaspaceRow) {
-
             $this->onMediaspace($mediaspaceRow);
-
         }
+
+        $this->afterImport();
 
     }
 

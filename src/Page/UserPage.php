@@ -2,9 +2,11 @@
 
 namespace LuzernTourismus\Pixxio\Page;
 
+use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Data\User\UserReader;
 use LuzernTourismus\Pixxio\Reader\User\UserDataReader;
+use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
@@ -19,6 +21,14 @@ class UserPage extends AbstractTemplateDocument
 
         $layout = new AdminFlexboxLayout($this);
         new PixxioTab($layout);
+
+        $search = new AdminSearchForm($layout);
+
+        $mediaspace = new MediaspaceListBox($search);
+        $mediaspace->searchMode = true;
+        $mediaspace->submitOnChange = true;
+
+
 
         $p = new Paragraph($layout);
 

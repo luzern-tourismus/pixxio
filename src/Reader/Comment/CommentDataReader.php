@@ -7,21 +7,20 @@ use LuzernTourismus\Pixxio\Data\Comment\CommentReader;
 class CommentDataReader extends CommentReader
 {
 
+    use CommentDataTrait;
 
     public function __construct() {
         parent::__construct();
-        $this->model
-            ->loadFile()
-            ->loadUser();
+        $this->loadModel();
     }
 
 
 
-    public function filterByFileId($fileId)
+/*    public function filterByFileId($fileId)
     {
         $this->model->loadFile();
         $this->filter->andEqual($this->model->fileId, $fileId);
         return $this;
-    }
+    }*/
 
 }

@@ -4,10 +4,7 @@ namespace LuzernTourismus\Pixxio\Import;
 
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow;
 use LuzernTourismus\Pixxio\Data\User\User;
-use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\Json\User\UserJsonReader;
-use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
-use Nemundo\Core\Base\Import\AbstractImport;
 
 class UserImport extends AbstractMediaspaceImport
 {
@@ -25,11 +22,11 @@ class UserImport extends AbstractMediaspaceImport
             //(new \Nemundo\Core\Debug\Debug())->write($item);
 
             $data = new User();
-            $data->updateOnDuplicate=true;
+            $data->updateOnDuplicate = true;
             $data->id = $item->id;
-            $data->userName= $item->userName;
-            $data->displayName= $item->displayName;
-            $data->mediaspaceId= $mediaspaceRow->id;
+            $data->userName = $item->userName;
+            $data->displayName = $item->displayName;
+            $data->mediaspaceId = $mediaspaceRow->id;
             $data->save();
 
 
@@ -37,9 +34,6 @@ class UserImport extends AbstractMediaspaceImport
 
 
     }
-
-
-
 
 
 }

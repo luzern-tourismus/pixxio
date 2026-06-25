@@ -6,7 +6,6 @@ use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Data\CustomMetadataOption\CustomMetadataOptionReader;
 use LuzernTourismus\Pixxio\Reader\CustomMetadata\CustomMetadataDataReader;
-use LuzernTourismus\Pixxio\Reader\Mediaspace\MediaspaceDataReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
@@ -30,52 +29,52 @@ class CustomMetadataPage extends AbstractTemplateDocument
         $mediaspace->searchMode = true;
         $mediaspace->submitOnChange = true;
 
-        if ($mediaspace->hasValue()) {
+        //if ($mediaspace->hasValue()) {
 
-            $table = new AdminTable($layout);
+        $table = new AdminTable($layout);
 
-            $mediaspaceRow = (new MediaspaceDataReader())->getRowById($mediaspace->getValue());
+        //$mediaspaceRow = (new MediaspaceDataReader())->getRowById($mediaspace->getValue());
 
-            $customMetadataReader = new CustomMetadataDataReader();
-            $customMetadataReader->filter->andEqual($customMetadataReader->model->mediaspaceId, $mediaspaceRow->id);
+        $customMetadataReader = new CustomMetadataDataReader();
+        //$customMetadataReader->filter->andEqual($customMetadataReader->model->mediaspaceId, $mediaspaceRow->id);
 
-            (new AdminTableHeader($table))
-                ->addText($customMetadataReader->model->id->label)
-                ->addText($customMetadataReader->model->active->label)
-                ->addText($customMetadataReader->model->name->label)
-                ->addText($customMetadataReader->model->type->label)
-                ->addText('Option');
+        (new AdminTableHeader($table))
+            ->addText($customMetadataReader->model->id->label)
+            ->addText($customMetadataReader->model->active->label)
+            ->addText($customMetadataReader->model->name->label)
+            ->addText($customMetadataReader->model->type->label)
+            ->addText('Option');
 
-            foreach ($customMetadataReader->getData() as $customMetadataRow) {
+        foreach ($customMetadataReader->getData() as $customMetadataRow) {
 
-                $row = new AdminTableRow($table);
+            $row = new AdminTableRow($table);
 
-                $row
-                    ->addText($customMetadataRow->id)
-                    ->addYesNo($customMetadataRow->active)
-                    ->addText($customMetadataRow->name)
-                    ->addText($customMetadataRow->type->type);
+            $row
+                ->addText($customMetadataRow->id)
+                ->addYesNo($customMetadataRow->active)
+                ->addText($customMetadataRow->name)
+                ->addText($customMetadataRow->type->type);
 
-                $ul = new AdminUnorderedList($row);
+            $ul = new AdminUnorderedList($row);
 
-                $optionReader = new CustomMetadataOptionReader();
-                $optionReader->filter->andEqual($optionReader->model->customMetadataId, $customMetadataRow->id);
-                foreach ($optionReader->getData() as $optionRow) {
+            $optionReader = new CustomMetadataOptionReader();
+            $optionReader->filter->andEqual($optionReader->model->customMetadataId, $customMetadataRow->id);
+            foreach ($optionReader->getData() as $optionRow) {
 
-                    $text = $optionRow->option . ' (' . $optionRow->id . ')';
+                $text = $optionRow->option . ' (' . $optionRow->id . ')';
 
-                    if ($optionRow->active) {
-                        $ul->addText($text);
-                    } else {
-                        $strike = new Strike($ul);
-                        $strike->content = $text;
-                    }
-
+                if ($optionRow->active) {
+                    $ul->addText($text);
+                } else {
+                    $strike = new Strike($ul);
+                    $strike->content = $text;
                 }
 
             }
 
         }
+
+        /*    }*/
 
         return parent::getContent();
 
