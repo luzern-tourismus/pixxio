@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\PixxioTest\Script;
 
+use LuzernTourismus\Pixxio\Import\CommentImport;
 use LuzernTourismus\Pixxio\Import\DirectoryImport;
 use LuzernTourismus\Pixxio\Import\FileImport;
 use LuzernTourismus\Pixxio\Json\File\FileJson;
@@ -18,8 +19,13 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
+        $id = 1976817110;
+        (new CommentImport())->importComment($id);
 
-        (new DirectoryImport())->importData();
+
+        /*(new DirectoryImport())->importData();
+        $id = 1976817110;*/
+
 
 
         /*$fileId = 1948276688;

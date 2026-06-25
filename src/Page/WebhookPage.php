@@ -25,7 +25,6 @@ class WebhookPage extends AbstractTemplateDocument
 
         $reader = new WebhookDataReader();
         $reader->addOrder($reader->model->dateTime,SortOrder::DESCENDING);
-        //$reader->model->loadFile();
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
@@ -44,9 +43,7 @@ class WebhookPage extends AbstractTemplateDocument
                 ->addText($mediaspaceRow->id)
                 ->addText($mediaspaceRow->dateTime->getShortDateTimeLeadingZeroFormat())
                 ->addText($mediaspaceRow->actionName)
-                ->addText($mediaspaceRow->fileId)
                 ->addSite($mediaspaceRow->file->getSite())
-                //->addText($mediaspaceRow->fileId)
                 ->addHyperlink($url, 'Comments');
 
         }

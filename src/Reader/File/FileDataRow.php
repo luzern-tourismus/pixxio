@@ -34,7 +34,8 @@ class FileDataRow extends FileRow
 
         $site = clone(FileItemSite::$site);
         $site->addParameter(new FileParameter($this->id));
-        $site->title = $this->id . ' ' . $this->filename;
+        //$site->title = $this->id . ' ' . $this->filename;
+        $site->title = $this->filename;
 
         return $site;
 

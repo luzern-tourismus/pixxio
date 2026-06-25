@@ -7,7 +7,6 @@ use LuzernTourismus\Pixxio\Data\Webhook\Webhook;
 use LuzernTourismus\Pixxio\Import\CommentImport;
 use LuzernTourismus\Pixxio\Import\FileImport;
 use LuzernTourismus\Pixxio\Json\File\FileJson;
-use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Json\Reader\JsonReader;
 use Nemundo\Core\TextFile\Writer\TextFileWriter;
@@ -51,25 +50,18 @@ class WebhookRequestSite extends AbstractSite
             $fileId = null;
             if (isset($eventData['data']['fileID'])) {
                 $fileId = $eventData['data']['fileID'];
-             //   $data->fileId = $eventData['data']['fileID'];
+                //   $data->fileId = $eventData['data']['fileID'];
             }
 
             $data = new Webhook();
             $data->id = $eventData['id'];
             $data->dateTime = new DateTime($eventData['createDate']);
             $data->actionName = $eventData['name'];
-
-            //if (isset($eventData['data']['fileID'])) {
-              //  $fileId = $eventData['data']['fileID'];
-                $data->fileId =$fileId;  // $eventData['data']['fileID'];
-            //}
-
-
+            $data->fileId = $fileId;
             $data->save();
 
-
             $id = new MediaspaceId();
-            $id->filter->andEqual($id->model->url, 'luzern-tourismus' );
+            $id->filter->andEqual($id->model->url, 'luzern-tourismus');
             $mediaspaceId = $id->getId();
 
 
@@ -82,7 +74,7 @@ class WebhookRequestSite extends AbstractSite
 
             $file = new FileJson();
             //$file->fromMediaspaceConfig(new MediaspaceConfigTest());
-            $file->subdomain= $mediaspaceRow->url;
+            $file->subdomain = $mediaspaceRow->url;
             $file->apiKey = $mediaspaceRow->apiKey;
             $fileItem = $file->getFile($fileId);
 
@@ -93,46 +85,41 @@ class WebhookRequestSite extends AbstractSite
             (new CommentImport())->importComment($fileId);
 
 
+            /*
+                        (
+                        [id] => 1283736455
+                [eventKey] => commentCreated
+                        [action] => created
+                        [name] => createComment
+                        [createDate] => 2026-06-22 18:55:54
+                [modifyDate] => 2026-06-22 18:55:54
+                [applicationKey] => iM91iRu6kb86Y6IaWMsK9T9q7
+                        [applicationName] => pixx.io
+                        [userType] => user
+                        [userID] => 1
+                [userName] => admin
+                        [userDescriptiveName] => System Administrator
+                        [resourceType] => comment
+                        [resourceID] => 1412627172
+                [resourceName] => Comment
+                        [resourceOwnerUserType] => user
+                        [resourceOwnerUserID] => 0
+                [resourceOwnerUserName] => admin
+                        [data] => Array
+                        (
+                            [fileID] => 354052574
+                        )
 
-/*
-            (
-            [id] => 1283736455
-    [eventKey] => commentCreated
-            [action] => created
-            [name] => createComment
-            [createDate] => 2026-06-22 18:55:54
-    [modifyDate] => 2026-06-22 18:55:54
-    [applicationKey] => iM91iRu6kb86Y6IaWMsK9T9q7
-            [applicationName] => pixx.io
-            [userType] => user
-            [userID] => 1
-    [userName] => admin
-            [userDescriptiveName] => System Administrator
-            [resourceType] => comment
-            [resourceID] => 1412627172
-    [resourceName] => Comment
-            [resourceOwnerUserType] => user
-            [resourceOwnerUserID] => 0
-    [resourceOwnerUserName] => admin
-            [data] => Array
-            (
-                [fileID] => 354052574
-            )
-
-)*/
-
+            )*/
 
 
+            $content = ob_get_contents();
 
-
-
-                $content = ob_get_contents();
-
-                $file = new TextFileWriter((new TmpPath())->addPath('webhook.txt')->getFullFilename());
-                $file->overwriteExistingFile = true;
-                $file->addLine($json);
-                $file->addLine($content);
-                $file->writeFile();
+            $file = new TextFileWriter((new TmpPath())->addPath('webhook.txt')->getFullFilename());
+            $file->overwriteExistingFile = true;
+            $file->addLine($json);
+            $file->addLine($content);
+            $file->writeFile();
 
         } else {
 
