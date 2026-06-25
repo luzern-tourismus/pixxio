@@ -52,10 +52,13 @@ class WebhookRequestSite extends AbstractSite
             $data->id = $eventData['id'];
             $data->dateTime = new DateTime($eventData['createDate']);
             $data->actionName = $eventData['name'];
+
             if (isset($eventData['data']['fileID'])) {
                 $fileId = $eventData['data']['fileID'];
                 $data->fileId = $eventData['data']['fileID'];
             }
+
+
             $data->save();
 
 
@@ -73,7 +76,10 @@ class WebhookRequestSite extends AbstractSite
             $file->apiKey = $mediaspaceRow->apiKey;
             $fileItem = $file->getFile($fileId);
 
-            (new FileImport())->importFile($fileItem, $mediaspaceId);
+            $import = new FileImport();
+            $import->importFile($fileItem, $mediaspaceId);
+
+
             (new CommentImport())->importComment($fileId);
 
 

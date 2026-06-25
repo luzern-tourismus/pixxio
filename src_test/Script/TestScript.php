@@ -31,11 +31,12 @@ class TestScript extends AbstractConsoleScript
     {
 
 
+$fileId = 1948276688;
 
 
         $file = new FileJson();
         $file->fromMediaspaceConfig(new MediaspaceConfigTest());
-        $fileItem = $file->getFile(1415387842);
+        $fileItem = $file->getFile($fileId);
 
         (new FileImport())->importFile($fileItem, (new MediaspaceConfigTest())->getMediaspaceId());
 

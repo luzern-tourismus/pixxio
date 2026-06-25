@@ -10,6 +10,7 @@ use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
 use Nemundo\Com\Template\AbstractTemplateDocument;
+use Nemundo\Db\Sql\Order\SortOrder;
 
 class WebhookPage extends AbstractTemplateDocument
 {
@@ -23,6 +24,7 @@ class WebhookPage extends AbstractTemplateDocument
         $table = new AdminTable($layout);
 
         $reader = new WebhookDataReader();
+        $reader->addOrder($reader->model->dateTime,SortOrder::DESCENDING);
         //$reader->model->loadFile();
 
         (new AdminTableHeader($table))
@@ -42,6 +44,7 @@ class WebhookPage extends AbstractTemplateDocument
                 ->addText($mediaspaceRow->id)
                 ->addText($mediaspaceRow->dateTime->getShortDateTimeLeadingZeroFormat())
                 ->addText($mediaspaceRow->actionName)
+                ->addText($mediaspaceRow->fileId)
                 ->addSite($mediaspaceRow->file->getSite())
                 //->addText($mediaspaceRow->fileId)
                 ->addHyperlink($url, 'Comments');
