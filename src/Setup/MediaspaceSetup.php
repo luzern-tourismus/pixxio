@@ -24,7 +24,7 @@ class MediaspaceSetup extends AbstractBase
 
         $data = new Mediaspace();
         $data->updateOnDuplicate = true;
-        $data->mediaspace = $mediaspace;
+        //$data->mediaspace = $mediaspace;
         $data->url = $url;
         $data->apiKey = $apiKey;
         $data->save();

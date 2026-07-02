@@ -17,13 +17,15 @@ $upload->fullFilename = $filename;
 $upload->subject = 'Test';
 $upload->directoryId = $directoryId;
 $upload->addKeyword('');
-$upload->addMetadata(628208860, 'Copyright by xy');
+$upload->addMetadata(30246638, 465210646);
 //$upload->addMetadata(1968059366, 26897557);
 $upload->description = '';
 $jobId = $upload->upload();
 
 (new \Nemundo\Core\Debug\Debug())->write($jobId);
 
+/*
 $reader = new \LuzernTourismus\Pixxio\Json\Job\JobJsonReader();
 $reader->fromMediaspaceConfig(new \LuzernTourismus\PixxioTest\MediaspaceConfigTest());
 $reader->getJob($jobId);
+*/

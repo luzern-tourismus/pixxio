@@ -1,19 +1,18 @@
 <?php
 
-namespace LuzernTourismus\Pixxio\Json\Collection;
+namespace LuzernTourismus\Pixxio\Json\PermissionGroup;
 
 use LuzernTourismus\Pixxio\Json\Base\AbstractJsonPixxioReader;
 
-class CollectionJsonReaderJson extends AbstractJsonPixxioReader  // AbstractDataSource
+class PermissionGroupJsonReader extends AbstractJsonPixxioReader  // AbstractDataSource
 {
-
 
     protected function loadReader()
     {
 
-        $this->endpoint = 'collections';
+        $this->endpoint = 'permissionGroups';
         $this->parameter = '?page=1&pageSize=20';
-        $this->loopName = 'collections';
+        $this->loopName = 'permissionGroups';
 
     }
 
@@ -21,13 +20,11 @@ class CollectionJsonReaderJson extends AbstractJsonPixxioReader  // AbstractData
     protected function onJson($json)
     {
 
-        /*}
 
-
-        protected function loadData()
+        /*protected function loadData()
         {
 
-            $endpoint = 'collections';
+            $endpoint = 'permissionGroups';
             $parameter = '?page=1&pageSize=20';
 
             $response = (new PixxioWebRequest())->getData($endpoint,$parameter);
@@ -39,12 +36,11 @@ class CollectionJsonReaderJson extends AbstractJsonPixxioReader  // AbstractData
             $jsonData = $jsonReader->getData();
 
 
-            foreach ($jsonData['collections'] as $collection) {
-    */
+            foreach ($jsonData['permissionGroups'] as $file) {*/
 
-        $item = new CollectionItem();
+        $item = new PermissionGroup();
         $item->id = $json['id'];
-        $item->collection = $json['name'];
+        $item->permissionGroup = $json['name'];
 
         $this->addItem($item);
 
@@ -54,7 +50,7 @@ class CollectionJsonReaderJson extends AbstractJsonPixxioReader  // AbstractData
 
 
     /**
-     * @return CollectionItem[]
+     * @return PermissionGroup[]
      */
     public function getData()
     {

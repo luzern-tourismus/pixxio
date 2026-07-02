@@ -2,7 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Site\File;
 
-use LuzernTourismus\Pixxio\Page\FileItemPage;
+use LuzernTourismus\Pixxio\Page\File\FileItemPage;
 use Nemundo\Web\Site\AbstractSite;
 
 class FileItemSite extends AbstractSite
@@ -17,7 +17,7 @@ class FileItemSite extends AbstractSite
     protected function loadSite()
     {
         $this->title = 'FileItem';
-        $this->url = 'FileItem';
+        $this->url = 'file-item';
         $this->menuActive = false;
 
         FileItemSite::$site = $this;

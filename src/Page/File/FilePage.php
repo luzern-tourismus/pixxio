@@ -1,13 +1,11 @@
 <?php
 
-namespace LuzernTourismus\Pixxio\Page;
+namespace LuzernTourismus\Pixxio\Page\File;
 
 use LuzernTourismus\Pixxio\Com\ListBox\DirectoryListBox;
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
-use LuzernTourismus\Pixxio\Parameter\FileParameter;
 use LuzernTourismus\Pixxio\Reader\File\FileDataPaginationReader;
-use LuzernTourismus\Pixxio\Site\File\FileItemSite;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;

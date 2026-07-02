@@ -45,8 +45,8 @@ class CommentPage extends AbstractTemplateDocument
 
             $row
                 ->addText($userRow->id)
-                ->addText($userRow->dateTime->getShortDateTimeLeadingZeroFormat())
                 ->addSite($userRow->file->getSite())
+                ->addText($userRow->dateTime->getShortDateTimeLeadingZeroFormat())
                 ->addText($userRow->user->userName)
                 ->addText($userRow->comment);
 

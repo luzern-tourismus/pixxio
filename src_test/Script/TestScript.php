@@ -2,11 +2,22 @@
 
 namespace LuzernTourismus\PixxioTest\Script;
 
+use LuzernTourismus\Pixxio\Application\PixxioApplication;
+use LuzernTourismus\Pixxio\Data\File\FileDelete;
+use LuzernTourismus\Pixxio\Delete\InactiveItemDelete;
+use LuzernTourismus\Pixxio\Import\CollectionImport;
 use LuzernTourismus\Pixxio\Import\CommentImport;
+use LuzernTourismus\Pixxio\Import\CustomMetadataImport;
 use LuzernTourismus\Pixxio\Import\DirectoryImport;
 use LuzernTourismus\Pixxio\Import\FileImport;
 use LuzernTourismus\Pixxio\Import\UserImport;
 use LuzernTourismus\Pixxio\Json\File\FileJson;
+use LuzernTourismus\Pixxio\Setup\MediaspaceSetup;
+use LuzernTourismus\PixxioTest\Builder\FileUploadTest;
+use LuzernTourismus\PixxioTest\Json\FileJsonReaderTest;
+use LuzernTourismus\PixxioTest\Json\FileJsonTest;
+use LuzernTourismus\PixxioTest\Json\JobJsonReaderTest;
+use LuzernTourismus\PixxioTest\Json\UserJsonReaderTest;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 
@@ -20,13 +31,45 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
+
+
+        //(new FileUploadTest())->runTest();
+        //(new JobJsonReaderTest())->runTest();
+
+        (new UserJsonReaderTest())->runTest();
+
+
+        //(new FileJsonTest())->runTest();
+
+        //(new PixxioApplication())->reinstallApp();
+
+        //(new MediaspaceSetup())->addMediaspaceConfig(new MediaspaceConfigTest());
+
+        //(new FileDelete())->delete();
+        //(new FileImport())->importData();
+
+
+
+        //(new CustomMetadataImport())->importData();
+        //(new CollectionImport())->importData();
+        //(new DirectoryImport())->importData();
+        //(new UserImport())->importData();
+
+        //(new InactiveItemDelete())->deleteInacitveItem();
+
+        //(new FileJsonReaderTest())->runTest();
+//        (new FileJsonTest())->runTest();
+
+
+
+
         //(new UserImport())->importData();
 
 
-        $id = 1976817110;
+        /*$id = 1976817110;
         $import =  new CommentImport();
         $import->fromMediaspaceConfig(new MediaspaceConfigTest());
-        $import->importComment($id);
+        $import->importComment($id);*/
 
 
         /*(new DirectoryImport())->importData();

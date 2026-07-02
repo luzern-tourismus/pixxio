@@ -1,8 +1,9 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest;
+namespace LuzernTourismus\PixxioTest\Builder;
 
 use LuzernTourismus\Pixxio\Builder\FileUpload;
+use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Test\AbstractTest;
 

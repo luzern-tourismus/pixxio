@@ -4,7 +4,6 @@ namespace LuzernTourismus\Pixxio\Page;
 
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
-use LuzernTourismus\Pixxio\Data\User\UserReader;
 use LuzernTourismus\Pixxio\Reader\User\UserDataReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
@@ -28,21 +27,16 @@ class UserPage extends AbstractTemplateDocument
         $mediaspace->searchMode = true;
         $mediaspace->submitOnChange = true;
 
-
-
         $p = new Paragraph($layout);
-
 
         $table = new AdminTable($layout);
 
         $reader = new UserDataReader();
-        //$reader->currentPage = (new PageParameter())->getValue();
-        //$reader->addOrder($reader->model->createDateTime,SortOrder::DESCENDING);
-
 
         $p->content = $reader->getTotalCount() . ' users found';
 
         (new AdminTableHeader($table))
+            ->addText($reader->model->active->label)
             ->addText($reader->model->id->label)
             ->addText($reader->model->userName->label)
             ->addText($reader->model->displayName->label)
@@ -50,9 +44,8 @@ class UserPage extends AbstractTemplateDocument
 
         foreach ($reader->getData() as $userRow) {
 
-            $row = new AdminTableRow($table);
-
-            $row
+            (new AdminTableRow($table))
+                ->addYesNo($userRow->active)
                 ->addText($userRow->id)
                 ->addText($userRow->userName)
                 ->addText($userRow->displayName)
@@ -60,7 +53,7 @@ class UserPage extends AbstractTemplateDocument
 
         }
 
-
         return parent::getContent();
+
     }
 }

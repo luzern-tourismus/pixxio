@@ -36,8 +36,8 @@ class PixxioSite extends AbstractSite
         new UserSite($this);
         new CommentSite($this);
         new JobSite($this);
-
         new WebhookSite($this);
+        new ConfigSite($this);
 
     }
 

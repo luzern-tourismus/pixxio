@@ -2,49 +2,41 @@
 
 namespace LuzernTourismus\Pixxio\Import;
 
-use LuzernTourismus\Pixxio\Config\PixxioConfig;
+use LuzernTourismus\Pixxio\Config\EditTypeConfig;
 use LuzernTourismus\Pixxio\Data\File\File;
+use LuzernTourismus\Pixxio\Data\File\FileUpdate;
 use LuzernTourismus\Pixxio\Data\FileKeyword\FileKeyword;
+use LuzernTourismus\Pixxio\Data\FileMetadata\FileMetadata;
+use LuzernTourismus\Pixxio\Data\FileMetadataOptionValue\FileMetadataOptionValue;
 use LuzernTourismus\Pixxio\Data\Keyword\Keyword;
 use LuzernTourismus\Pixxio\Data\Keyword\KeywordId;
-use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
+use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow;
+use LuzernTourismus\Pixxio\Data\MetadataOptionValue\MetadataOptionValue;
 use LuzernTourismus\Pixxio\Json\File\FileJsonItem;
 use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
-use LuzernTourismus\Pixxio\Mediaspace\AbstractMediaspaceConfig;
-use Nemundo\Core\Base\Import\AbstractImport;
-use Nemundo\Core\Check\ValueCheck;
 use Nemundo\Core\Debug\Debug;
 
-class FileImport extends AbstractImport
+class FileImport extends AbstractMediaspaceImport
 {
 
-    private $mediaspaceReader;
-
-    public function __construct()
+    protected function beforeImport()
     {
 
-        $this->mediaspaceReader = new MediaspaceReader();
+        $update = new FileUpdate();
+        $update->importStatus = false;
+        $update->update();
+
 
     }
 
 
-    public function filterByMediaspaceConfig(AbstractMediaspaceConfig $mediaspace)
+    protected function afterImport()
     {
 
-        $this->mediaspaceReader->filter->andEqual($this->mediaspaceReader->model->apiKey, $mediaspace->apiKey);
-        return $this;
-
-    }
-
-
-    public function filterByMediaspaceId($mediaspaceId)
-    {
-
-        if ((new ValueCheck())->hasValue($mediaspaceId)) {
-            $this->mediaspaceReader->filter->andEqual($this->mediaspaceReader->model->id, $mediaspaceId);
-        }
-
-        return $this;
+        $update = new FileUpdate();
+        $update->active = false;
+        $update->filter->andEqual($update->model->importStatus, false);
+        $update->update();
 
     }
 
@@ -57,7 +49,7 @@ class FileImport extends AbstractImport
         $data->id = $file->id;
         $data->importStatus = true;
         $data->active = true;
-        $data->mediaspaceId = $mediaspaceId;  // $mediaspaceRow->id;
+        $data->mediaspaceId = $mediaspaceId;
         $data->filename = $file->fileName;
         $data->fileExtension = $file->fileExtension;
         $data->fileSize = $file->fileSize;
@@ -91,68 +83,108 @@ class FileImport extends AbstractImport
     }
 
 
-    public function importData()
+    protected function onMediaspace(MediaspaceRow $mediaspaceRow)
     {
 
-        $count = 0;
+        $jsonReader = new FileJsonReaderJson();
+        $jsonReader->subdomain = $mediaspaceRow->url;
+        $jsonReader->apiKey = $mediaspaceRow->apiKey;
+        $jsonReader->pageSize = 500;
 
-        foreach ($this->mediaspaceReader->getData() as $mediaspaceRow) {
+        do {
 
-            $jsonReader = new FileJsonReaderJson();
-            $jsonReader->subdomain = $mediaspaceRow->url;
-            $jsonReader->apiKey = $mediaspaceRow->apiKey;
-            $jsonReader->pageSize = 500;
+            foreach ($jsonReader->getData() as $file) {
 
-            do {
+                $data = new File();
+                $data->updateOnDuplicate = true;
+                $data->id = $file->id;
+                $data->importStatus = true;
+                $data->active = true;
+                $data->mediaspaceId = $mediaspaceRow->id;
+                $data->filename = $file->fileName;
+                $data->fileExtension = $file->fileExtension;
+                $data->fileSize = $file->fileSize;
+                $data->subject = $file->subject;
+                $data->description = $file->description;
+                $data->fileUrl = $file->fileUrl;
+                $data->directoryId = $file->directoryId;
+                $data->creator = $file->creator;
+                $data->save();
 
-                $count++;
 
-                if (PixxioConfig::$debugMode) {
-                    (new Debug())->write($count);
-                }
+                foreach ($file->metadataList as $custom) {
 
-                foreach ($jsonReader->getData() as $file) {
-
-                    $data = new File();
+                    $data = new FileMetadata();
                     $data->updateOnDuplicate = true;
-                    $data->id = $file->id;
-                    $data->importStatus = true;
-                    $data->active = true;
-                    $data->mediaspaceId = $mediaspaceRow->id;
-                    $data->filename = $file->fileName;
-                    $data->fileExtension = $file->fileExtension;
-                    $data->fileSize = $file->fileSize;
-                    $data->subject = $file->subject;
-                    $data->description = $file->description;
-                    $data->fileUrl = $file->fileUrl;
-                    $data->directoryId = $file->directoryId;
-                    $data->creator = $file->creator;
+                    $data->fileId = $file->id;
+                    $data->metadataId = $custom->id;
+                    if ($custom->editType == EditTypeConfig::TEXT) {
+                        $data->value = $custom->value;
+                    }
                     $data->save();
 
-                    foreach ($file->keywordList as $keyword) {
 
-                        $data = new Keyword();
-                        $data->ignoreIfExists = true;
-                        $data->keyword = $keyword;
+                    /*if ($custom->editType == EditTypeConfig::SELECTION) {
+
+
+                        $data = new MetadataOptionValue();
+                        $data->updateOnDuplicate = true;
+                        $data->metadataId = $custom->id;
+
+
+                        $data->optionId = $custom->value;
+
                         $data->save();
 
-                        $id = new KeywordId();
-                        $id->filter->andEqual($id->model->keyword, $keyword);
-                        $keywordId = $id->getId();
 
-                        $data = new FileKeyword();
-                        $data->ignoreIfExists = true;
-                        $data->fileId = $file->id;
-                        $data->keywordId = $keywordId;
-                        $data->save();
+                    }*/
+
+
+                    if (($custom->editType == EditTypeConfig::SELECTION) ||($custom->editType == EditTypeConfig::MULTISELECTION)) {
+
+                        //$custom->
+
+                        //(new Debug())->write($custom->valueList);
+                        //exit;
+
+                        foreach ($custom->valueList as $value) {
+
+                            $data = new MetadataOptionValue();
+                            $data->updateOnDuplicate = true;
+                            $data->metadataId = $custom->id;
+                            $data->optionId = $value;
+                            $data->save();
+
+                        }
 
                     }
 
+
                 }
 
-            } while ($jsonReader->hasCursor());
 
-        }
+                foreach ($file->keywordList as $keyword) {
+
+                    $data = new Keyword();
+                    $data->ignoreIfExists = true;
+                    $data->keyword = $keyword;
+                    $data->save();
+
+                    $id = new KeywordId();
+                    $id->filter->andEqual($id->model->keyword, $keyword);
+                    $keywordId = $id->getId();
+
+                    $data = new FileKeyword();
+                    $data->ignoreIfExists = true;
+                    $data->fileId = $file->id;
+                    $data->keywordId = $keywordId;
+                    $data->save();
+
+                }
+
+            }
+
+        } while ($jsonReader->hasCursor());
 
     }
 

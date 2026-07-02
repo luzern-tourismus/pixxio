@@ -16,9 +16,9 @@ class PixxioPage extends AbstractTemplateDocument
         $layout = new AdminFlexboxLayout($this);
         new PixxioTab($layout);
 
-        $copy = new AdminCopyTextBox($layout);
+        /*$copy = new AdminCopyTextBox($layout);
         $copy->label = 'Webhook Url';
-        $copy->value = WebhookRequestSite::$site->getUrlWithDomain();
+        $copy->value = WebhookRequestSite::$site->getUrlWithDomain();*/
 
 
         return parent::getContent();

@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Reader\CustomMetadata;
 
 use LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadataReader;
+use Nemundo\Core\Check\ValueCheck;
 
 class CustomMetadataDataReader extends CustomMetadataReader
 {
@@ -19,9 +20,18 @@ class CustomMetadataDataReader extends CustomMetadataReader
     public function filterByActive()
     {
 
-        $this->filter->andEqual($this->model->active,true);
+        $this->filter->andEqual($this->model->active, true);
         return $this;
 
+    }
+
+    public function filterByMediaspaceId($mediaspaceId)
+    {
+
+        if ((new ValueCheck())->hasValue($mediaspaceId)) {
+            $this->filter->andEqual($this->model->mediaspaceId, $mediaspaceId);
+        }
+        return $this;
     }
 
 

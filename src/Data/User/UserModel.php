@@ -26,6 +26,16 @@ public $mediaspaceId;
 */
 public $mediaspace;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $importStatus;
+
 protected function loadModel() {
 $this->tableName = "pixxio_user";
 $this->aliasTableName = "pixxio_user";
@@ -65,6 +75,22 @@ $this->mediaspaceId->fieldName = "mediaspace";
 $this->mediaspaceId->aliasFieldName = "pixxio_user_mediaspace";
 $this->mediaspaceId->label = "Mediaspace";
 $this->mediaspaceId->allowNullValue = false;
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->active->tableName = "pixxio_user";
+$this->active->externalTableName = "pixxio_user";
+$this->active->fieldName = "active";
+$this->active->aliasFieldName = "pixxio_user_active";
+$this->active->label = "Active";
+$this->active->allowNullValue = false;
+
+$this->importStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->importStatus->tableName = "pixxio_user";
+$this->importStatus->externalTableName = "pixxio_user";
+$this->importStatus->fieldName = "import_status";
+$this->importStatus->aliasFieldName = "pixxio_user_import_status";
+$this->importStatus->label = "Import Status";
+$this->importStatus->allowNullValue = false;
 
 }
 public function loadMediaspace() {

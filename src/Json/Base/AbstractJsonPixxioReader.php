@@ -5,6 +5,7 @@ namespace LuzernTourismus\Pixxio\Json\Base;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\DataSource\AbstractDataSource;
+use Nemundo\Core\Check\ValueCheck;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Json\Reader\JsonReader;
 
@@ -35,11 +36,24 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
 
         $this->loadReader();
 
+        if (!(new ValueCheck())->hasValue($this->subdomain)) {
+            (new Debug())->write('No Pixxio Config');
+            exit;
+        }
+
+
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
 
         $response = $request->getData($this->endpoint, $this->parameter);
+
+
+        if ($response->statusCode === 0) {
+            (new Debug())->write($response->errorMessage);
+            exit;
+        }
+
 
         $jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);

@@ -5,22 +5,44 @@ namespace LuzernTourismus\Pixxio\Import;
 use LuzernTourismus\Pixxio\Data\Directory\Directory;
 use LuzernTourismus\Pixxio\Data\Directory\DirectoryUpdate;
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
+use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow;
 use LuzernTourismus\Pixxio\Json\Directory\DirecotryJsonReader;
 use Nemundo\Core\Base\Import\AbstractImport;
 use Nemundo\Core\Debug\Debug;
 
-class DirectoryImport extends AbstractImport
+class DirectoryImport extends AbstractMediaspaceImport  // AbstractImport
 {
 
-    public function importData()
+
+    protected function beforeImport()
     {
 
         $update = new DirectoryUpdate();
         $update->importStatus = false;
         $update->update();
 
-        $mediaspaceReader = new MediaspaceReader();
-        foreach ($mediaspaceReader->getData() as $mediaspaceRow) {
+
+    }
+
+    protected function afterImport() {
+
+        $update = new DirectoryUpdate();
+        $update->active = false;
+        $update->filter->andEqual($update->model->importStatus, false);
+        $update->update();
+
+
+    }
+
+
+    protected function onMediaspace(MediaspaceRow $mediaspaceRow) {
+
+        /*$update = new DirectoryUpdate();
+        $update->importStatus = false;
+        $update->update();*/
+
+        /*$mediaspaceReader = new MediaspaceReader();
+        foreach ($mediaspaceReader->getData() as $mediaspaceRow) {*/
 
             $page = 1;
 
@@ -55,12 +77,8 @@ class DirectoryImport extends AbstractImport
 
             } while ($count > 0);
 
-        }
+        //}
 
-        $update = new DirectoryUpdate();
-        $update->active = false;
-        $update->filter->andEqual($update->model->importStatus, false);
-        $update->update();
 
     }
 

@@ -2,7 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Site\File;
 
-use LuzernTourismus\Pixxio\Page\FilePage;
+use LuzernTourismus\Pixxio\Page\File\FilePage;
 use Nemundo\Web\Site\AbstractSite;
 
 class FileSite extends AbstractSite

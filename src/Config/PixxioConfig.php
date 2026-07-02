@@ -7,9 +7,9 @@ use Nemundo\Core\Base\AbstractBase;
 class PixxioConfig extends AbstractBase
 {
 
-    public static $mediaSpace;
+    //public static $mediaSpace;
 
-    public static $apiKey;
+    //public static $apiKey;
 
     /**
      * @var bool

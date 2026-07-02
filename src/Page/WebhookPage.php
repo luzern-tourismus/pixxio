@@ -20,7 +20,6 @@ class WebhookPage extends AbstractTemplateDocument
         $layout = new AdminFlexboxLayout($this);
         new PixxioTab($layout);
 
-
         $table = new AdminTable($layout);
 
         $reader = new WebhookDataReader();

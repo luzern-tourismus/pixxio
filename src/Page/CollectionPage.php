@@ -4,8 +4,6 @@ namespace LuzernTourismus\Pixxio\Page;
 
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
-use LuzernTourismus\Pixxio\Data\Collection\Collection;
-use LuzernTourismus\Pixxio\Data\Collection\CollectionReader;
 use LuzernTourismus\Pixxio\Reader\Collection\CollectionDataReader;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
@@ -25,8 +23,8 @@ class CollectionPage extends AbstractTemplateDocument
         $search = new AdminSearchForm($layout);
 
         $mediaspace = new MediaspaceListBox($search);
-        $mediaspace->searchMode=true;
-        $mediaspace->submitOnChange=true;
+        $mediaspace->searchMode = true;
+        $mediaspace->submitOnChange = true;
 
         $table = new AdminTable($layout);
 
@@ -35,6 +33,7 @@ class CollectionPage extends AbstractTemplateDocument
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
+            ->addText($reader->model->active->label)
             ->addText($reader->model->collection->label)
             ->addText($reader->model->mediaspace->label);
 
@@ -42,6 +41,7 @@ class CollectionPage extends AbstractTemplateDocument
 
             (new AdminTableRow($table))
                 ->addText($collectionRow->id)
+                ->addyesNo($collectionRow->active)
                 ->addText($collectionRow->collection)
                 ->addText($collectionRow->mediaspace->url);
 

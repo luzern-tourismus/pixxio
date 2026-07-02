@@ -36,6 +36,7 @@ class CustomMetadataPage extends AbstractTemplateDocument
         //$mediaspaceRow = (new MediaspaceDataReader())->getRowById($mediaspace->getValue());
 
         $customMetadataReader = new CustomMetadataDataReader();
+        $customMetadataReader->filterByMediaspaceId($mediaspace->getValue());
         //$customMetadataReader->filter->andEqual($customMetadataReader->model->mediaspaceId, $mediaspaceRow->id);
 
         (new AdminTableHeader($table))
@@ -43,7 +44,8 @@ class CustomMetadataPage extends AbstractTemplateDocument
             ->addText($customMetadataReader->model->active->label)
             ->addText($customMetadataReader->model->name->label)
             ->addText($customMetadataReader->model->type->label)
-            ->addText('Option');
+            ->addText('Option')
+            ->addText($customMetadataReader->model->mediaspace->label);
 
         foreach ($customMetadataReader->getData() as $customMetadataRow) {
 
@@ -71,6 +73,8 @@ class CustomMetadataPage extends AbstractTemplateDocument
                 }
 
             }
+
+            $row->addText($customMetadataRow->mediaspace->url);
 
         }
 

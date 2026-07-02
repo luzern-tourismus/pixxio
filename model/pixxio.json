@@ -32,6 +32,22 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []
@@ -462,6 +478,55 @@
         },
         {
             "template": "default",
+            "model_id": "4cbc530e-19fa-42e2-8bcb-00804860533a",
+            "label": "File Metadata",
+            "class_name": "FileMetadata",
+            "table_name": "pixxio_file_metadata",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\FileMetadata",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf"
+                },
+                {
+                    "type": "external",
+                    "label": "Metadata",
+                    "field_name": "metadata",
+                    "variable_name": "metadata",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "54458648-a7e2-4608-a9a3-7b9a613d67de"
+                },
+                {
+                    "type": "text",
+                    "label": "Value",
+                    "field_name": "value",
+                    "variable_name": "value",
+                    "allow_null": true,
+                    "is_deleted": true,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Value",
+                    "field_name": "value",
+                    "variable_name": "value",
+                    "allow_null": true,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "c536ec32-4ae5-48e8-84b9-abb0d6d5ce87",
             "label": "Job",
             "class_name": "Job",
@@ -630,6 +695,47 @@
         },
         {
             "template": "default",
+            "model_id": "02378912-22b9-4579-9793-be4c6f5ef68a",
+            "label": "Metadata Option Value",
+            "class_name": "MetadataOptionValue",
+            "table_name": "pixxio_metadata_option_value",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\MetadataOptionValue",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Metadata",
+                    "field_name": "metadata",
+                    "variable_name": "metadata",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "54458648-a7e2-4608-a9a3-7b9a613d67de"
+                },
+                {
+                    "type": "external",
+                    "label": "Option",
+                    "field_name": "option",
+                    "variable_name": "option",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "7c5242db-81a8-41d8-87af-aa807cf0bd62"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "metadata_option",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "metadata",
+                        "option"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "203bf3d5-e945-452d-a71e-0df1cb8ad42a",
             "label": "User",
             "class_name": "User",
@@ -665,6 +771,22 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "1ee86888-d2d4-4a85-b74a-2ed8405dd5d3"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []
