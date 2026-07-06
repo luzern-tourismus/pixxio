@@ -7,6 +7,27 @@ use Nemundo\Test\AbstractTest;
 abstract class AbstractPixxioTest extends AbstractTest
 {
 
+
+    protected $testName;
+
+    abstract protected function loadTest();
+
+
+    public function __construct()
+    {
+
+        $this->loadTest();
+
+    }
+
+
+    public function getTestName() {
+        return $this->testName;
+    }
+
+
+
+
     protected function getFileId()
     {
 
@@ -14,6 +35,5 @@ abstract class AbstractPixxioTest extends AbstractTest
         return $fileId;
 
     }
-
 
 }

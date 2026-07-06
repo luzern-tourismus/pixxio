@@ -41,13 +41,10 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
             (new Debug())->write($url);
 
 
-
-
             $filename = (new TmpPath())
                 ->addPath('pixxio_' . (new Text($endpoint))
                         ->replace('&', '_')
                         ->replace('=', '_')
-
                         ->replace('?', '_')
                         ->replace('/', '_')->getValue() . '_' . PixxioWebRequest::$n . '.json')
                 ->getFullFilename();
@@ -75,6 +72,10 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $url = $this->getServiceUrl($endpoint);
 
         $response = $this->uploadFile($url, 'file', $filename, $data);
+        $this->checkResponse($response);
+
+        (new Debug())->write($url);
+        (new Debug())->write($response);
 
         return $response;
 
@@ -112,22 +113,18 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $response = $this->deleteUrl($url);
         $this->checkResponse($response);
 
-
-        //{"success":false,"errorGroup":"unknown","errorcode":5016,"errormessage":"The user is not allowed to delete the file, because the user is not allowed to delete its own files."}
-
-        //(new Debug())->write($response);
-
     }
 
 
     public function postData($endpoint, $json)
     {
 
-        //(new Debug())->write($json);
         $this->bearerAuthentication = $this->apiKey;
 
-        $data = $this->postUrl($this->getServiceUrl($endpoint), $json);
-        return $data;
+        $response = $this->postUrl($this->getServiceUrl($endpoint), $json);
+        $this->checkResponse($response);
+
+        return $response;
 
     }
 
@@ -135,13 +132,12 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     public function putData($endpoint, $json)
     {
 
-        //(new Debug())->write($json);
         $this->bearerAuthentication = $this->apiKey;
 
-        //(new Debug())->write($this->bearerAuthentication);
-
         $data = $this->putUrl($this->getServiceUrl($endpoint), $json);
-        return $data;
+        $this->checkResponse($data);
+
+        //return $data;
 
     }
 
@@ -162,36 +158,20 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     private function checkResponse(WebResponse $response)
     {
 
-        //{"success":false,"errorGroup":"unknown","errorcode":5016,"errormessage":"The user is not allowed to delete the file, because the user is not allowed to delete its own files."}
-
-        //(new Debug())->write($response);
-
-
-
         if ($response->statusCode === StatusCode::NOT_FOUND) {
             (new Debug())->write('Pixxio Error: Not found');
             exit;
         }
-
 
         $jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);
 
         $jsonData = $jsonReader->getData();
 
-        //if (isset($jsonData['success'])) {
         if (!$jsonData['success']) {
-            (new Debug())->write('Pixxio Error: '. $jsonData['errormessage']);
-            //(new Debug())->write($jsonData);
-            //$success = $jsonData['success'];
-        } /*else {
-            (new Debug())->write('Pixxio Error: '. $jsonData['errormessage']);
-        }*/
-
-
-
+            (new Debug())->write('Pixxio Error: ' . $jsonData['errormessage']);
+        }
 
     }
-
 
 }

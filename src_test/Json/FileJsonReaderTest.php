@@ -8,6 +8,12 @@ use Nemundo\Test\AbstractTest;
 class FileJsonReaderTest extends AbstractPixxioTest
 {
 
+    protected function loadTest()
+    {
+        $this->testName = 'file-read';
+    }
+
+
     public function runTest()
     {
 

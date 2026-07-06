@@ -1,0 +1,1 @@
+<?phpuse Nemundo\Core\Console\ConsoleArgument;use Nemundo\Core\Debug\Debug;require 'config.php';//(new \Nemundo\App\Script\Command\ScriptConsole())->checkCommand();//(new Debug())->write('Test');(new \LuzernTourismus\PixxioTest\Collection\PixxioTestCollection())->runScript();

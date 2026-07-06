@@ -78,6 +78,8 @@ class FileUpload extends AbstractBase
             $this->customMultiList[$id]['id'] = $id;
             $this->customMultiList[$id]['value'][] = $value;
 
+            $this->customMultiList[$id]['value'] = array_unique($this->customMultiList[$id]['value']);
+
         }
 
         return $this;
@@ -95,13 +97,7 @@ class FileUpload extends AbstractBase
             $data['keywords'] = $keywordText;
         }
 
-
-
-        /*if ($this->subject !== null) {
-            $data['fileName'] = $this->subject;
-        } else {*/
-            $data['fileName'] = (new File($this->fullFilename))->getFilename();
-        //}
+        $data['fileName'] = (new File($this->fullFilename))->getFilename();
 
         if ($this->subject !== null) {
             $data['subject'] = $this->subject;
@@ -132,10 +128,12 @@ class FileUpload extends AbstractBase
         $request->apiKey = $this->apiKey;
         $response = $request->uploadImage($this->fullFilename, $data);
 
+
         $jsonReader = new JsonReader();
         $jsonReader->fromText($response->html);
         $jsonData = $jsonReader->getData();
 
+        $jobId = null;
         if (isset($jsonData['jobID'])) {
             $jobId = $jsonData['jobID'];
         } else {

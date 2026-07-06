@@ -37,6 +37,7 @@ class CustomMetadataBuilder extends AbstractBuilder
         $data['name'] = $this->name;
         $data['editType'] = $this->editType;
         $data['selectionOptions'] = $this->optionList->getTextWithSeperator(',');
+
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
@@ -65,9 +66,10 @@ class CustomMetadataBuilder extends AbstractBuilder
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
-        $response = $request->putData('metadata/custom/' . $id, $data);
+        $request->putData('metadata/custom/' . $id, $data);
 
-        (new Debug())->write($response);
+
+        //(new Debug())->write($response);
 
 
     }

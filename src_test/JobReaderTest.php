@@ -2,12 +2,20 @@
 
 namespace LuzernTourismus\PixxioTest;
 
-use AbstractTest;
 use LuzernTourismus\Pixxio\Json\Job\JobJsonReader;
+use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 use Nemundo\Core\Debug\Debug;
 
-class JobReaderTest extends AbstractTest
+class JobReaderTest extends AbstractPixxioTest
 {
+
+
+    protected function loadTest()
+    {
+        $this->testName = 'job-read';
+    }
+
+
 
     public function runTest()
     {

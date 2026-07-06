@@ -3,11 +3,21 @@
 namespace LuzernTourismus\PixxioTest\Json;
 
 use LuzernTourismus\Pixxio\Json\File\FileJson;
+use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Test\AbstractTest;
 
-class FileJsonTest extends AbstractTest
+class FileJsonTest extends AbstractPixxioTest  // AbstractTest
 {
+
+
+    protected function loadTest()
+    {
+
+        $this->testName = 'file-read';
+
+    }
+
 
     public function runTest()
     {
