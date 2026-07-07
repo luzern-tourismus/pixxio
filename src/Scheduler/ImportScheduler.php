@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Scheduler;
 
+use LuzernTourismus\Pixxio\Import\PixxioImport;
 use Nemundo\App\Scheduler\Job\AbstractScheduler;
 
 class ImportScheduler extends AbstractScheduler
@@ -12,5 +13,8 @@ class ImportScheduler extends AbstractScheduler
 
     public function run()
     {
+
+        (new PixxioImport())->importData();
+
     }
 }

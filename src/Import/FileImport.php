@@ -82,8 +82,6 @@ class FileImport extends AbstractMediaspaceImport
 
         foreach ($file->metadataList as $custom) {
 
-            //(new Debug())->write($custom->value);
-
             $data = new FileMetadata();
             $data->updateOnDuplicate = true;
             $data->active = true;
@@ -96,18 +94,13 @@ class FileImport extends AbstractMediaspaceImport
                 if (is_array($value)) {
                     $value = $custom->value['id'];
                 }
-                $data->value = $value;  // $custom->value;
+                $data->value = $value;
 
             }
             $data->save();
 
 
             if ($custom->editType == EditTypeConfig::SELECTION) {
-
-                //(new Debug())->write($custom->valueList);
-                //exit;
-
-                //foreach ($custom->valueList as $value) {
 
                 if ($custom->value !== null) {
 
@@ -122,15 +115,10 @@ class FileImport extends AbstractMediaspaceImport
 
                 }
 
-                //}
-
             }
 
 
             if ($custom->editType == EditTypeConfig::MULTISELECTION) {
-
-                //(new Debug())->write($custom->valueList);
-                //exit;
 
                 foreach ($custom->valueList as $value) {
 
