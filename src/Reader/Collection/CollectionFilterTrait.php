@@ -8,6 +8,15 @@ trait CollectionFilterTrait
 {
 
 
+    public function filterByActive()
+    {
+
+        $this->filter->andEqual($this->model->active, true);
+        return $this;
+
+    }
+
+
     public function filterMediaspace($mediaspaceId)
     {
 

@@ -18,6 +18,8 @@ class JobJsonItem extends AbstractBase
 
     public $fileId;
 
+    public $jobFinished = false;
+
     public $isDuplicate = false;
 
     public $existingFileId;

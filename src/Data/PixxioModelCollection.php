@@ -4,6 +4,7 @@ use Nemundo\Model\Collection\AbstractModelCollection;
 class PixxioModelCollection extends AbstractModelCollection {
 protected function loadCollection() {
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Collection\CollectionModel());
+$this->addModel(new \LuzernTourismus\Pixxio\Data\CollectionFile\CollectionFileModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\Comment\CommentModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadataModel());
 $this->addModel(new \LuzernTourismus\Pixxio\Data\CustomMetadataOption\CustomMetadataOptionModel());

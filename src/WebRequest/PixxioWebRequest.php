@@ -74,8 +74,8 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $response = $this->uploadFile($url, 'file', $filename, $data);
         $this->checkResponse($response);
 
-        (new Debug())->write($url);
-        (new Debug())->write($response);
+        /*(new Debug())->write($url);
+        (new Debug())->write($response);*/
 
         return $response;
 

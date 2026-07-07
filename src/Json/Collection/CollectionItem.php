@@ -11,4 +11,11 @@ class CollectionItem extends AbstractBase
 
     public $collection;
 
+    public $userId;
+
+    /**
+     * @var bool
+     */
+    public $dynamicCollection= false;
+
 }

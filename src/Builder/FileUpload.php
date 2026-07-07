@@ -120,13 +120,15 @@ class FileUpload extends AbstractBase
         }
 
         if (PixxioConfig::$debugMode) {
-            (new Debug())->write($data);
+            //(new Debug())->write($data);
         }
 
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
         $response = $request->uploadImage($this->fullFilename, $data);
+
+        //(new Debug())->write($response);
 
 
         $jsonReader = new JsonReader();

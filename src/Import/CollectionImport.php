@@ -36,15 +36,6 @@ class CollectionImport extends AbstractMediaspaceImport
     protected function onMediaspace(MediaspaceRow $mediaspaceRow)
     {
 
-        /*}
-
-
-        public function importData()
-        {
-
-            $mediaspaceReader = new MediaspaceReader();
-            foreach ($mediaspaceReader->getData() as $mediaspaceRow) {*/
-
         $collectionJsonReader = new CollectionJsonReader();
         $collectionJsonReader->subdomain = $mediaspaceRow->url;
         $collectionJsonReader->apiKey = $mediaspaceRow->apiKey;
@@ -57,12 +48,12 @@ class CollectionImport extends AbstractMediaspaceImport
             $data->active = true;
             $data->mediaspaceId = $mediaspaceRow->id;
             $data->collection = $collectionJsonRow->collection;
+            $data->userId = $collectionJsonRow->userId;
+            $data->dynamicCollection= $collectionJsonRow->dynamicCollection;
             $data->save();
 
 
         }
-
-        //}
 
     }
 

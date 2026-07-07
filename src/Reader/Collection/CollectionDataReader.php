@@ -13,7 +13,9 @@ class CollectionDataReader extends CollectionReader
     {
 
         parent::__construct();
-        $this->model->loadMediaspace();
+        $this->model
+            ->loadMediaspace()
+            ->loadUser();
 
     }
 

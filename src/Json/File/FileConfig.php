@@ -7,7 +7,7 @@ use Nemundo\Core\Base\AbstractBase;
 class FileConfig extends AbstractBase
 {
 
-    public static $responseField = 'id,createDate,fileExtension,fileSize,fileName,subject,id,clipFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases,originalFileURL';
+    public static $responseField = 'id,createDate,fileExtension,fileSize,fileName,subject,id,clipFileURL,previewFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases,originalFileURL';
 
 
 }

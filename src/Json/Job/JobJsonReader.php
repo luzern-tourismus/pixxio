@@ -6,7 +6,6 @@ use LuzernTourismus\Pixxio\Data\Job\Job;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Http\Response\StatusCode;
 use Nemundo\Core\Json\Reader\JsonReader;
 use Nemundo\Core\Type\DateTime\DateTime;
@@ -22,7 +21,6 @@ class JobJsonReader extends AbstractBase
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
-
         $response = $request->getData('jobs/' . $jobId . '?responseFields=id&responseFields=jobData&responseFields=error&responseFields=jobType&responseFields=success&responseFields=modifyDate&responseFields=progress&responseFields=createDate&responseFields=progress');
 
         //(new Debug())->write($response);
@@ -46,6 +44,8 @@ class JobJsonReader extends AbstractBase
             $item->jobType = $jobData['jobType'];
 
             if (isset($jobData['finishedJobData'])) {
+
+                $item->jobFinished = true;
 
                 $finishedJobData = $jobData['finishedJobData'];
 

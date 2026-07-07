@@ -31,6 +31,16 @@ public $active;
 */
 public $importStatus;
 
+/**
+* @var string
+*/
+public $userId;
+
+/**
+* @var bool
+*/
+public $dynamicCollection;
+
 public function __construct() {
 parent::__construct();
 $this->model = new CollectionModel();
@@ -42,6 +52,8 @@ $this->typeValueList->setModelValue($this->model->collection, $this->collection)
 $this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
 $this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
+$this->typeValueList->setModelValue($this->model->userId, $this->userId);
+$this->typeValueList->setModelValue($this->model->dynamicCollection, $this->dynamicCollection);
 $id = parent::save();
 return $id;
 }

@@ -26,6 +26,26 @@ public $optionId;
 */
 public $option;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $importStatus;
+
+/**
+* @var \Nemundo\Model\Type\External\Id\LargeNumberExternalIdType
+*/
+public $fileId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\File\FileExternalType
+*/
+public $file;
+
 protected function loadModel() {
 $this->tableName = "pixxio_metadata_option_value";
 $this->aliasTableName = "pixxio_metadata_option_value";
@@ -55,8 +75,32 @@ $this->optionId->aliasFieldName = "pixxio_metadata_option_value_option";
 $this->optionId->label = "Option";
 $this->optionId->allowNullValue = false;
 
+$this->active = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->active->tableName = "pixxio_metadata_option_value";
+$this->active->externalTableName = "pixxio_metadata_option_value";
+$this->active->fieldName = "active";
+$this->active->aliasFieldName = "pixxio_metadata_option_value_active";
+$this->active->label = "Active";
+$this->active->allowNullValue = false;
+
+$this->importStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->importStatus->tableName = "pixxio_metadata_option_value";
+$this->importStatus->externalTableName = "pixxio_metadata_option_value";
+$this->importStatus->fieldName = "import_status";
+$this->importStatus->aliasFieldName = "pixxio_metadata_option_value_import_status";
+$this->importStatus->label = "Import Status";
+$this->importStatus->allowNullValue = false;
+
+$this->fileId = new \Nemundo\Model\Type\External\Id\LargeNumberExternalIdType($this);
+$this->fileId->tableName = "pixxio_metadata_option_value";
+$this->fileId->fieldName = "file";
+$this->fileId->aliasFieldName = "pixxio_metadata_option_value_file";
+$this->fileId->label = "File";
+$this->fileId->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
-$index->indexName = "metadata_option";
+$index->indexName = "file_metadata_option";
+$index->addType($this->fileId);
 $index->addType($this->metadataId);
 $index->addType($this->optionId);
 
@@ -78,6 +122,16 @@ $this->option->tableName = "pixxio_metadata_option_value";
 $this->option->fieldName = "option";
 $this->option->aliasFieldName = "pixxio_metadata_option_value_option";
 $this->option->label = "Option";
+}
+return $this;
+}
+public function loadFile() {
+if ($this->file == null) {
+$this->file = new \LuzernTourismus\Pixxio\Data\File\FileExternalType($this, "pixxio_metadata_option_value_file");
+$this->file->tableName = "pixxio_metadata_option_value";
+$this->file->fieldName = "file";
+$this->file->aliasFieldName = "pixxio_metadata_option_value_file";
+$this->file->label = "File";
 }
 return $this;
 }

@@ -26,6 +26,26 @@ public $optionId;
 */
 public $option;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $importStatus;
+
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $fileId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\File\FileExternalType
+*/
+public $file;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = MetadataOptionValueModel::class;
@@ -53,6 +73,29 @@ $this->optionId->aliasFieldName = $this->optionId->tableName ."_".$this->optionI
 $this->optionId->label = "Option";
 $this->addType($this->optionId);
 
+$this->active = new \Nemundo\Model\Type\Number\YesNoType();
+$this->active->fieldName = "active";
+$this->active->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->active->externalTableName = $this->externalTableName;
+$this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->fieldName;
+$this->active->label = "Active";
+$this->addType($this->active);
+
+$this->importStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->importStatus->fieldName = "import_status";
+$this->importStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->importStatus->externalTableName = $this->externalTableName;
+$this->importStatus->aliasFieldName = $this->importStatus->tableName . "_" . $this->importStatus->fieldName;
+$this->importStatus->label = "Import Status";
+$this->addType($this->importStatus);
+
+$this->fileId = new \Nemundo\Model\Type\Id\IdType();
+$this->fileId->fieldName = "file";
+$this->fileId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->fileId->aliasFieldName = $this->fileId->tableName ."_".$this->fileId->fieldName;
+$this->fileId->label = "File";
+$this->addType($this->fileId);
+
 }
 public function loadMetadata() {
 if ($this->metadata == null) {
@@ -73,6 +116,17 @@ $this->option->tableName = $this->parentFieldName . "_" . $this->externalTableNa
 $this->option->aliasFieldName = $this->option->tableName ."_".$this->option->fieldName;
 $this->option->label = "Option";
 $this->addType($this->option);
+}
+return $this;
+}
+public function loadFile() {
+if ($this->file == null) {
+$this->file = new \LuzernTourismus\Pixxio\Data\File\FileExternalType(null, $this->parentFieldName . "_file");
+$this->file->fieldName = "file";
+$this->file->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->file->aliasFieldName = $this->file->tableName ."_".$this->file->fieldName;
+$this->file->label = "File";
+$this->addType($this->file);
 }
 return $this;
 }

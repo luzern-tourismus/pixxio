@@ -48,9 +48,83 @@
                     "variable_name": "importStatus",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "203bf3d5-e945-452d-a71e-0df1cb8ad42a"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Dynamic Collection",
+                    "field_name": "dynamic_collection",
+                    "variable_name": "dynamicCollection",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "3b9b2951-c117-4d2c-9eec-cf0c1ce98aa8",
+            "label": "Collection File",
+            "class_name": "CollectionFile",
+            "table_name": "pixxio_collection_file",
+            "namespace": "LuzernTourismus\\Pixxio\\Data\\CollectionFile",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Collection",
+                    "field_name": "collection",
+                    "variable_name": "collection",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "45a1d05b-95ec-467b-9778-9ff99ee10ae5"
+                },
+                {
+                    "type": "external",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "collection_file",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "collection",
+                        "file"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",
@@ -423,6 +497,15 @@
                     "variable_name": "fileSize",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Preview Url",
+                    "field_name": "preview_url",
+                    "variable_name": "previewUrl",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
                 }
             ],
             "index": [
@@ -521,9 +604,34 @@
                     "variable_name": "value",
                     "allow_null": true,
                     "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "file_metadata",
+                    "index_type": "unique_index",
+                    "field_name": [
+                        "file",
+                        "metadata"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",
@@ -721,13 +829,39 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "7c5242db-81a8-41d8-87af-aa807cf0bd62"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Import Status",
+                    "field_name": "import_status",
+                    "variable_name": "importStatus",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "File",
+                    "field_name": "file",
+                    "variable_name": "file",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "2b11ce78-8e72-4a35-a0bb-bf27886f89cf"
                 }
             ],
             "index": [
                 {
-                    "index_name": "metadata_option",
+                    "index_name": "file_metadata_option",
                     "index_type": "unique_index",
                     "field_name": [
+                        "file",
                         "metadata",
                         "option"
                     ]

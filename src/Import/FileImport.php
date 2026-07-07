@@ -7,14 +7,14 @@ use LuzernTourismus\Pixxio\Data\File\File;
 use LuzernTourismus\Pixxio\Data\File\FileUpdate;
 use LuzernTourismus\Pixxio\Data\FileKeyword\FileKeyword;
 use LuzernTourismus\Pixxio\Data\FileMetadata\FileMetadata;
-use LuzernTourismus\Pixxio\Data\FileMetadataOptionValue\FileMetadataOptionValue;
+use LuzernTourismus\Pixxio\Data\FileMetadata\FileMetadataUpdate;
 use LuzernTourismus\Pixxio\Data\Keyword\Keyword;
 use LuzernTourismus\Pixxio\Data\Keyword\KeywordId;
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow;
 use LuzernTourismus\Pixxio\Data\MetadataOptionValue\MetadataOptionValue;
+use LuzernTourismus\Pixxio\Data\MetadataOptionValue\MetadataOptionValueUpdate;
 use LuzernTourismus\Pixxio\Json\File\FileJsonItem;
 use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
-use Nemundo\Core\Debug\Debug;
 
 class FileImport extends AbstractMediaspaceImport
 {
@@ -26,6 +26,14 @@ class FileImport extends AbstractMediaspaceImport
         $update->importStatus = false;
         $update->update();
 
+        $update = new FileMetadataUpdate();
+        $update->importStatus = false;
+        $update->update();
+
+        $update = new MetadataOptionValueUpdate();
+        $update->importStatus = false;
+        $update->update();
+
 
     }
 
@@ -34,6 +42,16 @@ class FileImport extends AbstractMediaspaceImport
     {
 
         $update = new FileUpdate();
+        $update->active = false;
+        $update->filter->andEqual($update->model->importStatus, false);
+        $update->update();
+
+        $update = new FileMetadataUpdate();
+        $update->active = false;
+        $update->filter->andEqual($update->model->importStatus, false);
+        $update->update();
+
+        $update = new MetadataOptionValueUpdate();
         $update->active = false;
         $update->filter->andEqual($update->model->importStatus, false);
         $update->update();
@@ -56,9 +74,81 @@ class FileImport extends AbstractMediaspaceImport
         $data->subject = $file->subject;
         $data->description = $file->description;
         $data->fileUrl = $file->fileUrl;
+        $data->previewUrl = $file->previewUrl;
         $data->directoryId = $file->directoryId;
         $data->creator = $file->creator;
         $data->save();
+
+
+        foreach ($file->metadataList as $custom) {
+
+            //(new Debug())->write($custom->value);
+
+            $data = new FileMetadata();
+            $data->updateOnDuplicate = true;
+            $data->active = true;
+            $data->importStatus = true;
+            $data->fileId = $file->id;
+            $data->metadataId = $custom->id;
+            if ($custom->editType == EditTypeConfig::TEXT) {
+
+                $value = $custom->value;
+                if (is_array($value)) {
+                    $value = $custom->value['id'];
+                }
+                $data->value = $value;  // $custom->value;
+
+            }
+            $data->save();
+
+
+            if ($custom->editType == EditTypeConfig::SELECTION) {
+
+                //(new Debug())->write($custom->valueList);
+                //exit;
+
+                //foreach ($custom->valueList as $value) {
+
+                if ($custom->value !== null) {
+
+                    $data = new MetadataOptionValue();
+                    $data->updateOnDuplicate = true;
+                    $data->active = true;
+                    $data->importStatus = true;
+                    $data->fileId = $file->id;
+                    $data->metadataId = $custom->id;
+                    $data->optionId = $custom->value;
+                    $data->save();
+
+                }
+
+                //}
+
+            }
+
+
+            if ($custom->editType == EditTypeConfig::MULTISELECTION) {
+
+                //(new Debug())->write($custom->valueList);
+                //exit;
+
+                foreach ($custom->valueList as $value) {
+
+                    $data = new MetadataOptionValue();
+                    $data->updateOnDuplicate = true;
+                    $data->active = true;
+                    $data->importStatus = true;
+                    $data->fileId = $file->id;
+                    $data->metadataId = $custom->id;
+                    $data->optionId = $value;
+                    $data->save();
+
+                }
+
+            }
+
+        }
+
 
         foreach ($file->keywordList as $keyword) {
 
@@ -89,12 +179,20 @@ class FileImport extends AbstractMediaspaceImport
         $jsonReader = new FileJsonReaderJson();
         $jsonReader->subdomain = $mediaspaceRow->url;
         $jsonReader->apiKey = $mediaspaceRow->apiKey;
-        $jsonReader->pageSize = 500;
+        $jsonReader->pageSize = 100;  // 500;
+
+        //$count = 0;
 
         do {
 
             foreach ($jsonReader->getData() as $file) {
 
+                //(new Debug())->write($file->id);
+
+                $this->importFile($file, $mediaspaceRow->id);
+
+
+                /*
                 $data = new File();
                 $data->updateOnDuplicate = true;
                 $data->id = $file->id;
@@ -111,7 +209,6 @@ class FileImport extends AbstractMediaspaceImport
                 $data->creator = $file->creator;
                 $data->save();
 
-
                 foreach ($file->metadataList as $custom) {
 
                     $data = new FileMetadata();
@@ -124,28 +221,7 @@ class FileImport extends AbstractMediaspaceImport
                     $data->save();
 
 
-                    /*if ($custom->editType == EditTypeConfig::SELECTION) {
-
-
-                        $data = new MetadataOptionValue();
-                        $data->updateOnDuplicate = true;
-                        $data->metadataId = $custom->id;
-
-
-                        $data->optionId = $custom->value;
-
-                        $data->save();
-
-
-                    }*/
-
-
-                    if (($custom->editType == EditTypeConfig::SELECTION) ||($custom->editType == EditTypeConfig::MULTISELECTION)) {
-
-                        //$custom->
-
-                        //(new Debug())->write($custom->valueList);
-                        //exit;
+                    if (($custom->editType == EditTypeConfig::SELECTION) || ($custom->editType == EditTypeConfig::MULTISELECTION)) {
 
                         foreach ($custom->valueList as $value) {
 
@@ -158,7 +234,6 @@ class FileImport extends AbstractMediaspaceImport
                         }
 
                     }
-
 
                 }
 
@@ -180,9 +255,18 @@ class FileImport extends AbstractMediaspaceImport
                     $data->keywordId = $keywordId;
                     $data->save();
 
-                }
+                }*/
 
             }
+
+            //exit;
+
+            /*$count++;
+
+            if ($count ===2) {
+                exit;
+            }*/
+
 
         } while ($jsonReader->hasCursor());
 

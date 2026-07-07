@@ -31,6 +31,16 @@ public $metadata;
 */
 public $value;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $importStatus;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FileMetadataModel::class;
@@ -65,6 +75,22 @@ $this->value->externalTableName = $this->externalTableName;
 $this->value->aliasFieldName = $this->value->tableName . "_" . $this->value->fieldName;
 $this->value->label = "Value";
 $this->addType($this->value);
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType();
+$this->active->fieldName = "active";
+$this->active->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->active->externalTableName = $this->externalTableName;
+$this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->fieldName;
+$this->active->label = "Active";
+$this->addType($this->active);
+
+$this->importStatus = new \Nemundo\Model\Type\Number\YesNoType();
+$this->importStatus->fieldName = "import_status";
+$this->importStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->importStatus->externalTableName = $this->externalTableName;
+$this->importStatus->aliasFieldName = $this->importStatus->tableName . "_" . $this->importStatus->fieldName;
+$this->importStatus->label = "Import Status";
+$this->addType($this->importStatus);
 
 }
 public function loadFile() {

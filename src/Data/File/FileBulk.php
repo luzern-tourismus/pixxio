@@ -66,6 +66,11 @@ public $fileExtension;
 */
 public $fileSize;
 
+/**
+* @var string
+*/
+public $previewUrl;
+
 public function __construct() {
 parent::__construct();
 $this->model = new FileModel();
@@ -84,6 +89,7 @@ $this->typeValueList->setModelValue($this->model->description, $this->descriptio
 $this->typeValueList->setModelValue($this->model->subject, $this->subject);
 $this->typeValueList->setModelValue($this->model->fileExtension, $this->fileExtension);
 $this->typeValueList->setModelValue($this->model->fileSize, $this->fileSize);
+$this->typeValueList->setModelValue($this->model->previewUrl, $this->previewUrl);
 $id = parent::save();
 return $id;
 }

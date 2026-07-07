@@ -4,28 +4,21 @@ namespace LuzernTourismus\Pixxio\Script;
 
 use LuzernTourismus\Pixxio\Import\CollectionFileImport;
 use LuzernTourismus\Pixxio\Import\CollectionImport;
-use LuzernTourismus\Pixxio\Import\CustomMetadataImport;
 use LuzernTourismus\Pixxio\Import\DirectoryImport;
-use LuzernTourismus\Pixxio\Import\FileImport;
-use LuzernTourismus\Pixxio\Import\UserImport;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 
-class ImportScript extends AbstractConsoleScript
+class CollectionImportScript extends AbstractConsoleScript
 {
     protected function loadScript()
     {
-        $this->scriptName = 'pixxio-import';
+        $this->scriptName = 'pixxio-collection-import';
     }
 
     public function run()
     {
 
-        (new CustomMetadataImport())->importData();
         (new CollectionImport())->importData();
         (new CollectionFileImport())->importData();
-        (new DirectoryImport())->importData();
-        (new UserImport())->importData();
-        (new FileImport())->importData();
 
     }
 }

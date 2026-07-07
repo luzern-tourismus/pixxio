@@ -20,6 +20,8 @@ class FileJsonItem extends AbstractBase
 
     public $fileUrl;
 
+    public $previewUrl;
+
     public $description;
 
     public $directoryId;
@@ -43,6 +45,10 @@ class FileJsonItem extends AbstractBase
         $this->fileExtension = $json['fileExtension'];
         $this->fileSize = $json['fileSize'];
         $this->fileUrl = $json['originalFileURL'];
+        $this->previewUrl = $json['previewFileURL'];
+
+
+
         $this->description = $json['description'];
         $this->keywordList = $json['keywords'];
         $this->creator = $json['creator'];

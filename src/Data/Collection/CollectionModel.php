@@ -31,6 +31,21 @@ public $active;
 */
 public $importStatus;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $userId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\User\UserExternalType
+*/
+public $user;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $dynamicCollection;
+
 protected function loadModel() {
 $this->tableName = "pixxio_collection";
 $this->aliasTableName = "pixxio_collection";
@@ -78,6 +93,21 @@ $this->importStatus->aliasFieldName = "pixxio_collection_import_status";
 $this->importStatus->label = "Import Status";
 $this->importStatus->allowNullValue = false;
 
+$this->userId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->userId->tableName = "pixxio_collection";
+$this->userId->fieldName = "user";
+$this->userId->aliasFieldName = "pixxio_collection_user";
+$this->userId->label = "User";
+$this->userId->allowNullValue = false;
+
+$this->dynamicCollection = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->dynamicCollection->tableName = "pixxio_collection";
+$this->dynamicCollection->externalTableName = "pixxio_collection";
+$this->dynamicCollection->fieldName = "dynamic_collection";
+$this->dynamicCollection->aliasFieldName = "pixxio_collection_dynamic_collection";
+$this->dynamicCollection->label = "Dynamic Collection";
+$this->dynamicCollection->allowNullValue = false;
+
 }
 public function loadMediaspace() {
 if ($this->mediaspace == null) {
@@ -86,6 +116,16 @@ $this->mediaspace->tableName = "pixxio_collection";
 $this->mediaspace->fieldName = "mediaspace";
 $this->mediaspace->aliasFieldName = "pixxio_collection_mediaspace";
 $this->mediaspace->label = "Mediaspace";
+}
+return $this;
+}
+public function loadUser() {
+if ($this->user == null) {
+$this->user = new \LuzernTourismus\Pixxio\Data\User\UserExternalType($this, "pixxio_collection_user");
+$this->user->tableName = "pixxio_collection";
+$this->user->fieldName = "user";
+$this->user->aliasFieldName = "pixxio_collection_user";
+$this->user->label = "User";
 }
 return $this;
 }

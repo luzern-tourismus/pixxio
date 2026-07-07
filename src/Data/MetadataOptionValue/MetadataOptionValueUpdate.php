@@ -17,6 +17,21 @@ public $metadataId;
 */
 public $optionId;
 
+/**
+* @var bool
+*/
+public $active;
+
+/**
+* @var bool
+*/
+public $importStatus;
+
+/**
+* @var string
+*/
+public $fileId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new MetadataOptionValueModel();
@@ -24,6 +39,9 @@ $this->model = new MetadataOptionValueModel();
 public function update() {
 $this->typeValueList->setModelValue($this->model->metadataId, $this->metadataId);
 $this->typeValueList->setModelValue($this->model->optionId, $this->optionId);
+$this->typeValueList->setModelValue($this->model->active, $this->active);
+$this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
+$this->typeValueList->setModelValue($this->model->fileId, $this->fileId);
 parent::update();
 }
 }

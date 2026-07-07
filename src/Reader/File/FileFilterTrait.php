@@ -8,6 +8,17 @@ use Nemundo\Core\Check\ValueCheck;
 trait FileFilterTrait
 {
 
+
+    public function filterById($fileId)
+    {
+
+        if ((new ValueCheck())->hasValue($fileId)) {
+            $this->filter->andEqual($this->model->id, $fileId);
+        }
+        return $this;
+
+    }
+
     public function filterBySubject($subject)
     {
 

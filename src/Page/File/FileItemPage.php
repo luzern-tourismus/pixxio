@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Page\File;
 
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
+use LuzernTourismus\Pixxio\Config\EditTypeConfig;
 use LuzernTourismus\Pixxio\Data\FileMetadata\FileMetadataReader;
 use LuzernTourismus\Pixxio\Data\MetadataOptionValue\MetadataOptionValueReader;
 use LuzernTourismus\Pixxio\Parameter\FileParameter;
@@ -17,6 +18,8 @@ use Nemundo\Admin\Com\Table\Row\AdminTableRow;
 use Nemundo\Admin\Com\Title\AdminSubtitle;
 use Nemundo\Admin\Com\Title\AdminTitle;
 use Nemundo\Com\Template\AbstractTemplateDocument;
+use Nemundo\Html\Formatting\Strike;
+use Nemundo\Html\Image\Img;
 
 class FileItemPage extends AbstractTemplateDocument
 {
@@ -32,6 +35,9 @@ class FileItemPage extends AbstractTemplateDocument
         $title = new AdminTitle($layout);
         $title->content = $fileRow->filename;
 
+        $img = new Img($layout);
+        $img->src = $fileRow->previewUrl;
+        $img->width = 900;
 
         (new AdminLabelValueTable($layout))
             ->addLabelValue($fileRow->model->filename->label, $fileRow->filename)
@@ -41,7 +47,9 @@ class FileItemPage extends AbstractTemplateDocument
             ->addLabelValue($fileRow->model->description->label, $fileRow->description)
             ->addLabelValue($fileRow->model->creator->label, $fileRow->creator)
             ->addLabelValue($fileRow->model->directory->label, $fileRow->directory->directory)
-            ->addLabelValue($fileRow->model->description->label, $fileRow->description);
+            ->addLabelValue($fileRow->model->description->label, $fileRow->description)
+            ->addLabelHyperlink($fileRow->model->fileUrl->label, $fileRow->fileUrl)
+            ->addLabelHyperlink($fileRow->model->fileUrl->label, $fileRow->getPixxioUrl());
 
 
         $subtitle = new AdminSubtitle($layout);
@@ -55,6 +63,7 @@ class FileItemPage extends AbstractTemplateDocument
         $metadataReader->filter->andEqual($metadataReader->model->fileId, $fileId);
 
         (new AdminTableHeader($table))
+            ->addText($metadataReader->model->metadata->id->label)
             ->addText($metadataReader->model->metadata->label)
             ->addText($metadataReader->model->metadata->type->label)
             ->addText('Value');
@@ -63,25 +72,47 @@ class FileItemPage extends AbstractTemplateDocument
 
             $row = new AdminTableRow($table);
 
-            $row->addText($metadataRow->metadata->name)
+            $row
+                //->addText($metadataRow->id)
+                ->addText($metadataRow->metadata->id)
+                ->addText($metadataRow->metadata->name)
                 ->addText($metadataRow->metadata->type->type);
 
-            $ul = new AdminUnorderedList($row);
+            if ($metadataRow->metadata->type->type === EditTypeConfig::TEXT) {
+                $row->addText($metadataRow->value);
+            } else {
 
-            $metadataOptionValueReader = new MetadataOptionValueReader();
-            $metadataOptionValueReader->model->loadOption();
-            $metadataOptionValueReader->filter->andEqual($metadataOptionValueReader->model->metadataId, $metadataRow->metadata->id);
-            foreach ($metadataOptionValueReader->getData() as $metadataOptionValueRow) {
-                $ul->addText($metadataOptionValueRow->option->option . ' (' . $metadataOptionValueRow->optionId . ')');
+
+            //if ($metadataRow->metadata->type->type === EditTypeConfig::MULTISELECTION) {
+                $ul = new AdminUnorderedList($row);
+
+                $metadataOptionValueReader = new MetadataOptionValueReader();
+                $metadataOptionValueReader->model->loadOption();
+                $metadataOptionValueReader->filter->andEqual($metadataOptionValueReader->model->fileId, $fileId);
+                $metadataOptionValueReader->filter->andEqual($metadataOptionValueReader->model->metadataId, $metadataRow->metadata->id);
+                foreach ($metadataOptionValueReader->getData() as $metadataOptionValueRow) {
+
+                    $value = $metadataOptionValueRow->option->option . ' (' . $metadataOptionValueRow->optionId . ')';
+
+                    if ($metadataOptionValueRow->active) {
+                        $ul->addText($value);
+                    } else {
+                        $strike = new Strike($ul);
+                        $strike->content = $value;
+                    }
+
+
+
+                    //$ul->addText($metadataOptionValueRow->option->option . ' (' . $metadataOptionValueRow->optionId . ')');
+
+                }
+
             }
-
 
         }
 
-
         $subtitle = new AdminSubtitle($layout);
         $subtitle->content = 'Comment';
-
 
         $table = new AdminTable($layout);
 

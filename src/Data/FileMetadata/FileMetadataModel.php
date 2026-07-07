@@ -31,6 +31,16 @@ public $metadata;
 */
 public $value;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $importStatus;
+
 protected function loadModel() {
 $this->tableName = "pixxio_file_metadata";
 $this->aliasTableName = "pixxio_file_metadata";
@@ -67,6 +77,27 @@ $this->value->fieldName = "value";
 $this->value->aliasFieldName = "pixxio_file_metadata_value";
 $this->value->label = "Value";
 $this->value->allowNullValue = true;
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->active->tableName = "pixxio_file_metadata";
+$this->active->externalTableName = "pixxio_file_metadata";
+$this->active->fieldName = "active";
+$this->active->aliasFieldName = "pixxio_file_metadata_active";
+$this->active->label = "Active";
+$this->active->allowNullValue = false;
+
+$this->importStatus = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->importStatus->tableName = "pixxio_file_metadata";
+$this->importStatus->externalTableName = "pixxio_file_metadata";
+$this->importStatus->fieldName = "import_status";
+$this->importStatus->aliasFieldName = "pixxio_file_metadata_import_status";
+$this->importStatus->label = "Import Status";
+$this->importStatus->allowNullValue = false;
+
+$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
+$index->indexName = "file_metadata";
+$index->addType($this->fileId);
+$index->addType($this->metadataId);
 
 }
 public function loadFile() {

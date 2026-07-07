@@ -4,16 +4,30 @@ namespace LuzernTourismus\Pixxio\Json\Collection;
 
 use LuzernTourismus\Pixxio\Json\Base\AbstractJsonPixxioReader;
 
-class CollectionJsonReader extends AbstractJsonPixxioReader  // AbstractDataSource
+class CollectionJsonReader extends AbstractJsonPixxioReader
 {
-
 
     protected function loadReader()
     {
 
         $this->endpoint = 'collections';
-        $this->parameter = '?page=1&pageSize=20';
+        $this->parameter = '?page=1&pageSize=20&responseFields=id,name,isDynamic,user';
+
+
+        //$this->parameter = '?collectionIDs=918404315&page=1&pageSize=20&responseFields=id,name,isDynamic,assetNavigator,previewFiles,user&assetNavigatorResponseFields=id';
+
+
+        //$this->endpoint= 'collections/918404315';
+
         $this->loopName = 'collections';
+
+
+/*
+        Array of strings (Array of ResponseFields)
+Default: "id&responseFields=name"
+Items Enum: "assetNavigator" "createDate" "description" "filesQuantity" "filesQuantityWithFilter" "id" "isDeleted" "isDynamic" "isSharedExternally" "isSharedGlobally" "isSharedInternally" "modifyDate" "name" "permissions" "previewFiles" "sharedPermissionGroups" "sharedUsers" "translationState" "user" "userHasPermissionForCollection"
+Example: responseFields=id
+  */
 
     }
 
@@ -21,34 +35,13 @@ class CollectionJsonReader extends AbstractJsonPixxioReader  // AbstractDataSour
     protected function onJson($json)
     {
 
-        /*}
-
-
-        protected function loadData()
-        {
-
-            $endpoint = 'collections';
-            $parameter = '?page=1&pageSize=20';
-
-            $response = (new PixxioWebRequest())->getData($endpoint,$parameter);
-
-            (new Debug())->write($response);
-
-            $jsonReader = new JsonReader();
-            $jsonReader->fromText($response->html);
-            $jsonData = $jsonReader->getData();
-
-
-            foreach ($jsonData['collections'] as $collection) {
-    */
-
         $item = new CollectionItem();
         $item->id = $json['id'];
         $item->collection = $json['name'];
+        $item->userId = $json['user']['id'];
+        $item->dynamicCollection = $json['isDynamic'];
 
         $this->addItem($item);
-
-        //}
 
     }
 

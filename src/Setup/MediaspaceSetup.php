@@ -19,7 +19,7 @@ class MediaspaceSetup extends AbstractBase
     }
 
 
-    public function addMediaspace($mediaspace, $url, $apiKey)
+    public function addMediaspace( $url, $apiKey)
     {
 
         $data = new Mediaspace();

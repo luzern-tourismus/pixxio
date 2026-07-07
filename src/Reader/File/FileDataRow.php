@@ -42,6 +42,15 @@ class FileDataRow extends FileRow
     }
 
 
+    public function getPixxioUrl()
+    {
+
+        $url = 'https://pixxio.luzern.com/media/' . $this->id;
+        return $url;
+
+    }
+
+
     public function getCommentUrl()
     {
 

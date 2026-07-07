@@ -1,9 +1,11 @@
 # Pixxio
 
-## Api
+## Api Stable Version
 https://api.pixxio.com/docs
 
-https://api.pixxio.com/docs/unstable#tag/Custom-Metadata
+## Api Unstable Version
+https://api.pixxio.com/docs/unstable
+
 
 ## Installation
 ```

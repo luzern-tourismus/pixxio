@@ -1,10 +1,12 @@
 <?php
 
-namespace LuzernTourismus\Pixxio\Page;
+namespace LuzernTourismus\Pixxio\Page\Collection;
 
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
+use LuzernTourismus\Pixxio\Parameter\CollectionParameter;
 use LuzernTourismus\Pixxio\Reader\Collection\CollectionDataReader;
+use LuzernTourismus\Pixxio\Site\Collection\CollectionItemSite;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Table\AdminTable;
@@ -35,14 +37,20 @@ class CollectionPage extends AbstractTemplateDocument
             ->addText($reader->model->id->label)
             ->addText($reader->model->active->label)
             ->addText($reader->model->collection->label)
+            ->addText($reader->model->user->label)
             ->addText($reader->model->mediaspace->label);
 
         foreach ($reader->getData() as $collectionRow) {
 
+            $site = clone(CollectionItemSite::$site);
+            $site->addParameter(new CollectionParameter( $collectionRow->id));
+            $site->title = $collectionRow->collection;
+
             (new AdminTableRow($table))
                 ->addText($collectionRow->id)
                 ->addyesNo($collectionRow->active)
-                ->addText($collectionRow->collection)
+                ->addsite($site)
+                ->addText($collectionRow->user->userName)
                 ->addText($collectionRow->mediaspace->url);
 
         }

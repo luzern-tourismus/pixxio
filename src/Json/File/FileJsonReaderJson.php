@@ -12,7 +12,12 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
     public $pageSize;
 
 
+    public $filter;
+
     protected $cursor;
+
+
+    public $filterByCollectionId;
 
 
     protected function loadReader()
@@ -29,9 +34,23 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
             $url->addRequestValue('pageCursor', $this->getCursor());
         }
 
+        if ($this->filterByCollectionId !== null) {
+
+            $url->addRequestValue('filter', '{
+    "filterType": "connectorAnd",
+    "filters": [
+      {
+        "filterType": "collection",
+        "collectionID": ' . $this->filterByCollectionId . ',
+        "inverted": false
+      }
+    ],
+    "inverted": false
+    }');
+        }
+
 
         $this->parameter = $url->getUrl();
-
         $this->loopName = 'files';
 
     }
@@ -52,7 +71,6 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
     {
 
         $item = new FileJsonItem($json);
-
         $this->addItem($item);
 
     }
@@ -65,6 +83,7 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
     {
 
         $this->loaded = false;
+        $this->clearList();
         return parent::getData();
 
     }

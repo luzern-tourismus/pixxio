@@ -31,6 +31,21 @@ public $active;
 */
 public $importStatus;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $userId;
+
+/**
+* @var \LuzernTourismus\Pixxio\Data\User\UserExternalType
+*/
+public $user;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $dynamicCollection;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = CollectionModel::class;
@@ -75,6 +90,21 @@ $this->importStatus->aliasFieldName = $this->importStatus->tableName . "_" . $th
 $this->importStatus->label = "Import Status";
 $this->addType($this->importStatus);
 
+$this->userId = new \Nemundo\Model\Type\Id\IdType();
+$this->userId->fieldName = "user";
+$this->userId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->userId->aliasFieldName = $this->userId->tableName ."_".$this->userId->fieldName;
+$this->userId->label = "User";
+$this->addType($this->userId);
+
+$this->dynamicCollection = new \Nemundo\Model\Type\Number\YesNoType();
+$this->dynamicCollection->fieldName = "dynamic_collection";
+$this->dynamicCollection->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->dynamicCollection->externalTableName = $this->externalTableName;
+$this->dynamicCollection->aliasFieldName = $this->dynamicCollection->tableName . "_" . $this->dynamicCollection->fieldName;
+$this->dynamicCollection->label = "Dynamic Collection";
+$this->addType($this->dynamicCollection);
+
 }
 public function loadMediaspace() {
 if ($this->mediaspace == null) {
@@ -84,6 +114,17 @@ $this->mediaspace->tableName = $this->parentFieldName . "_" . $this->externalTab
 $this->mediaspace->aliasFieldName = $this->mediaspace->tableName ."_".$this->mediaspace->fieldName;
 $this->mediaspace->label = "Mediaspace";
 $this->addType($this->mediaspace);
+}
+return $this;
+}
+public function loadUser() {
+if ($this->user == null) {
+$this->user = new \LuzernTourismus\Pixxio\Data\User\UserExternalType(null, $this->parentFieldName . "_user");
+$this->user->fieldName = "user";
+$this->user->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->user->aliasFieldName = $this->user->tableName ."_".$this->user->fieldName;
+$this->user->label = "User";
+$this->addType($this->user);
 }
 return $this;
 }

@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Site;
 
 use LuzernTourismus\Pixxio\Page\PixxioPage;
+use LuzernTourismus\Pixxio\Site\Collection\CollectionSite;
 use LuzernTourismus\Pixxio\Site\Comment\CommentSite;
 use LuzernTourismus\Pixxio\Site\File\FileSite;
 use LuzernTourismus\Pixxio\Site\Mediaspace\MediaspaceSite;
@@ -27,15 +28,15 @@ class PixxioSite extends AbstractSite
 
         PixxioSite::$site = $this;
 
-        new MediaspaceSite($this);
-        new CollectionSite($this);
         new FileSite($this);
+        new CollectionSite($this);
         new KeywordSite($this);
         new DirectorySite($this);
         new CustomMetadataSite($this);
         new UserSite($this);
         new CommentSite($this);
         new JobSite($this);
+        new MediaspaceSite($this);
         new WebhookSite($this);
         new ConfigSite($this);
 

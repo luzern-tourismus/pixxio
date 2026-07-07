@@ -81,6 +81,11 @@ public $fileExtension;
 */
 public $fileSize;
 
+/**
+* @var string
+*/
+public $previewUrl;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -102,6 +107,7 @@ $this->description = $this->getModelValue($model->description);
 $this->subject = $this->getModelValue($model->subject);
 $this->fileExtension = $this->getModelValue($model->fileExtension);
 $this->fileSize = intval($this->getModelValue($model->fileSize));
+$this->previewUrl = $this->getModelValue($model->previewUrl);
 }
 private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model) {
 $this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);

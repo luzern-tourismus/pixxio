@@ -3,9 +3,11 @@
 namespace LuzernTourismus\PixxioTest\Builder;
 
 use LuzernTourismus\Pixxio\Builder\FileUpload;
+use LuzernTourismus\Pixxio\Json\Job\JobJsonReader;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\System\Delay;
 use Nemundo\Test\AbstractTest;
 
 class FileUploadTest extends AbstractPixxioTest
@@ -36,7 +38,34 @@ class FileUploadTest extends AbstractPixxioTest
 
         $jobId = $upload->upload();
 
-        (new Debug())->write($jobId);
+        //exit;
+
+        (new Debug())->write('Job Id: '. $jobId);
+
+        $fileId = null;
+        do {
+
+            (new Delay())->delay(2);
+
+            $reader = new JobJsonReader();
+            $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
+            $item = $reader->getJob($jobId);
+
+            $fileId = $item->fileId;
+
+            //(new Debug())->write($item);
+
+
+
+        } while (!$item->jobFinished);
+
+
+        (new Debug())->write('File Id: '. $fileId);
+
+        /*(new Debug())->write($item);
+        (new Debug())->write($item->fileId);*/
+
+
 
     }
 

@@ -2,15 +2,16 @@
 
 namespace LuzernTourismus\PixxioTest\Json;
 
+use LuzernTourismus\Pixxio\Import\FileImport;
 use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
-use Nemundo\Test\AbstractTest;
+use Nemundo\Core\Debug\Debug;
 
 class FileJsonReaderTest extends AbstractPixxioTest
 {
 
     protected function loadTest()
     {
-        $this->testName = 'file-read';
+        $this->testName = 'file-json-read';
     }
 
 
@@ -19,11 +20,21 @@ class FileJsonReaderTest extends AbstractPixxioTest
 
         $reader = new \LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson();
         $reader->fromMediaspaceConfig(new \LuzernTourismus\PixxioTest\MediaspaceConfigTest());
-        $reader->pageSize = 10;
+        //$reader->filterByCollectionId = 1866091533;
+        $reader->pageSize = 1;  // 500;
+
+        $n = 0;
 
         foreach ($reader->getData() as $file) {
+
+            (new FileImport())->importFile($file,1);
+
+            (new \Nemundo\Core\Debug\Debug())->write($file->fileName);
             (new \Nemundo\Core\Debug\Debug())->write($file);
+            $n++;
         }
+
+        (new Debug())->write('Count: ' . $n);
 
     }
 

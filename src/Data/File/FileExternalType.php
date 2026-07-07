@@ -71,6 +71,11 @@ public $fileExtension;
 */
 public $fileSize;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $previewUrl;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FileModel::class;
@@ -169,6 +174,14 @@ $this->fileSize->externalTableName = $this->externalTableName;
 $this->fileSize->aliasFieldName = $this->fileSize->tableName . "_" . $this->fileSize->fieldName;
 $this->fileSize->label = "File Size";
 $this->addType($this->fileSize);
+
+$this->previewUrl = new \Nemundo\Model\Type\Text\TextType();
+$this->previewUrl->fieldName = "preview_url";
+$this->previewUrl->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->previewUrl->externalTableName = $this->externalTableName;
+$this->previewUrl->aliasFieldName = $this->previewUrl->tableName . "_" . $this->previewUrl->fieldName;
+$this->previewUrl->label = "Preview Url";
+$this->addType($this->previewUrl);
 
 }
 public function loadMediaspace() {

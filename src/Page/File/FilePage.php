@@ -6,6 +6,7 @@ use LuzernTourismus\Pixxio\Com\ListBox\DirectoryListBox;
 use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Reader\File\FileDataPaginationReader;
+use Nemundo\Admin\Com\Button\AdminSearchButton;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
@@ -29,6 +30,11 @@ class FilePage extends AbstractTemplateDocument
 
         $search = new AdminSearchForm($layout);
 
+        $id = new AdminTextBox($search);
+        $id->label = 'Id';
+        $id->searchMode = true;
+
+
         $subject = new AdminTextBox($search);
         $subject->label = 'Subject';
         $subject->searchMode = true;
@@ -42,6 +48,7 @@ class FilePage extends AbstractTemplateDocument
         $directory->searchMode = true;
         $directory->submitOnChange = true;
 
+        new AdminSearchButton($search);
 
         $p = new Paragraph($layout);
 
@@ -54,6 +61,7 @@ class FilePage extends AbstractTemplateDocument
         $reader = new FileDataPaginationReader();
         $reader->currentPage = (new PageParameter())->getValue();
         $reader
+            ->filterById($id->getValue())
             ->filterBySubject($subject->getValue())
             ->filterByMediaspaceId($mediaspace->getValue())
             ->filterDirecctory($directory->getValue());
@@ -70,7 +78,7 @@ class FilePage extends AbstractTemplateDocument
             ->addText($reader->model->description->label)
             ->addText($reader->model->creator->label)
             ->addText($reader->model->directory->label)
-            ->addText($reader->model->directory->label.' List')
+            ->addText($reader->model->directory->label . ' List')
             ->addText($reader->model->mediaspace->label)
             ->addText('Keyword');
 
