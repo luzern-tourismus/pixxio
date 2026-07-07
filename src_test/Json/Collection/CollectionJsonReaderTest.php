@@ -1,6 +1,6 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest\Json;
+namespace LuzernTourismus\PixxioTest\Json\Collection;
 
 use LuzernTourismus\Pixxio\Json\Collection\CollectionJsonReader;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;

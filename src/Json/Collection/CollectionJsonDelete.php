@@ -1,23 +1,23 @@
 <?php
 
-namespace LuzernTourismus\Pixxio\Json\File;
+namespace LuzernTourismus\Pixxio\Json\Collection;
 
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
 
-class FileJsonDelete extends AbstractBase
+class CollectionJsonDelete extends AbstractBase
 {
 
     use MediaspaceConfigTrait;
 
-    public function deleteFile($id)
+    public function deleteCollection($id)
     {
 
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
         $request->apiKey = $this->apiKey;
-        $request->deleteId('files', $id);
+        $request->deleteId('collections', $id);
 
     }
 
