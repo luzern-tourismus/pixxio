@@ -17,7 +17,7 @@ class MediaspaceEditSite extends AbstractEditIconSite
     protected function loadSite()
     {
         $this->title = 'MediaspaceEdit';
-        $this->url = 'MediaspaceEdit';
+        $this->url = 'mediaspace-edit';
         $this->menuActive = false;
 
         MediaspaceEditSite::$site = $this;

@@ -16,7 +16,7 @@ class MediaspaceSite extends AbstractSite
     protected function loadSite()
     {
         $this->title = 'Mediaspace';
-        $this->url = 'Mediaspace';
+        $this->url = 'mediaspace';
 
         MediaspaceSite::$site = $this;
 

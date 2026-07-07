@@ -17,7 +17,7 @@ class MediaspaceNewSite extends AbstractNewIconSite
     protected function loadSite()
     {
         $this->title = 'New Mediaspace';
-        $this->url = 'MediaspaceNew';
+        $this->url = 'mediaspace-new';
         $this->menuActive = false;
 
         MediaspaceNewSite::$site = $this;
