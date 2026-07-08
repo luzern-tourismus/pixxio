@@ -45,7 +45,10 @@ class FileDataRow extends FileRow
     public function getPixxioUrl()
     {
 
-        $url = 'https://pixxio.luzern.com/media/' . $this->id;
+        //https://vtrk.px.media/media/1218937814/info
+        $url = 'https://'.$this->mediaspace->url.'.px.media/media/'. $this->id;
+        //$url = 'https://pixxio.luzern.com/media/' . $this->id;
+
         return $url;
 
     }

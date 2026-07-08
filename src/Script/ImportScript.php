@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Script;
 
+use LuzernTourismus\Pixxio\Delete\TrashDelete;
 use LuzernTourismus\Pixxio\Import\CollectionFileImport;
 use LuzernTourismus\Pixxio\Import\CollectionImport;
 use LuzernTourismus\Pixxio\Import\CustomMetadataImport;
@@ -22,6 +23,7 @@ class ImportScript extends AbstractConsoleScript
     {
 
         (new PixxioImport())->importData();
+        (new TrashDelete())->deleteTrash();
 
         /*(new CustomMetadataImport())->importData();
         (new CollectionImport())->importData();
