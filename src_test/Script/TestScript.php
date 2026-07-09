@@ -34,7 +34,7 @@ class TestScript extends AbstractConsoleScript
 
         $json = new JobJsonReader();
         $json->fromMediaspaceConfig(new MediaspaceConfigTest());
-        $json->getJob(25874351);
+        $json->getJob(25871925);
 
 
 

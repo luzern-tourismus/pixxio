@@ -81,8 +81,8 @@ class JobPage extends AbstractTemplateDocument
                 ->addYesNo($fileRow->success)
                 ->addText($fileRow->fileId)
                 ->addYesNo($fileRow->isDuplicate)
-                ->addText($fileRow->createDateTime->getShortDateTimeLeadingZeroFormat())
-                ->addText($fileRow->modifyDateTime->getShortDateTimeLeadingZeroFormat())
+                ->addText($fileRow->createDateTime->getShortDateTimeWithSecondLeadingZeroFormat())
+                ->addText($fileRow->modifyDateTime->getShortDateTimeWithSecondLeadingZeroFormat())
                 ->addText($fileRow->json);
 
         }

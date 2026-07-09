@@ -27,7 +27,7 @@ class JobJsonReader extends AbstractBase
             $request->apiKey = $this->apiKey;
             $response = $request->getData('jobs/' . $jobId . '?responseFields=id&responseFields=jobData&responseFields=error&responseFields=jobType&responseFields=success&responseFields=modifyDate&responseFields=progress&responseFields=createDate&responseFields=progress');
 
-            //(new Debug())->write($response);
+            (new Debug())->write($response);
 
             $jsonReader = new JsonReader();
             $jsonReader->fromText($response->html);
@@ -81,11 +81,7 @@ class JobJsonReader extends AbstractBase
                 $data->success = $item->success;
                 $data->save();
 
-            } /*else {
-
-            (new Debug())->write($response);
-
-        }*/
+            }
 
         } else {
 
