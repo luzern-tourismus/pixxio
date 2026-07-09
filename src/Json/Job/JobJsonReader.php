@@ -6,9 +6,11 @@ use LuzernTourismus\Pixxio\Data\Job\Job;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Http\Response\StatusCode;
 use Nemundo\Core\Json\Reader\JsonReader;
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Core\Validation\NumberValidation;
 
 class JobJsonReader extends AbstractBase
 {
@@ -18,70 +20,78 @@ class JobJsonReader extends AbstractBase
     public function getJob($jobId)
     {
 
-        $request = new PixxioWebRequest();
-        $request->subdomain = $this->subdomain;
-        $request->apiKey = $this->apiKey;
-        $response = $request->getData('jobs/' . $jobId . '?responseFields=id&responseFields=jobData&responseFields=error&responseFields=jobType&responseFields=success&responseFields=modifyDate&responseFields=progress&responseFields=createDate&responseFields=progress');
+        if ((new NumberValidation())->isNumber($jobId)) {
 
-        //(new Debug())->write($response);
+            $request = new PixxioWebRequest();
+            $request->subdomain = $this->subdomain;
+            $request->apiKey = $this->apiKey;
+            $response = $request->getData('jobs/' . $jobId . '?responseFields=id&responseFields=jobData&responseFields=error&responseFields=jobType&responseFields=success&responseFields=modifyDate&responseFields=progress&responseFields=createDate&responseFields=progress');
 
-        $jsonReader = new JsonReader();
-        $jsonReader->fromText($response->html);
-        $jsonData = $jsonReader->getData();
+            //(new Debug())->write($response);
 
-
-        $item = new JobJsonItem();
-
-        if ($response->statusCode == StatusCode::NOT_FOUND) {
-            $item->jobExists = false;
-        }
+            $jsonReader = new JsonReader();
+            $jsonReader->fromText($response->html);
+            $jsonData = $jsonReader->getData();
 
 
-        if (isset($jsonData['job'])) {
-            $jobData = $jsonData['job'];
+            $item = new JobJsonItem();
 
-            $item->id = $jobData['id'];
-            $item->jobType = $jobData['jobType'];
-
-            if (isset($jobData['finishedJobData'])) {
-
-                $item->jobFinished = true;
-
-                $finishedJobData = $jobData['finishedJobData'];
-
-                $item->fileId = $finishedJobData['fileID'];
-                $item->isDuplicate = $finishedJobData['isDuplicate'];
-
-                if (isset($finishedJobData['duplicateInfo'])) {
-                    $item->existingFileId = $finishedJobData['duplicateInfo']['existingFileID'];
-                }
-
+            if ($response->statusCode == StatusCode::NOT_FOUND) {
+                $item->jobExists = false;
             }
 
-            $item->error = $jobData['error'];
-            $item->success = $jobData['success'];
-            $item->createDateTime = (new DateTime($jobData['createDate']));
-            $item->modifyDateTime = (new DateTime($jobData['modifyDate']));
-            $item->percent = $jobData['percent'];
+
+            if (isset($jsonData['job'])) {
+                $jobData = $jsonData['job'];
+
+                $item->id = $jobData['id'];
+                $item->jobType = $jobData['jobType'];
+
+                if (isset($jobData['finishedJobData'])) {
+
+                    $item->jobFinished = true;
+
+                    $finishedJobData = $jobData['finishedJobData'];
+
+                    $item->fileId = $finishedJobData['fileID'];
+                    $item->isDuplicate = $finishedJobData['isDuplicate'];
+
+                    if (isset($finishedJobData['duplicateInfo'])) {
+                        $item->existingFileId = $finishedJobData['duplicateInfo']['existingFileID'];
+                    }
+
+                }
+
+                $item->error = $jobData['error'];
+                $item->success = $jobData['success'];
+                $item->createDateTime = (new DateTime($jobData['createDate']));
+                $item->modifyDateTime = (new DateTime($jobData['modifyDate']));
+                $item->percent = $jobData['percent'];
 
 
-            $data = new Job();
-            $data->updateOnDuplicate = true;
-            $data->id = $jobId;
-            $data->jobExists = true;
-            $data->fileId = $item->fileId;
-            $data->isDuplicate = $item->isDuplicate;
-            $data->createDateTime = $item->createDateTime;
-            $data->modifyDateTime = $item->modifyDateTime;
-            $data->json = $response->html;
-            $data->success = $item->success;
-            $data->save();
+                $data = new Job();
+                $data->updateOnDuplicate = true;
+                $data->id = $jobId;
+                $data->jobExists = true;
+                $data->fileId = $item->fileId;
+                $data->isDuplicate = $item->isDuplicate;
+                $data->createDateTime = $item->createDateTime;
+                $data->modifyDateTime = $item->modifyDateTime;
+                $data->json = $response->html;
+                $data->success = $item->success;
+                $data->save();
 
-        } /*else {
+            } /*else {
 
             (new Debug())->write($response);
 
         }*/
+
+        } else {
+
+            (new Debug())->write('No valid Job Id: ' . $jobId);
+
+        }
 
         return $item;
 

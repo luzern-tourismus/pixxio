@@ -21,14 +21,8 @@ class FileJson extends AbstractBase
         $url = new UrlBuilder('');
         $url->addRequestValue('responseFields', FileConfig::$responseField);
 
-        //    ->addRequestValue('responseFields', 'id,createDate,fileExtension,fileSize,fileName,subject,id,clipFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases,originalFileURL');
-
-//                           ->addRequestValue('responseFields', 'id,createDate,fileExtension,fileSize,fileName,subject,id,clipFileURL,description,directory,keywords,licenseReleases,description,importantMetadata,creator,metadataFields,modelReleases,originalFileURL');
-
-
         $parameter = '/' . $fileId . $url->getUrl();
         $loopName = 'file';
-
 
         $request = new PixxioWebRequest();
         $request->subdomain = $this->subdomain;
@@ -43,22 +37,8 @@ class FileJson extends AbstractBase
         $json = $jsonData[$loopName];
 
         $item = new FileJsonItem($json);
-/*        $item->id = $json['id'];
-        $item->subject = $json['subject'];
-        $item->fileName = $json['fileName'];
-        $item->fileExtension = $json['fileExtension'];
-        $item->fileSize = $json['fileSize'];
-        $item->fileUrl = $json['originalFileURL'];
-        $item->description = $json['description'];
-        $item->keywordList = $json['keywords'];
-        $item->creator = $json['creator'];
-        $item->directoryId = $json['directory']['id'];
-
-        importantMetadata*/
-
 
         return $item;
-
 
     }
 

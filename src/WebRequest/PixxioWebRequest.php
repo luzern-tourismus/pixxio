@@ -159,7 +159,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
     {
 
         if ($response->statusCode === StatusCode::NOT_FOUND) {
-            (new Debug())->write('Pixxio Error: Not found');
+            //(new Debug())->write('Pixxio Error: Not found');
             (new Debug())->write($response);
         }
 
