@@ -160,7 +160,7 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         if ($response->statusCode === StatusCode::NOT_FOUND) {
             (new Debug())->write('Pixxio Error: Not found');
-            exit;
+            (new Debug())->write($response);
         }
 
         $jsonReader = new JsonReader();
@@ -168,8 +168,12 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         $jsonData = $jsonReader->getData();
 
-        if (!$jsonData['success']) {
-            (new Debug())->write('Pixxio Error: ' . $jsonData['errormessage']);
+        if (isset($jsonData['success'])) {
+            if (!$jsonData['success']) {
+                (new Debug())->write('Pixxio Error: ' . $jsonData['errormessage']);
+            }
+        } else {
+            (new Debug())->write($jsonData);
         }
 
     }

@@ -36,6 +36,11 @@ public $active;
 */
 public $importStatus;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $email;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = UserModel::class;
@@ -87,6 +92,14 @@ $this->importStatus->externalTableName = $this->externalTableName;
 $this->importStatus->aliasFieldName = $this->importStatus->tableName . "_" . $this->importStatus->fieldName;
 $this->importStatus->label = "Import Status";
 $this->addType($this->importStatus);
+
+$this->email = new \Nemundo\Model\Type\Text\TextType();
+$this->email->fieldName = "email";
+$this->email->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->email->externalTableName = $this->externalTableName;
+$this->email->aliasFieldName = $this->email->tableName . "_" . $this->email->fieldName;
+$this->email->label = "eMail";
+$this->addType($this->email);
 
 }
 public function loadMediaspace() {

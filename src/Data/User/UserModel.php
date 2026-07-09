@@ -36,6 +36,11 @@ public $active;
 */
 public $importStatus;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $email;
+
 protected function loadModel() {
 $this->tableName = "pixxio_user";
 $this->aliasTableName = "pixxio_user";
@@ -91,6 +96,19 @@ $this->importStatus->fieldName = "import_status";
 $this->importStatus->aliasFieldName = "pixxio_user_import_status";
 $this->importStatus->label = "Import Status";
 $this->importStatus->allowNullValue = false;
+
+$this->email = new \Nemundo\Model\Type\Text\TextType($this);
+$this->email->tableName = "pixxio_user";
+$this->email->externalTableName = "pixxio_user";
+$this->email->fieldName = "email";
+$this->email->aliasFieldName = "pixxio_user_email";
+$this->email->label = "eMail";
+$this->email->allowNullValue = false;
+$this->email->length = 255;
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "mediaspace";
+$index->addType($this->mediaspaceId);
 
 }
 public function loadMediaspace() {

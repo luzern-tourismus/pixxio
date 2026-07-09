@@ -38,7 +38,7 @@ class CollectionFileImport extends AbstractMediaspaceImport
     {
 
         $reader = new CollectionDataReader();
-        $reader->filterMediaspace($mediaspaceRow->id);
+        $reader->filterByMediaspace($mediaspaceRow->id);
         $reader->filter->andEqual($reader->model->active, true);
         foreach ($reader->getData() as $collectionRow) {
 

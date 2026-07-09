@@ -17,7 +17,7 @@ trait CollectionFilterTrait
     }
 
 
-    public function filterMediaspace($mediaspaceId)
+    public function filterByMediaspace($mediaspaceId)
     {
 
         if ((new ValueCheck())->hasValue($mediaspaceId)) {
@@ -26,8 +26,18 @@ trait CollectionFilterTrait
 
         return $this;
 
-
     }
 
+
+    public function filterByUser($userId)
+    {
+
+        if ((new ValueCheck())->hasValue($userId)) {
+            $this->filter->andEqual($this->model->userId, $userId);
+        }
+
+        return $this;
+
+    }
 
 }

@@ -921,9 +921,26 @@
                     "variable_name": "importStatus",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "eMail",
+                    "field_name": "email",
+                    "variable_name": "email",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
                 }
             ],
-            "index": []
+            "index": [
+                {
+                    "index_name": "mediaspace",
+                    "index_type": "index",
+                    "field_name": [
+                        "mediaspace"
+                    ]
+                }
+            ]
         },
         {
             "template": "default",

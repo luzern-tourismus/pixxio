@@ -32,6 +32,11 @@ public $active;
 */
 public $importStatus;
 
+/**
+* @var string
+*/
+public $email;
+
 public function __construct() {
 parent::__construct();
 $this->model = new UserModel();
@@ -42,6 +47,7 @@ $this->typeValueList->setModelValue($this->model->displayName, $this->displayNam
 $this->typeValueList->setModelValue($this->model->mediaspaceId, $this->mediaspaceId);
 $this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->importStatus, $this->importStatus);
+$this->typeValueList->setModelValue($this->model->email, $this->email);
 parent::update();
 }
 }

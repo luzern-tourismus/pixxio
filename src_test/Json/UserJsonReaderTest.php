@@ -5,10 +5,18 @@ namespace LuzernTourismus\PixxioTest\Json;
 use LuzernTourismus\Pixxio\Json\Comment\CommentJsonReader;
 use LuzernTourismus\Pixxio\Json\User\UserJsonReader;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
+use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 use Nemundo\Test\AbstractTest;
 
-class UserJsonReaderTest extends AbstractTest
+class UserJsonReaderTest extends AbstractPixxioTest
 {
+
+    protected function loadTest()
+    {
+
+        $this->testName = 'user-json-read';
+
+    }
 
     public function runTest() {
 

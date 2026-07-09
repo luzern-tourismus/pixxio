@@ -38,7 +38,7 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
 
         if (!(new ValueCheck())->hasValue($this->subdomain)) {
             (new Debug())->write('No Pixxio Config');
-            exit;
+            //exit;
         }
 
 
@@ -51,7 +51,7 @@ abstract class AbstractJsonPixxioReader extends AbstractDataSource
 
         if ($response->statusCode === 0) {
             (new Debug())->write($response->errorMessage);
-            exit;
+            //exit;
         }
 
 

@@ -6,6 +6,7 @@ use LuzernTourismus\Pixxio\Data\Collection\Collection;
 use LuzernTourismus\Pixxio\Data\Collection\CollectionUpdate;
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow;
 use LuzernTourismus\Pixxio\Json\Collection\CollectionJsonReader;
+use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
 
 class CollectionImport extends AbstractMediaspaceImport
 {
@@ -54,6 +55,25 @@ class CollectionImport extends AbstractMediaspaceImport
 
 
         }
+
+
+
+
+/*
+        $jsonReader = new FileJsonReaderJson();
+        $jsonReader->subdomain = $mediaspaceRow->url;
+        $jsonReader->apiKey = $mediaspaceRow->apiKey;
+        $jsonReader->pageSize = 100;  // 500;
+
+        do {
+
+            foreach ($jsonReader->getData() as $file) {
+                $this->importFile($file, $mediaspaceRow->id);
+            }
+
+        } while ($jsonReader->hasCursor());*/
+
+
 
     }
 

@@ -32,6 +32,9 @@ class UserPage extends AbstractTemplateDocument
         $table = new AdminTable($layout);
 
         $reader = new UserDataReader();
+        $reader
+            ->filterByMediaspace($mediaspace->getValue())
+        ;
 
         $p->content = $reader->getTotalCount() . ' users found';
 
