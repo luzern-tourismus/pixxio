@@ -7,9 +7,12 @@ use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Data\Job\JobPaginationReader;
 use LuzernTourismus\Pixxio\Reader\File\FileDataPaginationReader;
+use LuzernTourismus\Pixxio\Reader\Job\JobDataPaginationReader;
+use Nemundo\Admin\Com\Button\AdminSearchButton;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
+use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
@@ -27,13 +30,32 @@ class JobPage extends AbstractTemplateDocument
         $layout = new AdminFlexboxLayout($this);
         new PixxioTab($layout);
 
+
+        $search = new AdminSearchForm($layout);
+
+        $jobId = new AdminTextBox($search);
+        $jobId->label = 'Job Id';
+        $jobId->searchMode = true;
+
+        $fileId = new AdminTextBox($search);
+        $fileId->label = 'File Id';
+        $fileId->searchMode = true;
+
+
+        new AdminSearchButton($search);
+        
+        
+        
         $p = new Paragraph($layout);
 
 
         $table = new AdminTable($layout);
 
-        $reader = new JobPaginationReader();
+        $reader = new JobDataPaginationReader();
         $reader->currentPage = (new PageParameter())->getValue();
+        $reader
+            ->filterByJobId($jobId->getValue())
+            ->filterByFileId($fileId->getValue());
         $reader->addOrder($reader->model->createDateTime,SortOrder::DESCENDING);
 
 
