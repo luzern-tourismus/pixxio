@@ -10,7 +10,7 @@ class UserSite extends AbstractSite
     protected function loadSite()
     {
         $this->title = 'User';
-        $this->url = 'User';
+        $this->url = 'user';
     }
 
     public function loadContent()

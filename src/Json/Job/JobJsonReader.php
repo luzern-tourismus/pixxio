@@ -27,19 +27,21 @@ class JobJsonReader extends AbstractBase
             $request->apiKey = $this->apiKey;
             $response = $request->getData('jobs/' . $jobId . '?responseFields=id&responseFields=jobData&responseFields=error&responseFields=jobType&responseFields=success&responseFields=modifyDate&responseFields=progress&responseFields=createDate&responseFields=progress');
 
-            (new Debug())->write($response);
+            /*(new Debug())->write($response);
+
+            if ($response->statusCode == StatusCode::NOT_FOUND) {
+
+            }*/
 
             $jsonReader = new JsonReader();
             $jsonReader->fromText($response->html);
             $jsonData = $jsonReader->getData();
-
 
             $item = new JobJsonItem();
 
             if ($response->statusCode == StatusCode::NOT_FOUND) {
                 $item->jobExists = false;
             }
-
 
             if (isset($jsonData['job'])) {
                 $jobData = $jsonData['job'];
@@ -67,7 +69,6 @@ class JobJsonReader extends AbstractBase
                 $item->createDateTime = (new DateTime($jobData['createDate']));
                 $item->modifyDateTime = (new DateTime($jobData['modifyDate']));
                 $item->percent = $jobData['percent'];
-
 
                 $data = new Job();
                 $data->updateOnDuplicate = true;
