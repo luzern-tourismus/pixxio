@@ -56,7 +56,10 @@ class JobPage extends AbstractTemplateDocument
         $reader
             ->filterByJobId($jobId->getValue())
             ->filterByFileId($fileId->getValue());
-        $reader->addOrder($reader->model->createDateTime,SortOrder::DESCENDING);
+        $reader
+            ->addOrder($reader->model->jobExists)
+            ->addOrder($reader->model->success)
+            ->addOrder($reader->model->createDateTime,SortOrder::DESCENDING);
 
 
         $p->content = $reader->getFormatTotalCount() . ' files found';
