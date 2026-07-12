@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Script;
 
 use LuzernTourismus\Pixxio\Application\PixxioApplication;
+use LuzernTourismus\Pixxio\Clean\JobClean;
 use LuzernTourismus\Pixxio\Data\Job\JobDelete;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 
@@ -16,7 +17,8 @@ class JobCleanScript extends AbstractConsoleScript
     public function run()
     {
 
-        (new JobDelete())->delete();
+        (new JobClean())->clean();
+        //(new JobDelete())->delete();
 
     }
 }
