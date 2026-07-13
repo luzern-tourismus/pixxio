@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Builder;
 
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
+use Nemundo\Core\Debug\Debug;
 
 class CollectionBuilder extends AbstractBuilder
 {
@@ -36,8 +37,7 @@ class CollectionBuilder extends AbstractBuilder
         $request->apiKey = $this->apiKey;
         $response = $request->postData('collections', $data);
 
-        //(new Debug())->write($response);
-
+        (new Debug())->write($response);
 
     }
 
