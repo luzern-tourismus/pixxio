@@ -1,8 +1,8 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest\Import;
+namespace LuzernTourismus\PixxioTest\Json\Collection;
 
-use LuzernTourismus\Pixxio\Import\UserImport;
+use LuzernTourismus\Pixxio\Import\CollectionImport;
 use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 
 class CollectionImportTest extends AbstractPixxioTest
@@ -11,13 +11,13 @@ class CollectionImportTest extends AbstractPixxioTest
     protected function loadTest()
     {
 
-        $this->testName = 'user-import';
+        $this->testName = 'collection-import';
 
     }
 
     public function runTest() {
 
-        (new UserImport())->importData();
+        (new CollectionImport())->importData();
 
     }
 

@@ -18,7 +18,6 @@ class UserImport extends AbstractMediaspaceImport
         $update->importStatus = false;
         $update->update();
 
-
     }
 
 

@@ -31,6 +31,7 @@ abstract class AbstractTestCollection extends AbstractBase
     public function runScript()
     {
 
+        //(new Debug())->write('Run Test');
 
         $consoleArgument = new ConsoleArgument();
         $testName = $consoleArgument->getValue(1);

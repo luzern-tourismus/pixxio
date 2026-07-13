@@ -110,6 +110,10 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
         $url = $this->getServiceUrl($endpoint);
         $url .= '?ids=' . $id;
 
+        if (PixxioConfig::$debugMode) {
+            (new Debug())->write($url);
+        }
+
         $response = $this->deleteUrl($url);
         $this->checkResponse($response);
 

@@ -23,6 +23,8 @@ class CollectionJsonReaderTest extends AbstractPixxioTest
     {
 
         $reader = new CollectionJsonReader();
+        $reader->page = 100;
+        $reader->pageSize = 50;
         $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
         foreach ($reader->getData() as $file) {
             (new Debug())->write($file);

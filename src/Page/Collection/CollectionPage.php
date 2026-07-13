@@ -10,6 +10,7 @@ use LuzernTourismus\Pixxio\Reader\Collection\CollectionDataReader;
 use LuzernTourismus\Pixxio\Site\Collection\CollectionItemSite;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
+use Nemundo\Admin\Com\ListBox\AdminCheckBox;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
@@ -35,6 +36,11 @@ class CollectionPage extends AbstractTemplateDocument
         $user->searchMode = true;
         $user->submitOnChange = true;
 
+        $active = new AdminCheckBox($search);
+        $active->label = 'Active';
+        $active->searchMode = true;
+        $active->submitOnChange = true;
+
         $p = new Paragraph($layout);
 
 
@@ -44,6 +50,10 @@ class CollectionPage extends AbstractTemplateDocument
         $reader
             ->filterByMediaspace($mediaspace->getValue())
             ->filterByUser($user->getValue());
+
+        if ($active->getValue()) {
+            $reader->filterByActive();
+        }
 
         $p->content = $reader->getTotalCount() . ' collections found';
 

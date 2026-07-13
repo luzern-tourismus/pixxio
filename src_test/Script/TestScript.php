@@ -30,12 +30,12 @@ class TestScript extends AbstractConsoleScript
 
         //(new UserDelete())->delete();
 
-        //(new UserImport())->importData();
+        (new UserImport())->importData();
 
-        $json = new JobJsonReader();
+        /*$json = new JobJsonReader();
         $json->fromMediaspaceConfig(new MediaspaceConfigTest());
         $json->getJob(25871925);
-
+*/
 
 
 

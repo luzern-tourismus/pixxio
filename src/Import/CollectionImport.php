@@ -6,7 +6,6 @@ use LuzernTourismus\Pixxio\Data\Collection\Collection;
 use LuzernTourismus\Pixxio\Data\Collection\CollectionUpdate;
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow;
 use LuzernTourismus\Pixxio\Json\Collection\CollectionJsonReader;
-use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
 
 class CollectionImport extends AbstractMediaspaceImport
 {
@@ -37,42 +36,66 @@ class CollectionImport extends AbstractMediaspaceImport
     protected function onMediaspace(MediaspaceRow $mediaspaceRow)
     {
 
-        $collectionJsonReader = new CollectionJsonReader();
-        $collectionJsonReader->subdomain = $mediaspaceRow->url;
-        $collectionJsonReader->apiKey = $mediaspaceRow->apiKey;
-        foreach ($collectionJsonReader->getData() as $collectionJsonRow) {
-
-            $data = new Collection();
-            $data->updateOnDuplicate = true;
-            $data->id = $collectionJsonRow->id;
-            $data->importStatus = true;
-            $data->active = true;
-            $data->mediaspaceId = $mediaspaceRow->id;
-            $data->collection = $collectionJsonRow->collection;
-            $data->userId = $collectionJsonRow->userId;
-            $data->dynamicCollection= $collectionJsonRow->dynamicCollection;
-            $data->save();
-
-
-        }
-
-
-
-
-/*
-        $jsonReader = new FileJsonReaderJson();
-        $jsonReader->subdomain = $mediaspaceRow->url;
-        $jsonReader->apiKey = $mediaspaceRow->apiKey;
-        $jsonReader->pageSize = 100;  // 500;
+        $page = 1;
 
         do {
 
-            foreach ($jsonReader->getData() as $file) {
-                $this->importFile($file, $mediaspaceRow->id);
+            $count = 0;
+
+            $collectionJsonReader = new CollectionJsonReader();
+            $collectionJsonReader->subdomain = $mediaspaceRow->url;
+            $collectionJsonReader->apiKey = $mediaspaceRow->apiKey;
+            $collectionJsonReader->page = $page;
+            $collectionJsonReader->pageSize = 30;// 100;
+            foreach ($collectionJsonReader->getData() as $collectionJsonRow) {
+
+                $data = new Collection();
+                $data->updateOnDuplicate = true;
+                $data->id = $collectionJsonRow->id;
+                $data->importStatus = true;
+                $data->active = true;
+                $data->mediaspaceId = $mediaspaceRow->id;
+                $data->collection = $collectionJsonRow->collection;
+                $data->userId = $collectionJsonRow->userId;
+                $data->dynamicCollection = $collectionJsonRow->dynamicCollection;
+                $data->save();
+
+                $count++;
+
             }
 
-        } while ($jsonReader->hasCursor());*/
+            $page++;
 
+        } while ($count > 0);
+
+
+        /*    $jsonReader = new FileJsonReaderJson();
+            $jsonReader->subdomain = $mediaspaceRow->url;
+            $jsonReader->apiKey = $mediaspaceRow->apiKey;
+            $jsonReader->pageSize = 100;  // 500;
+
+            do {
+
+                foreach ($jsonReader->getData() as $file) {
+                    $this->importFile($file, $mediaspaceRow->id);
+                }
+
+            } while ($jsonReader->hasCursor());*/
+
+
+        /*
+                $jsonReader = new FileJsonReaderJson();
+                $jsonReader->subdomain = $mediaspaceRow->url;
+                $jsonReader->apiKey = $mediaspaceRow->apiKey;
+                $jsonReader->pageSize = 100;  // 500;
+
+                do {
+
+                    foreach ($jsonReader->getData() as $file) {
+                        $this->importFile($file, $mediaspaceRow->id);
+                    }
+
+                } while ($jsonReader->hasCursor());*/
 
 
     }

@@ -3,31 +3,26 @@
 namespace LuzernTourismus\Pixxio\Json\Collection;
 
 use LuzernTourismus\Pixxio\Json\Base\AbstractJsonPixxioReader;
+use Nemundo\Core\Http\Url\UrlBuilder;
 
 class CollectionJsonReader extends AbstractJsonPixxioReader
 {
+
+    public $page = 1;
+    public $pageSize = 20;
+
 
     protected function loadReader()
     {
 
         $this->endpoint = 'collections';
-        $this->parameter = '?page=1&pageSize=20&responseFields=id,name,isDynamic,user';
-
-
-        //$this->parameter = '?collectionIDs=918404315&page=1&pageSize=20&responseFields=id,name,isDynamic,assetNavigator,previewFiles,user&assetNavigatorResponseFields=id';
-
-
-        //$this->endpoint= 'collections/918404315';
+        $this->parameter = (new UrlBuilder(''))
+            ->addRequestValue('page', $this->page)
+            ->addRequestValue('pageSize', $this->pageSize)
+            ->addRequestValue('responseFields', 'id,name,isDynamic,user')
+            ->getUrl();
 
         $this->loopName = 'collections';
-
-
-/*
-        Array of strings (Array of ResponseFields)
-Default: "id&responseFields=name"
-Items Enum: "assetNavigator" "createDate" "description" "filesQuantity" "filesQuantityWithFilter" "id" "isDeleted" "isDynamic" "isSharedExternally" "isSharedGlobally" "isSharedInternally" "modifyDate" "name" "permissions" "previewFiles" "sharedPermissionGroups" "sharedUsers" "translationState" "user" "userHasPermissionForCollection"
-Example: responseFields=id
-  */
 
     }
 
