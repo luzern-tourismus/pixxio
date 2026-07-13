@@ -4,6 +4,7 @@ namespace LuzernTourismus\Pixxio\Builder;
 
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Core\Json\Reader\JsonReader;
 
 class CollectionBuilder extends AbstractBuilder
 {
@@ -37,7 +38,21 @@ class CollectionBuilder extends AbstractBuilder
         $request->apiKey = $this->apiKey;
         $response = $request->postData('collections', $data);
 
-        (new Debug())->write($response);
+
+        //{"success":true,"id":896174845}
+
+        $reader = new JsonReader();
+        $reader->fromText($response->html);
+        $data = $reader->getData();
+
+        $collectionId = null;
+        if ($data['success']) {
+            $collectionId = $data['id'];
+        }
+
+        return $collectionId;
+
+        //(new Debug())->write($response);
 
     }
 

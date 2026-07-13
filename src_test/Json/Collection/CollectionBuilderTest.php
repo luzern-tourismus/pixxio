@@ -24,13 +24,16 @@ class CollectionBuilderTest extends AbstractPixxioTest
 
         $loop = new ForLoop();
         $loop->minNumber = 1;
-        $loop->maxNumber = 40;
+        $loop->maxNumber = 5;
         foreach ($loop->getData() as $number) {
 
             $builder = new CollectionBuilder();
             $builder->fromMediaspaceConfig(new MediaspaceConfigTest());
             $builder->collection = 'Test Collection ' . $number;    // $this->getValue('test_collection');
-            $builder->build();
+           $collectionId =  $builder->build();
+
+            (new Debug())->write($collectionId);
+
         }
 
 
