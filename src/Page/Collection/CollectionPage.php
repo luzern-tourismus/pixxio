@@ -11,6 +11,7 @@ use LuzernTourismus\Pixxio\Site\Collection\CollectionItemSite;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\ListBox\AdminCheckBox;
+use Nemundo\Admin\Com\ListBox\AdminSearchTextBox;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
@@ -27,6 +28,11 @@ class CollectionPage extends AbstractTemplateDocument
         new PixxioTab($layout);
 
         $search = new AdminSearchForm($layout);
+
+        $collection = new AdminSearchTextBox($search);
+        $collection->label = 'Collection';
+        $collection->searchMode = true;
+
 
         $mediaspace = new MediaspaceListBox($search);
         $mediaspace->searchMode = true;
@@ -48,6 +54,7 @@ class CollectionPage extends AbstractTemplateDocument
 
         $reader = new CollectionDataReader();
         $reader
+            ->searchByCollection($collection->getValue())
             ->filterByMediaspace($mediaspace->getValue())
             ->filterByUser($user->getValue());
 

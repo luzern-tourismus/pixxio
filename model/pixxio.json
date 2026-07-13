@@ -11,7 +11,7 @@
             "class_name": "Collection",
             "table_name": "pixxio_collection",
             "namespace": "LuzernTourismus\\Pixxio\\Data\\Collection",
-            "row_class_name": "",
+            "row_class_name": "LuzernTourismus\\Pixxio\\Reader\\Collection\\CollectionDataRow",
             "primary_index": "number_id",
             "is_deleted": false,
             "type": [

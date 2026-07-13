@@ -11,7 +11,7 @@ $this->model = new CollectionModel();
 parent::__construct();
 }
 /**
-* @return CollectionRow[]
+* @return \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow[]
 */
 public function getData() {
 $list = [];
@@ -22,7 +22,7 @@ $list[] = $row;
 return $list;
 }
 /**
-* @return CollectionRow
+* @return \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow
 */
 public function getRow() {
 $dataRow = parent::getRow();
@@ -30,13 +30,13 @@ $row = $this->getModelRow($dataRow);
 return $row;
 }
 /**
-* @return CollectionRow
+* @return \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow
 */
 public function getRowById($id) {
 return parent::getRowById($id);
 }
 private function getModelRow($dataRow) {
-$row = new CollectionRow($dataRow, $this->model, $this->multiLanguage);
+$row = new \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow($dataRow, $this->model, $this->multiLanguage);
 $row->model = $this->model;
 return $row;
 }

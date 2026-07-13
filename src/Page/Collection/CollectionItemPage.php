@@ -27,13 +27,19 @@ class CollectionItemPage extends AbstractTemplateDocument
 
         $table = new FileTable($layout);
 
+        foreach ($collectionRow->getFileList() as $fileRow) {
+            $table->addRow($fileRow);
+        }
+
+
+        /*$table = new FileTable($layout);
         $reader = new CollectionFileReader();
         $reader->model->loadFile();
         $reader->model->file->loadDirectory()->loadMediaspace();
-        $reader->filter->andequal($reader->model->collectionId, $collectionId);
+        $reader->filter->andEqual($reader->model->collectionId, $collectionId);
         foreach ($reader->getData() as $collectionFileRow) {
             $table->addRow($collectionFileRow->file);
-        }
+        }*/
 
 
         return parent::getContent();

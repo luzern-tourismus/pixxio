@@ -11,12 +11,12 @@ parent::__construct();
 $this->model = new CollectionModel();
 }
 /**
-* @return CollectionRow[]
+* @return \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow[]
 */
 public function getData() {
 $list = [];
 foreach (parent::getData() as $dataRow) {
-$row = new CollectionRow($dataRow, $this->model);
+$row = new \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow($dataRow, $this->model);
 $list[] = $row;
 }
 return $list;

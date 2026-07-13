@@ -8,6 +8,17 @@ trait CollectionFilterTrait
 {
 
 
+    public function searchByCollection($collection)
+    {
+
+        if ((new ValueCheck())->hasValue($collection)) {
+            $this->filter->andContains($this->model->collection, $collection);
+        }
+        return $this;
+
+    }
+
+
     public function filterByActive()
     {
 
