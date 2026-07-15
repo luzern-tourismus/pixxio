@@ -5,20 +5,21 @@ namespace LuzernTourismus\Pixxio\Json\File;
 use LuzernTourismus\Pixxio\Json\Base\AbstractJsonPixxioReader;
 use Nemundo\Core\Http\Url\UrlBuilder;
 
+
+// FileJsonReader
+// FileApiReader
+
 class FileJsonReaderJson extends AbstractJsonPixxioReader
 {
 
-
-    public $pageSize;
-
+    public $pageSize = 20;
 
     public $filter;
 
     protected $cursor;
-
-
     public $filterByCollectionId;
 
+    public $filterByDirectoryId;
 
     protected function loadReader()
     {
@@ -42,6 +43,23 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
       {
         "filterType": "collection",
         "collectionID": ' . $this->filterByCollectionId . ',
+        "inverted": false
+      }
+    ],
+    "inverted": false
+    }');
+        }
+
+
+        if ($this->filterByDirectoryId !== null) {
+
+            $url->addRequestValue('filter', '{
+    "filterType": "connectorAnd",
+    "filters": [
+      {
+        "filterType": "directory",
+        "directoryID": ' . $this->filterByDirectoryId . ',
+        "includeSubdirectories": true,
         "inverted": false
       }
     ],
