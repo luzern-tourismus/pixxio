@@ -52,7 +52,7 @@ class JobImport extends AbstractBase
         $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
         $item = $reader->getJob($jobId);
 
-        (new Debug())->write($item);
+        //(new Debug())->write($item);
 
         if ($item->jobExists) {
 

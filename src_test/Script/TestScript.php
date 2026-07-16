@@ -2,6 +2,7 @@
 
 namespace LuzernTourismus\PixxioTest\Script;
 
+use LuzernTourismus\Pixxio\Data\Job\JobModel;
 use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
@@ -18,6 +19,10 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
+
+         $table = new ModelSetup();
+         $table->model = new JobModel();
+         $table->dropTable();
 
 
 
