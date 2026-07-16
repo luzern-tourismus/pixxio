@@ -1,8 +1,10 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest;
+namespace LuzernTourismus\PixxioTest\Json;
 
+use LuzernTourismus\Pixxio\Import\JobImport;
 use LuzernTourismus\Pixxio\Json\Job\JobJsonReader;
+use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 use Nemundo\Core\Debug\Debug;
 
@@ -22,11 +24,17 @@ class JobReaderTest extends AbstractPixxioTest
 
         $jobId = $this->getValue('test_job_id');
 
-        $reader = new JobJsonReader();
+
+        $import = new JobImport();
+        $import->fromMediaspaceConfig(new MediaspaceConfigTest());
+        $import->importJob($jobId);
+
+
+        /*$reader = new JobJsonReader();
         $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
         $item = $reader->getJob($jobId);
 
-        (new Debug())->write($item);
+        (new Debug())->write($item);*/
 
 
     }

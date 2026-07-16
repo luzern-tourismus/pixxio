@@ -708,7 +708,7 @@
                     "field_name": "job_exists",
                     "variable_name": "jobExists",
                     "allow_null": false,
-                    "is_deleted": false
+                    "is_deleted": true
                 }
             ],
             "index": [

@@ -2,15 +2,10 @@
 
 namespace LuzernTourismus\Pixxio\Page;
 
-use LuzernTourismus\Pixxio\Com\ListBox\DirectoryListBox;
-use LuzernTourismus\Pixxio\Com\ListBox\MediaspaceListBox;
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
-use LuzernTourismus\Pixxio\Data\Job\JobPaginationReader;
-use LuzernTourismus\Pixxio\Reader\File\FileDataPaginationReader;
 use LuzernTourismus\Pixxio\Reader\Job\JobDataPaginationReader;
 use Nemundo\Admin\Com\Button\AdminSearchButton;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
-use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
@@ -43,9 +38,8 @@ class JobPage extends AbstractTemplateDocument
 
 
         new AdminSearchButton($search);
-        
-        
-        
+
+
         $p = new Paragraph($layout);
 
 
@@ -57,16 +51,16 @@ class JobPage extends AbstractTemplateDocument
             ->filterByJobId($jobId->getValue())
             ->filterByFileId($fileId->getValue());
         $reader
-            ->addOrder($reader->model->jobExists)
+            //->addOrder($reader->model->jobExists)
             ->addOrder($reader->model->success)
-            ->addOrder($reader->model->createDateTime,SortOrder::DESCENDING);
+            ->addOrder($reader->model->createDateTime, SortOrder::DESCENDING);
 
 
         $p->content = $reader->getFormatTotalCount() . ' files found';
 
         (new AdminTableHeader($table))
             ->addText($reader->model->id->label)
-            ->addText($reader->model->jobExists->label)
+            //->addText($reader->model->jobExists->label)
             ->addText($reader->model->success->label)
             ->addText($reader->model->fileId->label)
             ->addText($reader->model->isDuplicate->label)
@@ -80,7 +74,7 @@ class JobPage extends AbstractTemplateDocument
 
             $row
                 ->addText($fileRow->id)
-                ->addYesNo($fileRow->jobExists)
+                //->addYesNo($fileRow->jobExists)
                 ->addYesNo($fileRow->success)
                 ->addText($fileRow->fileId)
                 ->addYesNo($fileRow->isDuplicate)
@@ -93,7 +87,8 @@ class JobPage extends AbstractTemplateDocument
         $pagination = new AdminPagination($layout);
         $pagination->paginationReader = $reader;
 
-
         return parent::getContent();
+
     }
+
 }

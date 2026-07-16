@@ -51,11 +51,6 @@ public $mediaspaceId;
 */
 public $mediaspace;
 
-/**
-* @var \Nemundo\Model\Type\Number\YesNoType
-*/
-public $jobExists;
-
 protected function loadModel() {
 $this->tableName = "pixxio_job";
 $this->aliasTableName = "pixxio_job";
@@ -124,14 +119,6 @@ $this->mediaspaceId->fieldName = "mediaspace";
 $this->mediaspaceId->aliasFieldName = "pixxio_job_mediaspace";
 $this->mediaspaceId->label = "Mediaspace";
 $this->mediaspaceId->allowNullValue = true;
-
-$this->jobExists = new \Nemundo\Model\Type\Number\YesNoType($this);
-$this->jobExists->tableName = "pixxio_job";
-$this->jobExists->externalTableName = "pixxio_job";
-$this->jobExists->fieldName = "job_exists";
-$this->jobExists->aliasFieldName = "pixxio_job_job_exists";
-$this->jobExists->label = "Job Exists";
-$this->jobExists->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "create_date_time";

@@ -10,7 +10,7 @@ class JobJsonItem extends AbstractBase
     /**
      * @var bool
      */
-    public $jobExists = true;
+    public $jobExists = false;  // true;
 
     public $id;
 
@@ -33,5 +33,7 @@ class JobJsonItem extends AbstractBase
     public $modifyDateTime;
 
     public $percent;
+
+    public $json;
 
 }

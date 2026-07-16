@@ -6,6 +6,7 @@ use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Core\Debug\Debug;
+use Nemundo\Model\Setup\ModelSetup;
 
 class TestScript extends AbstractConsoleScript
 {
@@ -17,7 +18,13 @@ class TestScript extends AbstractConsoleScript
     public function run()
     {
 
-        $n = 0;
+
+
+
+       // $model = new ModelSetup())->createTable()
+
+
+        /*$n = 0;
 
         $reader = new FileJsonReaderJson();
         $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
@@ -35,7 +42,7 @@ class TestScript extends AbstractConsoleScript
 
                 $n++;
 
-            }
+        /*    }
 
             (new Debug())->write($n);
 

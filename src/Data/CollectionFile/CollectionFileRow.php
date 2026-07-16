@@ -22,7 +22,7 @@ public $id;
 public $collectionId;
 
 /**
-* @var \LuzernTourismus\Pixxio\Data\Collection\CollectionRow
+* @var \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow
 */
 public $collection;
 
@@ -62,7 +62,7 @@ $this->active = boolval($this->getModelValue($model->active));
 $this->importStatus = boolval($this->getModelValue($model->importStatus));
 }
 private function loadLuzernTourismusPixxioDataCollectionCollectioncollectionRow($model) {
-$this->collection = new \LuzernTourismus\Pixxio\Data\Collection\CollectionRow($this->row, $model);
+$this->collection = new \LuzernTourismus\Pixxio\Reader\Collection\CollectionDataRow($this->row, $model);
 }
 private function loadLuzernTourismusPixxioDataFileFilefileRow($model) {
 $this->file = new \LuzernTourismus\Pixxio\Reader\File\FileDataRow($this->row, $model);

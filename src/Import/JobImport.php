@@ -2,10 +2,12 @@
 
 namespace LuzernTourismus\Pixxio\Import;
 
+use LuzernTourismus\Pixxio\Data\Job\Job;
 use LuzernTourismus\Pixxio\Data\Job\JobReader;
 use LuzernTourismus\Pixxio\Data\Job\JobUpdate;
 use LuzernTourismus\Pixxio\Json\Job\JobJsonReader;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
+use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\Core\Base\AbstractBase;
 use Nemundo\Core\Debug\Debug;
 
@@ -39,5 +41,35 @@ class JobImport extends AbstractBase
         }
 
     }
+
+
+    public function importJob($jobId)
+    {
+
+        $reader = new JobJsonReader();
+        $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
+        $item = $reader->getJob($jobId);
+
+        (new Debug())->write($item);
+
+        if ($item->jobExists) {
+
+            $data = new Job();
+            $data->updateOnDuplicate = true;
+            $data->id = $jobId;
+            //$data->jobExists = true;
+            $data->fileId = $item->fileId;
+            $data->isDuplicate = $item->isDuplicate;
+            $data->createDateTime = $item->createDateTime;
+            $data->modifyDateTime = $item->modifyDateTime;
+            $data->json = $item->json;  // $response->html;
+            $data->success = $item->success;
+            $data->save();
+
+        }
+
+
+    }
+
 
 }

@@ -61,11 +61,6 @@ public $mediaspaceId;
 */
 public $mediaspace;
 
-/**
-* @var bool
-*/
-public $jobExists;
-
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -83,7 +78,6 @@ $this->mediaspaceId = intval($this->getModelValue($model->mediaspaceId));
 if ($model->mediaspace !== null) {
 $this->loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model->mediaspace);
 }
-$this->jobExists = boolval($this->getModelValue($model->jobExists));
 }
 private function loadLuzernTourismusPixxioDataFileFilefileRow($model) {
 $this->file = new \LuzernTourismus\Pixxio\Reader\File\FileDataRow($this->row, $model);
