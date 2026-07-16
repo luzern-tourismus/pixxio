@@ -4,6 +4,8 @@ namespace LuzernTourismus\Pixxio\Reader\File;
 
 use LuzernTourismus\Pixxio\Data\File\FileRow;
 use LuzernTourismus\Pixxio\Data\FileKeyword\FileKeywordReader;
+use LuzernTourismus\Pixxio\Data\FileMetadata\FileMetadataReader;
+use LuzernTourismus\Pixxio\Data\FileMetadata\FileMetadataRow;
 use LuzernTourismus\Pixxio\Data\Keyword\KeywordRow;
 use LuzernTourismus\Pixxio\Parameter\FileParameter;
 use LuzernTourismus\Pixxio\Site\File\FileItemSite;
@@ -27,6 +29,45 @@ class FileDataRow extends FileRow
         return $list;
 
     }
+
+
+
+    public function getMetadataReader()
+    {
+
+
+        $metadataReader = new FileMetadataReader();
+        $metadataReader->model->loadMetadata();
+        $metadataReader->model->metadata->loadType();
+        $metadataReader->filter->andEqual($metadataReader->model->fileId, $this->id);
+
+        return $metadataReader;
+
+
+    }
+
+
+    public function getMetadataList()
+    {
+
+        /** @var FileMetadataRow $list */
+        $list = [];
+
+        /*$metadataReader = new FileMetadataReader();
+        $metadataReader->model->loadMetadata();
+        $metadataReader->model->metadata->loadType();
+        $metadataReader->filter->andEqual($metadataReader->model->fileId, $this->id);*/
+        foreach ($this->getMetadataReader()->getData() as $fileMetadataRow) {
+            $list[] = $fileMetadataRow;
+        }
+
+        return $list;
+
+    }
+
+
+
+
 
 
     public function getSite()

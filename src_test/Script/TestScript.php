@@ -4,6 +4,7 @@ namespace LuzernTourismus\PixxioTest\Script;
 
 use LuzernTourismus\Pixxio\Data\Job\JobModel;
 use LuzernTourismus\Pixxio\Json\File\FileJsonReaderJson;
+use LuzernTourismus\Pixxio\Reader\File\FileDataReader;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use Nemundo\App\Script\Type\AbstractConsoleScript;
 use Nemundo\Core\Debug\Debug;
@@ -20,48 +21,25 @@ class TestScript extends AbstractConsoleScript
     {
 
 
-         $table = new ModelSetup();
-         $table->model = new JobModel();
-         $table->dropTable();
+
+        $reader = new FileDataReader();
+        foreach ($reader->getData() as $fileRow) {
+
+
+            (new Debug())->write($fileRow->id);
+
+
+            $metaReader = $fileRow->getMetadataReader();
+            $metaReader->filter->andEqual($metaReader->model->metadataId,540987239);
+            foreach ($metaReader->getData() as $metaRow) {
+                (new Debug())->write($metaRow->value);
+            }
+
+
+        }
 
 
 
-       // $model = new ModelSetup())->createTable()
-
-
-        /*$n = 0;
-
-        $reader = new FileJsonReaderJson();
-        $reader->fromMediaspaceConfig(new MediaspaceConfigTest());
-        $reader->filterByDirectoryId = 198885700;
-        $reader->pageSize = 500;
-
-        do {
-
-            foreach ($reader->getData() as $file) {
-
-                /*(new Debug())->write($file->id);
-                (new Debug())->write($file->fileName);*/
-
-                //(new FileJsonDelete())->fromMediaspaceConfig(new MediaspaceConfigTest())->deleteFile($file->id);
-
-                $n++;
-
-        /*    }
-
-            (new Debug())->write($n);
-
-        } while ($reader->hasCursor());
-
-
-        //(new UserDelete())->delete();
-
-        //(new UserImport())->importData();
-
-        /*$json = new JobJsonReader();
-        $json->fromMediaspaceConfig(new MediaspaceConfigTest());
-        $json->getJob(25871925);
-*/
 
 
     }

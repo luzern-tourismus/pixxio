@@ -4,6 +4,7 @@ namespace LuzernTourismus\Pixxio\Page\File;
 
 use LuzernTourismus\Pixxio\Com\Tab\PixxioTab;
 use LuzernTourismus\Pixxio\Config\EditTypeConfig;
+use LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadataModel;
 use LuzernTourismus\Pixxio\Data\FileMetadata\FileMetadataReader;
 use LuzernTourismus\Pixxio\Data\MetadataOptionValue\MetadataOptionValueReader;
 use LuzernTourismus\Pixxio\Parameter\FileParameter;
@@ -64,13 +65,26 @@ class FileItemPage extends AbstractTemplateDocument
         $metadataReader->model->metadata->loadType();
         $metadataReader->filter->andEqual($metadataReader->model->fileId, $fileId);
 
+
+        $model = new CustomMetadataModel();
+        $model->loadType();
+
         (new AdminTableHeader($table))
-            ->addText($metadataReader->model->metadata->id->label)
-            ->addText($metadataReader->model->metadata->label)
-            ->addText($metadataReader->model->metadata->type->label)
+            ->addText($model->id->label)
+            ->addText($model->name->label)
+            ->addText($model->type->label)
             ->addText('Value');
 
-        foreach ($metadataReader->getData() as $metadataRow) {
+        /*
+
+                (new AdminTableHeader($table))
+                    ->addText($metadataReader->model->metadata->id->label)
+                    ->addText($metadataReader->model->metadata->label)
+                    ->addText($metadataReader->model->metadata->type->label)
+                    ->addText('Value');*/
+
+        //foreach ($metadataReader->getData() as $metadataRow) {
+        foreach ($fileRow->getMetadataList() as $metadataRow) {
 
             $row = new AdminTableRow($table);
 
@@ -88,7 +102,7 @@ class FileItemPage extends AbstractTemplateDocument
             } else {
 
 
-            //if ($metadataRow->metadata->type->type === EditTypeConfig::MULTISELECTION) {
+                //if ($metadataRow->metadata->type->type === EditTypeConfig::MULTISELECTION) {
                 $ul = new AdminUnorderedList($row);
 
                 $metadataOptionValueReader = new MetadataOptionValueReader();
@@ -105,7 +119,6 @@ class FileItemPage extends AbstractTemplateDocument
                         $strike = new Strike($ul);
                         $strike->content = $value;
                     }
-
 
 
                     //$ul->addText($metadataOptionValueRow->option->option . ' (' . $metadataOptionValueRow->optionId . ')');
@@ -145,8 +158,6 @@ class FileItemPage extends AbstractTemplateDocument
         $copy = new AdminLargeTextBox($layout);
         $copy->label = 'Json';
         $copy->value = $fileRow->json;
-
-
 
 
         return parent::getContent();
