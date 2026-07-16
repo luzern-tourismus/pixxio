@@ -21,11 +21,13 @@ class JobImport extends AbstractBase
 
         $reader = new JobReader();
         $reader->filter->andEqual($reader->model->success, false);
-        $reader->filter->andEqual($reader->model->jobExists, true);
+        //$reader->filter->andEqual($reader->model->jobExists, true);
 
         foreach ($reader->getData() as $jobRow) {
 
-            $reader = new JobJsonReader();
+            $this->importJob($jobRow->id);
+
+            /*$reader = new JobJsonReader();
             $reader->subdomain = $this->subdomain;
             $reader->apiKey = $this->apiKey;
             $item = $reader->getJob($jobRow->id);
@@ -35,7 +37,7 @@ class JobImport extends AbstractBase
                 $update->jobExists = false;
                 $update->updateById($jobRow->id);
                 //(new JobDelete())->deleteById($jobRow->id);
-            }
+            }*/
 
 
         }
