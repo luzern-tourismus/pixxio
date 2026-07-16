@@ -3,6 +3,9 @@
 namespace LuzernTourismus\Pixxio\Import;
 
 use LuzernTourismus\Pixxio\Config\EditTypeConfig;
+use LuzernTourismus\Pixxio\Data\CustomMetadata\CustomMetadata;
+use LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataType;
+use LuzernTourismus\Pixxio\Data\CustomMetadataType\CustomMetadataTypeId;
 use LuzernTourismus\Pixxio\Data\File\File;
 use LuzernTourismus\Pixxio\Data\File\FileUpdate;
 use LuzernTourismus\Pixxio\Data\FileKeyword\FileKeyword;
@@ -77,10 +80,31 @@ class FileImport extends AbstractMediaspaceImport
         $data->previewUrl = $file->previewUrl;
         $data->directoryId = $file->directoryId;
         $data->creator = $file->creator;
+        //$data->json = $file->json;
         $data->save();
 
 
         foreach ($file->metadataList as $custom) {
+
+            $data = new CustomMetadataType();
+            $data->ignoreIfExists = true;
+            $data->type = $custom->editType;
+            $data->save();
+
+            $id = new CustomMetadataTypeId();
+            $id->filter->andEqual($id->model->type, $custom->editType);
+            $typeId = $id->getId();
+
+            $data = new CustomMetadata();
+            $data->updateOnDuplicate = true;
+            //$data->ignoreIfExists = true;
+            $data->id = $custom->id;
+            $data->name = $custom->name;
+            $data->typeId = $typeId;
+            $data->mediaspaceId = $mediaspaceId;
+            $data->importStatus = true;
+            $data->active = true;
+            $data->save();
 
             $data = new FileMetadata();
             $data->updateOnDuplicate = true;
@@ -88,6 +112,7 @@ class FileImport extends AbstractMediaspaceImport
             $data->importStatus = true;
             $data->fileId = $file->id;
             $data->metadataId = $custom->id;
+
             if ($custom->editType == EditTypeConfig::TEXT) {
 
                 $value = $custom->value;
@@ -95,6 +120,7 @@ class FileImport extends AbstractMediaspaceImport
                     $value = $custom->value['id'];
                 }
                 $data->value = $value;
+
 
             }
             $data->save();

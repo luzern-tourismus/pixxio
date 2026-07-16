@@ -506,6 +506,14 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Json",
+                    "field_name": "json",
+                    "variable_name": "json",
+                    "allow_null": true,
+                    "is_deleted": false
                 }
             ],
             "index": [

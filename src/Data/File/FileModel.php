@@ -76,6 +76,11 @@ public $fileSize;
 */
 public $previewUrl;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $json;
+
 protected function loadModel() {
 $this->tableName = "pixxio_file";
 $this->aliasTableName = "pixxio_file";
@@ -190,6 +195,14 @@ $this->previewUrl->aliasFieldName = "pixxio_file_preview_url";
 $this->previewUrl->label = "Preview Url";
 $this->previewUrl->allowNullValue = false;
 $this->previewUrl->length = 255;
+
+$this->json = new \Nemundo\Model\Type\Text\LargeTextType($this);
+$this->json->tableName = "pixxio_file";
+$this->json->externalTableName = "pixxio_file";
+$this->json->fieldName = "json";
+$this->json->aliasFieldName = "pixxio_file_json";
+$this->json->label = "Json";
+$this->json->allowNullValue = true;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "mediaspace";

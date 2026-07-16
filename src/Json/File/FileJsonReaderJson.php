@@ -21,6 +21,10 @@ class FileJsonReaderJson extends AbstractJsonPixxioReader
 
     public $filterByDirectoryId;
 
+
+    public $filterById;
+
+
     protected function loadReader()
     {
 

@@ -2,7 +2,7 @@
 
 namespace LuzernTourismus\Pixxio\Type;
 
-class CustomMetadataType
+class CustomMetadataTypeConfig
 {
 
     const TEXT = 'text';

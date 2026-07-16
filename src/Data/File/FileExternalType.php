@@ -76,6 +76,11 @@ public $fileSize;
 */
 public $previewUrl;
 
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $json;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FileModel::class;
@@ -182,6 +187,14 @@ $this->previewUrl->externalTableName = $this->externalTableName;
 $this->previewUrl->aliasFieldName = $this->previewUrl->tableName . "_" . $this->previewUrl->fieldName;
 $this->previewUrl->label = "Preview Url";
 $this->addType($this->previewUrl);
+
+$this->json = new \Nemundo\Model\Type\Text\LargeTextType();
+$this->json->fieldName = "json";
+$this->json->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->json->externalTableName = $this->externalTableName;
+$this->json->aliasFieldName = $this->json->tableName . "_" . $this->json->fieldName;
+$this->json->label = "Json";
+$this->addType($this->json);
 
 }
 public function loadMediaspace() {

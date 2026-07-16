@@ -11,6 +11,7 @@ use LuzernTourismus\Pixxio\Reader\Comment\CommentDataReader;
 use LuzernTourismus\Pixxio\Reader\File\FileDataReader;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
+use Nemundo\Admin\Com\ListBox\AdminLargeTextBox;
 use Nemundo\Admin\Com\Table\AdminLabelValueTable;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\AdminTableHeader;
@@ -40,6 +41,7 @@ class FileItemPage extends AbstractTemplateDocument
         $img->width = 900;
 
         (new AdminLabelValueTable($layout))
+            ->addLabelValue($fileRow->model->id->label, $fileRow->id)
             ->addLabelValue($fileRow->model->filename->label, $fileRow->filename)
             ->addLabelValue($fileRow->model->fileSize->label, $fileRow->fileSize)
             ->addLabelValue($fileRow->model->fileExtension->label, $fileRow->fileExtension)
@@ -74,8 +76,11 @@ class FileItemPage extends AbstractTemplateDocument
 
             $row
                 //->addText($metadataRow->id)
-                ->addText($metadataRow->metadata->id)
+                ->addText($metadataRow->metadataId)
+                //->addText($metadataRow->metadata->id)
                 ->addText($metadataRow->metadata->name)
+
+                //->addText($metadataRow->metadata->typeId)
                 ->addText($metadataRow->metadata->type->type);
 
             if ($metadataRow->metadata->type->type === EditTypeConfig::TEXT) {
@@ -135,6 +140,13 @@ class FileItemPage extends AbstractTemplateDocument
         foreach ($fileRow->getKeywordList() as $keywordRow) {
             $ul->addText($keywordRow->keyword);
         }
+
+
+        $copy = new AdminLargeTextBox($layout);
+        $copy->label = 'Json';
+        $copy->value = $fileRow->json;
+
+
 
 
         return parent::getContent();

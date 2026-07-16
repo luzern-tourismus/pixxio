@@ -11,7 +11,14 @@ class CustomMetadataJsonReader extends AbstractJsonPixxioReader
     protected function loadReader()
     {
 
+        //https://[EXAMPLE-MEDIASPACE].px.media/api/unstable/metadata/internal
+        //https://[EXAMPLE-MEDIASPACE].px.media/api/unstable/metadata/important
+
+
         $this->endpoint = 'metadata/custom';
+        //$this->endpoint = 'metadata/internal';
+        //$this->endpoint = 'metadata/important';
+
 
         $url = new UrlBuilder('');
         $url
@@ -20,7 +27,9 @@ class CustomMetadataJsonReader extends AbstractJsonPixxioReader
             ->addRequestValue('responseFields', 'selectionOptions,name,createDate,editType,id,modifyDate,parentCondition,translationState');
 
         $this->parameter = $url->getUrl();
+
         $this->loopName = 'customMetadata';
+        //$this->loopName = 'importantMetadata';
 
     }
 

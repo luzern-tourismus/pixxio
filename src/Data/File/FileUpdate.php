@@ -67,6 +67,11 @@ public $fileSize;
 */
 public $previewUrl;
 
+/**
+* @var string
+*/
+public $json;
+
 public function __construct() {
 parent::__construct();
 $this->model = new FileModel();
@@ -84,6 +89,7 @@ $this->typeValueList->setModelValue($this->model->subject, $this->subject);
 $this->typeValueList->setModelValue($this->model->fileExtension, $this->fileExtension);
 $this->typeValueList->setModelValue($this->model->fileSize, $this->fileSize);
 $this->typeValueList->setModelValue($this->model->previewUrl, $this->previewUrl);
+$this->typeValueList->setModelValue($this->model->json, $this->json);
 parent::update();
 }
 }

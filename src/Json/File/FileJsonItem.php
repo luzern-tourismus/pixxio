@@ -35,6 +35,8 @@ class FileJsonItem extends AbstractBase
      */
     public $metadataList = [];
 
+    public $json;
+
 
     public function __construct($json)
     {
@@ -46,9 +48,6 @@ class FileJsonItem extends AbstractBase
         $this->fileSize = $json['fileSize'];
         $this->fileUrl = $json['originalFileURL'];
         $this->previewUrl = $json['previewFileURL'];
-
-
-
         $this->description = $json['description'];
         $this->keywordList = $json['keywords'];
         $this->creator = $json['creator'];
@@ -62,7 +61,8 @@ class FileJsonItem extends AbstractBase
 
             $metadataItem = new FileCustomMetadataItem();
             $metadataItem->id = $metadata['id'];
-            $metadataItem->editType = $editType;  // $metadata['editType'];
+            $metadataItem->name = $metadata['name'];
+            $metadataItem->editType = $editType;
 
             if ($editType == EditTypeConfig::TEXT) {
                 if (isset($metadata['value'])) {
@@ -70,13 +70,11 @@ class FileJsonItem extends AbstractBase
                 }
             }
 
-
             if ($editType == EditTypeConfig::SELECTION) {
                 if (isset($metadata['value']['id'])) {
                     $metadataItem->value = $metadata['value']['id'];
                 }
             }
-
 
             if ($editType == EditTypeConfig::MULTISELECTION) {
 
@@ -87,45 +85,13 @@ class FileJsonItem extends AbstractBase
                     }
                 }
 
-                /*                if (isset($metadata['value']['id'])) {
-                                    $metadataItem->value = $metadata['value']['id'];
-                                }*/
             }
-
-
-            /*      "id": 989301806,
-              "name": "Nutzungsrecht",
-              "editType": "selection",
-              "type": "custom",
-              "isEditable": true,
-              "selectionOptions": [
-                {
-                    "id": 233572193,
-                  "name": "Für Verwendung LTAG",
-                  "order": "n"
-                },
-                {
-                    "id": 642912341,
-                  "name": "Für touristische Zwecke",
-                  "order": "u"
-                },
-                {
-                    "id": 2143484185,
-                  "name": "Für internen Gebrauch",
-                  "order": "x"
-                }
-              ],
-              "translationState": [],
-              "value": {
-                      "id": 642912341,
-                "name": "Für touristische Zwecke",
-                "order": "u"
-              }*/
-
 
             $this->metadataList[] = $metadataItem;
 
         }
+
+        $this->json = $json;
 
     }
 
@@ -136,6 +102,5 @@ class FileJsonItem extends AbstractBase
         return $this->metadataList;
 
     }
-
 
 }
