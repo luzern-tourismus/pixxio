@@ -194,7 +194,7 @@ class FileModify extends AbstractBase
         }
 
         if (PixxioConfig::$debugMode) {
-            (new Debug())->write($data);
+            //(new Debug())->write($data);
         }
 
         $request = new PixxioWebRequest();
