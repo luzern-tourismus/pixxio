@@ -207,11 +207,11 @@ class FileModify extends AbstractBase
         $jsonData = $jsonReader->getData();
 
         $jobId = null;
-        if (isset($jsonData['jobID'])) {
+        /*if (isset($jsonData['jobID'])) {
             $jobId = $jsonData['jobID'];
         } else {
             (new Debug())->write($jsonData);
-        }
+        }*/
 
         return $jobId;
 
