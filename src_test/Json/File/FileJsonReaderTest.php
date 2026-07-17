@@ -1,6 +1,6 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest\Json;
+namespace LuzernTourismus\PixxioTest\Json\File;
 
 use LuzernTourismus\Pixxio\Config\EditTypeConfig;
 use LuzernTourismus\Pixxio\Import\FileImport;

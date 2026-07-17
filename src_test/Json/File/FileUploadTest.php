@@ -1,14 +1,13 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest\Builder;
+namespace LuzernTourismus\PixxioTest\Json\File;
 
-use LuzernTourismus\Pixxio\Builder\FileUpload;
+use LuzernTourismus\Pixxio\Json\File\FileUpload;
 use LuzernTourismus\Pixxio\Json\Job\JobJsonReader;
 use LuzernTourismus\PixxioTest\MediaspaceConfigTest;
 use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\System\Delay;
-use Nemundo\Test\AbstractTest;
 
 class FileUploadTest extends AbstractPixxioTest
 {
@@ -35,6 +34,13 @@ class FileUploadTest extends AbstractPixxioTest
         $upload->addMultiMetadata(30246638,785365002);
         $upload->addMultiMetadata(30246638,785365002);
         $upload->addMultiMetadata(30246638,785365002);
+
+
+        $upload
+            ->addCustomMetadata(628208860,'by ltag')
+            ->addStandardMetadata(937651234,'irgendeine beschreibung');
+
+
 
         $jobId = $upload->upload();
 

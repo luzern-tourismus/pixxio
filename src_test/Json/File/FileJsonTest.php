@@ -1,11 +1,10 @@
 <?php
 
-namespace LuzernTourismus\PixxioTest\Json;
+namespace LuzernTourismus\PixxioTest\Json\File;
 
 use LuzernTourismus\Pixxio\Json\File\FileJson;
 use LuzernTourismus\PixxioTest\Test\AbstractPixxioTest;
 use Nemundo\Core\Debug\Debug;
-use Nemundo\Test\AbstractTest;
 
 class FileJsonTest extends AbstractPixxioTest  // AbstractTest
 {

@@ -26,15 +26,15 @@ class TextFileUploadTest extends AbstractTest
 
         $directoryId = $this->getValue('test_directory_id');
 
-        $upload = new \LuzernTourismus\Pixxio\Builder\FileUpload();
+        $upload = new \LuzernTourismus\Pixxio\Json\File\FileUpload();
         $upload->fromMediaspaceConfig(new \LuzernTourismus\PixxioTest\MediaspaceConfigTest());
         $upload->fullFilename = $filename;
         $upload->subject = 'Test';
         //$upload->directoryId = $directoryId;
         $upload->addKeyword('');
 //        $upload->addMetadata(628208860, 'Copyright by xy');
-        $upload->addMetadata(628208, 'Copyright by xy');
-        $upload->addMetadata(1968059366, 2689);
+        $upload->addCustomMetadata(628208, 'Copyright by xy');
+        $upload->addCustomMetadata(1968059366, 2689);
 
 //$upload->addMetadata(1968059366, 26897557);
         $upload->description = '';

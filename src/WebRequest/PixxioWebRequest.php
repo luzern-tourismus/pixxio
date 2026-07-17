@@ -138,10 +138,10 @@ class PixxioWebRequest extends AbstractBearerAuthenticationWebRequest
 
         $this->bearerAuthentication = $this->apiKey;
 
-        $data = $this->putUrl($this->getServiceUrl($endpoint), $json);
-        $this->checkResponse($data);
+        $response = $this->putUrl($this->getServiceUrl($endpoint), $json);
+        $this->checkResponse($response);
 
-        //return $data;
+        return $response;
 
     }
 

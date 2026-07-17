@@ -1,6 +1,6 @@
 <?php
 
-namespace LuzernTourismus\Pixxio\Builder;
+namespace LuzernTourismus\Pixxio\Json\File;
 
 use LuzernTourismus\Pixxio\Config\PixxioConfig;
 use LuzernTourismus\Pixxio\Json\MediaspaceConfigTrait;
@@ -32,7 +32,9 @@ class FileUpload extends AbstractBase
     private $keywordList = [];
 
 
-    private $customList = [];
+    private $standardMetadataList = [];
+
+    private $customMetadataList = [];
 
 
     private $customMultiList = [];
@@ -50,7 +52,8 @@ class FileUpload extends AbstractBase
     }
 
 
-    public function addMetadata($id, $value)
+
+    public function addStandardMetadata($id, $value)
     {
 
         if ($value !== null) {
@@ -60,7 +63,27 @@ class FileUpload extends AbstractBase
             $custom['id'] = $id;
             $custom['value'] = $value;
 
-            $this->customList[] = $custom;
+            $this->standardMetadataList[] = $custom;
+
+        }
+
+        return $this;
+
+    }
+
+
+
+    public function addCustomMetadata($id, $value)
+    {
+
+        if ($value !== null) {
+
+            $custom = [];
+            $custom['action'] = 'add';
+            $custom['id'] = $id;
+            $custom['value'] = $value;
+
+            $this->customMetadataList[] = $custom;
 
         }
 
@@ -111,13 +134,20 @@ class FileUpload extends AbstractBase
             $data['directoryID'] = $this->directoryId;
         }
 
-        foreach ($this->customMultiList as $customMulti) {
-            $this->customList[] = $customMulti;
+        if (sizeof($this->standardMetadataList) > 0) {
+            $data['metadataStandard'] = (new JsonText())->addData($this->standardMetadataList)->getJson();
         }
 
-        if (sizeof($this->customList) > 0) {
-            $data['metadataCustom'] = (new JsonText())->addData($this->customList)->getJson();
+
+        foreach ($this->customMultiList as $customMulti) {
+            $this->customMetadataList[] = $customMulti;
         }
+
+        if (sizeof($this->customMetadataList) > 0) {
+            $data['metadataCustom'] = (new JsonText())->addData($this->customMetadataList)->getJson();
+        }
+
+
 
         if (PixxioConfig::$debugMode) {
             //(new Debug())->write($data);

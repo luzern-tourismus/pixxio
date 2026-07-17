@@ -11,13 +11,13 @@ $mediaspace->apiKey = $api '';*/
 $filename ='C:\test\test.png';  // 'C:\test\webp.webp';
 $directoryId = 1900732808;
 
-$upload = new \LuzernTourismus\Pixxio\Builder\FileUpload();
+$upload = new \LuzernTourismus\Pixxio\Json\File\FileUpload();
 $upload->fromMediaspaceConfig(new \LuzernTourismus\PixxioTest\MediaspaceConfigTest());
 $upload->fullFilename = $filename;
 $upload->subject = 'Test';
 $upload->directoryId = $directoryId;
 $upload->addKeyword('');
-$upload->addMetadata(30246638, 465210646);
+$upload->addCustomMetadata(30246638, 465210646);
 //$upload->addMetadata(1968059366, 26897557);
 $upload->description = '';
 $jobId = $upload->upload();
