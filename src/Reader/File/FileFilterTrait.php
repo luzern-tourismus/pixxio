@@ -65,6 +65,15 @@ trait FileFilterTrait
     }
 
 
+    public function filterByActive()
+    {
+
+        $this->filter->andEqual($this->model->active, true);
+        return $this;
+
+    }
+
+
     protected function loadModel()
     {
 

@@ -10,6 +10,7 @@ use Nemundo\Admin\Com\Button\AdminSearchButton;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Html\AdminUnorderedList;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
+use Nemundo\Admin\Com\ListBox\AdminCheckBox;
 use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
 use Nemundo\Admin\Com\Table\AdminTable;
@@ -48,6 +49,11 @@ class FilePage extends AbstractTemplateDocument
         $directory->searchMode = true;
         $directory->submitOnChange = true;
 
+        $active = new AdminCheckBox($search);
+        $active->label = 'Active';
+        $active->searchMode = true;
+        $active->submitOnChange = true;
+
         new AdminSearchButton($search);
 
         $p = new Paragraph($layout);
@@ -65,6 +71,10 @@ class FilePage extends AbstractTemplateDocument
             ->filterBySubject($subject->getValue())
             ->filterByMediaspaceId($mediaspace->getValue())
             ->filterDirecctory($directory->getValue());
+
+        if ($active->getValue()) {
+            $reader->filterByActive();
+        }
 
         $p->content = $reader->getFormatTotalCount() . ' files found';
 
@@ -86,28 +96,19 @@ class FilePage extends AbstractTemplateDocument
 
             $row = new AdminTableRow($table);
 
-            /*$site = clone(FileItemSite::$site);
-            $site->addParameter(new FileParameter($fileRow->id));
-            $site->title = $fileRow->filename;*/
-
-
             $row
                 ->addText($fileRow->id)
                 ->addYesNo($fileRow->active)
                 ->addSite($fileRow->getSite())
-                //->addHyperlink($fileRow->fileUrl, $fileRow->filename, true)
                 ->addText($fileRow->fileExtension)
                 ->addText($fileRow->fileSize)
                 ->addText($bold->getBoldText($fileRow->subject))
                 ->addText($fileRow->description)
                 ->addText($fileRow->creator)
-                //->addText($fileRow->directory->id)
                 ->addText($fileRow->directory->directory);
 
             $ul = new AdminUnorderedList($row);
-            //$ul->addText($fileRow->directoryId);
             foreach ($fileRow->directory->getParentDirectoryList() as $parentDirectoryRow) {
-                //$ul->addText($parentDirectoryRow->id . ' ' . $parentDirectoryRow->directory);
                 $ul->addText($parentDirectoryRow->directory);
             }
 
@@ -125,4 +126,5 @@ class FilePage extends AbstractTemplateDocument
 
         return parent::getContent();
     }
+
 }
