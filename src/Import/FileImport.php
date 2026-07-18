@@ -121,8 +121,8 @@ class FileImport extends AbstractMediaspaceImport
                 }
                 $data->value = $value;
 
-
             }
+
             $data->save();
 
 
@@ -193,7 +193,7 @@ class FileImport extends AbstractMediaspaceImport
         $jsonReader = new FileJsonReaderJson();
         $jsonReader->subdomain = $mediaspaceRow->url;
         $jsonReader->apiKey = $mediaspaceRow->apiKey;
-        $jsonReader->pageSize = 100;  // 500;
+        $jsonReader->pageSize = 100;
 
         do {
 
