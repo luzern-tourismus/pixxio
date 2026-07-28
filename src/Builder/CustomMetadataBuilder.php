@@ -3,9 +3,7 @@
 namespace LuzernTourismus\Pixxio\Builder;
 
 use LuzernTourismus\Pixxio\WebRequest\PixxioWebRequest;
-use Nemundo\Core\Debug\Debug;
 use Nemundo\Core\Directory\TextDirectory;
-use Nemundo\Core\Json\Reader\JsonReader;
 
 class CustomMetadataBuilder extends AbstractBuilder
 {
@@ -29,7 +27,6 @@ class CustomMetadataBuilder extends AbstractBuilder
     }
 
 
-
     public function build()
     {
 
@@ -51,7 +48,7 @@ class CustomMetadataBuilder extends AbstractBuilder
     public function addOption($option)
     {
 
-        $this->optionList->addValue( $option);
+        $this->optionList->addValue($option);
         return $this;
 
     }

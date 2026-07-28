@@ -10,6 +10,7 @@ use LuzernTourismus\PixxioTest\Json\Collection\CollectionImportTest;
 use LuzernTourismus\PixxioTest\Json\Collection\CollectionJsonDeleteTest;
 use LuzernTourismus\PixxioTest\Json\Collection\CollectionJsonReaderTest;
 use LuzernTourismus\PixxioTest\Json\File\FileJsonReaderTest;
+use LuzernTourismus\PixxioTest\Json\File\FileModifyTest;
 use LuzernTourismus\PixxioTest\Json\File\FileUploadTest;
 use LuzernTourismus\PixxioTest\Json\JobReaderTest;
 use LuzernTourismus\PixxioTest\Json\MetadataReaderTest;
@@ -28,6 +29,7 @@ class PixxioTestCollection extends AbstractTestCollection
             ->addTest(new UserJsonReaderTest())
             ->addTest(new UserImportTest())
             ->addTest(new FileUploadTest())
+            ->addTest(new FileModifyTest())
             ->addTest(new FileJsonReaderTest())
             ->addTest(new CollectionBuilderTest())
             ->addTest(new JobReaderTest())

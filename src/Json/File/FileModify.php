@@ -134,10 +134,6 @@ class FileModify extends AbstractBase
     }
 
 
-
-
-
-
     public function addMultiMetadata($id, $value)
     {
 
@@ -164,10 +160,8 @@ class FileModify extends AbstractBase
 
         if (sizeof($this->keywordList) > 0) {
             $keywordText = implode(',', array_unique($this->keywordList));
-            $data['keywords'] = $keywordText;
+            $data['keywordsToAdd'] = $keywordText;
         }
-
-        //$data['fileName'] = (new File($this->fullFilename))->getFilename();
 
         if ($this->subject !== null) {
             $data['subject'] = $this->subject;
@@ -176,10 +170,6 @@ class FileModify extends AbstractBase
         if ($this->description !== null) {
             $data['description'] = $this->description;
         }
-
-        /*if ($this->directoryId !== null) {
-            $data['directoryID'] = $this->directoryId;
-        }*/
 
         foreach ($this->customMultiList as $customMulti) {
             $this->customList[] = $customMulti;
