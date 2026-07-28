@@ -24,25 +24,33 @@ class FileJsonReaderTest extends AbstractPixxioTest
         //$reader->filterByCollectionId = 1866091533;
         //$reader->filterByDirectoryId
         //$reader->filterById = 897128954;
-        $reader->pageSize = 1;  // 500;
+        $reader->pageSize =  500;
 
         $n = 0;
 
         foreach ($reader->getData() as $file) {
 
-            (new FileImport())->importFile($file, 1);
+            //(new FileImport())->importFile($file, 1);
 
-            (new \Nemundo\Core\Debug\Debug())->write($file->fileName);
+            (new \Nemundo\Core\Debug\Debug())->write($file->id);
+            (new Debug())->write($file->createdDateTime->getShortDateTimeLeadingZeroFormat());
+            //(new \Nemundo\Core\Debug\Debug())->write($file->fileName);
+            (new \Nemundo\Core\Debug\Debug())->write($file->creator);
+            (new Debug())->write($file->directoryId);
+
+            //(new \Nemundo\Core\Debug\Debug())->write($file->createdDateTime->getShortDateTimeLeadingZeroFormat());
+
             //(new \Nemundo\Core\Debug\Debug())->write($file);
 
-            foreach ($file->getMetadataList() as $metadata) {
+            /*foreach ($file->getMetadataList() as $metadata) {
                 if ($metadata->editType == EditTypeConfig::TEXT) {
                     (new \Nemundo\Core\Debug\Debug())->write($metadata->id . ' = ' . $metadata->value);
                 }
-            }
+            }*/
 
 
             $n++;
+
         }
 
         (new Debug())->write('Count: ' . $n);

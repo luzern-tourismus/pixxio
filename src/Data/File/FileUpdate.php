@@ -72,9 +72,15 @@ public $previewUrl;
 */
 public $json;
 
+/**
+* @var \Nemundo\Core\Type\DateTime\DateTime
+*/
+public $createdDateTime;
+
 public function __construct() {
 parent::__construct();
 $this->model = new FileModel();
+$this->createdDateTime = new \Nemundo\Core\Type\DateTime\DateTime();
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->filename, $this->filename);
@@ -90,6 +96,10 @@ $this->typeValueList->setModelValue($this->model->fileExtension, $this->fileExte
 $this->typeValueList->setModelValue($this->model->fileSize, $this->fileSize);
 $this->typeValueList->setModelValue($this->model->previewUrl, $this->previewUrl);
 $this->typeValueList->setModelValue($this->model->json, $this->json);
+if ($this->createdDateTime->hasValue()) {
+$property = new \Nemundo\Model\Data\Property\DateTime\DateTimeDataProperty($this->model->createdDateTime, $this->typeValueList);
+$property->setValue($this->createdDateTime);
+}
 parent::update();
 }
 }

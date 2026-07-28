@@ -25,10 +25,9 @@ class FileUploadTest extends AbstractPixxioTest
         $upload->fromMediaspaceConfig(new MediaspaceConfigTest());
         $upload->fullFilename =  $this->getValue('test_filename');
         $upload->subject = 'Titel';
+
+
         $upload->description = $this->getValue('test_description');
-
-
-
         $upload->directoryId = $this->getValue('test_directory_id');
 
         $upload->addMultiMetadata(30246638,785365002);

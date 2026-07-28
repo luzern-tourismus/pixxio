@@ -81,6 +81,11 @@ public $previewUrl;
 */
 public $json;
 
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $createdDateTime;
+
 protected function loadModel() {
 $this->tableName = "pixxio_file";
 $this->aliasTableName = "pixxio_file";
@@ -203,6 +208,14 @@ $this->json->fieldName = "json";
 $this->json->aliasFieldName = "pixxio_file_json";
 $this->json->label = "Json";
 $this->json->allowNullValue = true;
+
+$this->createdDateTime = new \Nemundo\Model\Type\DateTime\DateTimeType($this);
+$this->createdDateTime->tableName = "pixxio_file";
+$this->createdDateTime->externalTableName = "pixxio_file";
+$this->createdDateTime->fieldName = "created_date_time";
+$this->createdDateTime->aliasFieldName = "pixxio_file_created_date_time";
+$this->createdDateTime->label = "Created Date Time";
+$this->createdDateTime->allowNullValue = true;
 
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "mediaspace";

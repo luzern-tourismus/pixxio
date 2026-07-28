@@ -514,6 +514,14 @@
                     "variable_name": "json",
                     "allow_null": true,
                     "is_deleted": false
+                },
+                {
+                    "type": "date_time",
+                    "label": "Created Date Time",
+                    "field_name": "created_date_time",
+                    "variable_name": "createdDateTime",
+                    "allow_null": true,
+                    "is_deleted": false
                 }
             ],
             "index": [

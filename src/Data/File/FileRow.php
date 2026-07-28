@@ -91,6 +91,11 @@ public $previewUrl;
 */
 public $json;
 
+/**
+* @var \Nemundo\Core\Type\DateTime\DateTime
+*/
+public $createdDateTime;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model, $multiLanguage = false) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -114,6 +119,7 @@ $this->fileExtension = $this->getModelValue($model->fileExtension);
 $this->fileSize = intval($this->getModelValue($model->fileSize));
 $this->previewUrl = $this->getModelValue($model->previewUrl);
 $this->json = $this->getModelValue($model->json);
+$this->createdDateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModelValue($model->createdDateTime));
 }
 private function loadLuzernTourismusPixxioDataMediaspaceMediaspacemediaspaceRow($model) {
 $this->mediaspace = new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceRow($this->row, $model);

@@ -4,6 +4,7 @@ namespace LuzernTourismus\Pixxio\Json\File;
 
 use LuzernTourismus\Pixxio\Config\EditTypeConfig;
 use Nemundo\Core\Base\AbstractBase;
+use Nemundo\Core\Type\DateTime\DateTime;
 
 class FileJsonItem extends AbstractBase
 {
@@ -28,6 +29,11 @@ class FileJsonItem extends AbstractBase
 
     public $creator;
 
+    /**
+     * @var DateTime
+     */
+    public $createdDateTime;
+
     public $keywordList = [];
 
     /**
@@ -51,6 +57,7 @@ class FileJsonItem extends AbstractBase
         $this->description = $json['description'];
         $this->keywordList = $json['keywords'];
         $this->creator = $json['creator'];
+        $this->createdDateTime = new DateTime($json['createDate']);
         $this->directoryId = $json['directory']['id'];
 
         //importantMetadata

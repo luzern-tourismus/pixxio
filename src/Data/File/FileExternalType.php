@@ -81,6 +81,11 @@ public $previewUrl;
 */
 public $json;
 
+/**
+* @var \Nemundo\Model\Type\DateTime\DateTimeType
+*/
+public $createdDateTime;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = FileModel::class;
@@ -195,6 +200,14 @@ $this->json->externalTableName = $this->externalTableName;
 $this->json->aliasFieldName = $this->json->tableName . "_" . $this->json->fieldName;
 $this->json->label = "Json";
 $this->addType($this->json);
+
+$this->createdDateTime = new \Nemundo\Model\Type\DateTime\DateTimeType();
+$this->createdDateTime->fieldName = "created_date_time";
+$this->createdDateTime->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->createdDateTime->externalTableName = $this->externalTableName;
+$this->createdDateTime->aliasFieldName = $this->createdDateTime->tableName . "_" . $this->createdDateTime->fieldName;
+$this->createdDateTime->label = "Created Date Time";
+$this->addType($this->createdDateTime);
 
 }
 public function loadMediaspace() {

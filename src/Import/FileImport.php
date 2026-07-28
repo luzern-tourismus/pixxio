@@ -80,9 +80,9 @@ class FileImport extends AbstractMediaspaceImport
         $data->previewUrl = $file->previewUrl;
         $data->directoryId = $file->directoryId;
         $data->creator = $file->creator;
+        $data->createdDateTime = $file->createdDateTime;
         //$data->json = $file->json;
         $data->save();
-
 
         foreach ($file->metadataList as $custom) {
 

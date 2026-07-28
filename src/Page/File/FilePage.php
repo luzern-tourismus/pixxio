@@ -87,6 +87,7 @@ class FilePage extends AbstractTemplateDocument
             ->addText($reader->model->subject->label)
             ->addText($reader->model->description->label)
             ->addText($reader->model->creator->label)
+            ->addText($reader->model->createdDateTime->label)
             ->addText($reader->model->directory->label)
             ->addText($reader->model->directory->label . ' List')
             ->addText($reader->model->mediaspace->label)
@@ -105,6 +106,7 @@ class FilePage extends AbstractTemplateDocument
                 ->addText($bold->getBoldText($fileRow->subject))
                 ->addText($fileRow->description)
                 ->addText($fileRow->creator)
+                ->addtext($fileRow->createdDateTime->getShortDateTimeLeadingZeroFormat())
                 ->addText($fileRow->directory->directory);
 
             $ul = new AdminUnorderedList($row);
