@@ -23,7 +23,7 @@ class ImportScript extends AbstractConsoleScript
     {
 
         (new PixxioImport())->importData();
-        (new TrashDelete())->deleteTrash();
+        //(new TrashDelete())->deleteTrash();
 
         /*(new CustomMetadataImport())->importData();
         (new CollectionImport())->importData();

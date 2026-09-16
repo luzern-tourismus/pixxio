@@ -18,9 +18,6 @@ class FileImportScript extends AbstractConsoleScript
     public function run()
     {
 
-        /*(new CustomMetadataImport())->importData();
-        (new CollectionImport())->importData();
-        (new DirectoryImport())->importData();*/
         (new FileImport())->importData();
 
     }
