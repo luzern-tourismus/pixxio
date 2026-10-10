@@ -3,6 +3,7 @@
 namespace LuzernTourismus\Pixxio\Site;
 
 use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceId;
+use LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader;
 use LuzernTourismus\Pixxio\Data\Webhook\Webhook;
 use LuzernTourismus\Pixxio\Import\CommentImport;
 use LuzernTourismus\Pixxio\Import\FileImport;
@@ -26,7 +27,6 @@ class WebhookRequestSite extends AbstractSite
     {
 
         $this->url = 'pixxio-webhook';
-
         WebhookRequestSite::$site = $this;
 
     }
@@ -46,11 +46,9 @@ class WebhookRequestSite extends AbstractSite
 
             $eventData = $jsonData['events'][0];
 
-
             $fileId = null;
             if (isset($eventData['data']['fileID'])) {
                 $fileId = $eventData['data']['fileID'];
-                //   $data->fileId = $eventData['data']['fileID'];
             }
 
             $data = new Webhook();
@@ -64,16 +62,9 @@ class WebhookRequestSite extends AbstractSite
             $id->filter->andEqual($id->model->url, 'luzern-tourismus');
             $mediaspaceId = $id->getId();
 
-
-            (new Debug())->write($mediaspaceId);
-
-            $mediaspaceRow = (new \LuzernTourismus\Pixxio\Data\Mediaspace\MediaspaceReader())->getRowById($mediaspaceId);
-
-            //(new Debug())->write($mediaspaceRow);
-
+            $mediaspaceRow = (new MediaspaceReader())->getRowById($mediaspaceId);
 
             $file = new FileJson();
-            //$file->fromMediaspaceConfig(new MediaspaceConfigTest());
             $file->subdomain = $mediaspaceRow->url;
             $file->apiKey = $mediaspaceRow->apiKey;
             $fileItem = $file->getFile($fileId);
@@ -81,40 +72,10 @@ class WebhookRequestSite extends AbstractSite
             $import = new FileImport();
             $import->importFile($fileItem, $mediaspaceId);
 
-
             $import = new CommentImport();
             $import->subdomain = $mediaspaceRow->url;
             $import->apiKey = $mediaspaceRow->apiKey;
             $import->importComment($fileId);
-
-
-            /*
-                        (
-                        [id] => 1283736455
-                [eventKey] => commentCreated
-                        [action] => created
-                        [name] => createComment
-                        [createDate] => 2026-06-22 18:55:54
-                [modifyDate] => 2026-06-22 18:55:54
-                [applicationKey] => iM91iRu6kb86Y6IaWMsK9T9q7
-                        [applicationName] => pixx.io
-                        [userType] => user
-                        [userID] => 1
-                [userName] => admin
-                        [userDescriptiveName] => System Administrator
-                        [resourceType] => comment
-                        [resourceID] => 1412627172
-                [resourceName] => Comment
-                        [resourceOwnerUserType] => user
-                        [resourceOwnerUserID] => 0
-                [resourceOwnerUserName] => admin
-                        [data] => Array
-                        (
-                            [fileID] => 354052574
-                        )
-
-            )*/
-
 
             $content = ob_get_contents();
 
