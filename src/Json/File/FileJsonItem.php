@@ -110,4 +110,27 @@ class FileJsonItem extends AbstractBase
 
     }
 
+
+    public function getMetadataValue($id)
+    {
+
+        $value=null;
+
+        $list=$this->getMetadataList();
+
+        foreach ($list as $metadata) {
+            if ($metadata->id === $id) {
+                $value = $metadata->value;
+            }
+        }
+
+        /*if (isset($list[$id])) {
+            $value = $list[$id];
+        }*/
+
+        return $value;
+
+    }
+
+
 }
