@@ -13,9 +13,11 @@ class DirectoryListBox extends AdminListBox
         $this->label = 'Directory';
 
         $reader = new DirectoryDataReader();
-        $reader->filterByActive();
+        $reader
+            ->addOrder($reader->model->directory)
+            ->filterByActive();
         foreach ($reader->getData() as $directoryRow) {
-            $this->addItem($directoryRow->id, $directoryRow->directory);
+            $this->addItem($directoryRow->id, $directoryRow->directory. ' ('.$directoryRow->id.')');
         }
 
         return parent::getContent();
